@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title">
-  <title id="title">AI Forge Studio</title>
+  <title id="title">CurvatureTech</title>
   <defs>
     <linearGradient id="background" x1="70" y1="30" x2="1130" y2="600" gradientUnits="userSpaceOnUse">
       <stop stop-color="#111D32" />
@@ -40,18 +40,13 @@
   <g transform="translate(82 78)">
     <rect width="68" height="68" rx="19" fill="#FFFFFF" fill-opacity="0.075" />
     <rect x="0.5" y="0.5" width="67" height="67" rx="18.5" fill="none" stroke="#FFFFFF" stroke-opacity="0.17" />
-    <path
-      fill="url(#mark)"
-      fill-rule="evenodd"
-      d="M14 51 29.8 17.5a4.65 4.65 0 0 1 8.4 0L54 51H43.9l-3.4-8H27.5l-3.4 8H14Zm17-15h6l-3-7.2L31 36Z"
-      clip-rule="evenodd"
-    />
-    <path d="M52 11v8M48 15h8" fill="none" stroke="#FFB460" stroke-width="2.6" stroke-linecap="round" />
+    <path d="M50 19A20 20 0 1 0 50 49" fill="none" stroke="url(#mark)" stroke-width="8" stroke-linecap="round" />
+    <circle cx="52" cy="16" r="3.2" fill="#FFB460" />
   </g>
 
   <g fill="#F7F9FD" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
-    <text x="82" y="287" font-size="91" font-weight="720" letter-spacing="-4.2">AI Forge</text>
-    <text x="88" y="340" font-size="25" font-weight="650" letter-spacing="10">STUDIO</text>
+    <text x="82" y="287" font-size="82" font-weight="720" letter-spacing="-3.8">Curvature</text>
+    <text x="88" y="340" font-size="25" font-weight="650" letter-spacing="10">TECH</text>
   </g>
 
   <path d="M84 408H510" stroke="#FFFFFF" stroke-opacity="0.13" />
@@ -87,14 +82,8 @@
     <circle r="119" fill="#0B1220" fill-opacity="0.9" stroke="#FFFFFF" stroke-opacity="0.08" />
     <circle r="94" fill="none" stroke="url(#line)" stroke-width="2.2" stroke-dasharray="2 9" stroke-linecap="round" />
     <circle r="72" fill="#FFFFFF" fill-opacity="0.055" stroke="#FFFFFF" stroke-opacity="0.12" />
-    <path
-      fill="url(#mark)"
-      fill-rule="evenodd"
-      d="M-41 48-11-43a11.6 11.6 0 0 1 22 0L41 48H19L13 27h-26l-6 21h-22Zm34-42H7L0-18-7 6Z"
-      clip-rule="evenodd"
-    />
-    <path d="M53-57v18M44-48h18" fill="none" stroke="#FFB460" stroke-width="5" stroke-linecap="round" />
-    <circle cx="66" cy="-27" r="4" fill="#FFB460" opacity="0.75" />
+    <path d="M43-43A62 62 0 1 0 43 43" fill="none" stroke="url(#mark)" stroke-width="19" stroke-linecap="round" />
+    <circle cx="51" cy="-51" r="7" fill="#FFB460" />
   </g>
 
   <rect x="24" y="24" width="1152" height="582" rx="28" fill="none" stroke="#FFFFFF" stroke-opacity="0.075" />

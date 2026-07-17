@@ -1,6 +1,6 @@
-# AI Forge Studio
+# CurvatureTech
 
-The public website for AI Forge Studio. It presents the studio's website, web-application, AI-integration, and machine-learning services through a responsive React and TypeScript experience with five accessible color themes.
+The public website for CurvatureTech. It presents the startup's website, web-application, AI-integration, and machine-learning services through a responsive React and TypeScript experience with five accessible color themes.
 
 ## Stack
 

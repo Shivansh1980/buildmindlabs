@@ -1,18 +1,18 @@
 {
   "brand": {
-    "name": "AI Forge Studio",
-    "shortName": "AI Forge",
+    "name": "CurvatureTech",
+    "shortName": "CurvatureTech",
     "description": "Conversion-focused websites, web applications, and practical AI systems for founders and growing teams.",
     "footerText": "We turn ambitious ideas and operational friction into clear, useful digital products—without the black-box agency experience.",
-    "email": "hello@aiforgestudio.com",
+    "email": "hello@curvaturetech.com",
     "location": "India · Working worldwide",
     "responseTime": "Replies within one business day",
     "socialLinks": []
   },
   "seo": {
-    "title": "AI Forge Studio | Websites, Web Apps & Practical AI Systems",
-    "description": "AI Forge Studio builds conversion-ready websites, web apps, AI automations, and machine-learning systems for founders and growing teams.",
-    "canonicalUrl": "https://aiforgestudio.com/",
+    "title": "CurvatureTech | Websites, Web Apps & Practical AI Systems",
+    "description": "CurvatureTech builds conversion-ready websites, web apps, AI automations, and machine-learning systems for founders and growing teams.",
+    "canonicalUrl": "https://curvaturetech.com/",
     "ogImage": "/og.png",
     "themeColor": "#0f172a",
     "keywords": [
@@ -40,7 +40,7 @@
   "actions": {
     "startProject": { "label": "Get a scoped plan", "href": "#contact" },
     "viewWork": { "label": "Explore our work", "href": "#work" },
-    "email": { "label": "Email us directly", "href": "mailto:hello@aiforgestudio.com" }
+    "email": { "label": "Email us directly", "href": "mailto:hello@curvaturetech.com" }
   },
   "themeSwitcher": {
     "ariaLabel": "Choose a color theme",
@@ -130,10 +130,10 @@
   "projects": {
     "eyebrow": "Selected work & thinking",
     "title": "Experience behind the studio. Thinking you can inspect.",
-    "subtitle": "AI Forge Studio is new, so we separate the founder's anonymized professional experience from our forward-looking build concepts. No borrowed logos, inflated metrics, or vague claims.",
+    "subtitle": "CurvatureTech is new, so we separate the founder's anonymized professional experience from our forward-looking build concepts. No borrowed logos, inflated metrics, or vague claims.",
     "experienceEyebrow": "Experience behind the studio",
     "experienceTitle": "Complex product work, generalized to respect confidentiality.",
-    "experienceNote": "These are anonymized founder contributions completed in prior and current professional roles—not AI Forge Studio client engagements. Client names, internal workflows, architecture, and proprietary details are intentionally omitted.",
+    "experienceNote": "These are anonymized founder contributions completed in prior and current professional roles—not CurvatureTech client engagements. Client names, internal workflows, architecture, and proprietary details are intentionally omitted.",
     "experienceItems": [
       {
         "id": "workflow-modernization",
