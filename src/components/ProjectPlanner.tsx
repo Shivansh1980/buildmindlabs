@@ -41,7 +41,7 @@ export default function ProjectPlanner({ data }: { data: SiteData }) {
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.35 }}
           transition={{ duration: 0.45 }}
@@ -63,7 +63,7 @@ export default function ProjectPlanner({ data }: { data: SiteData }) {
 
         <div className="grid items-stretch gap-5 lg:grid-cols-[0.88fr_1.12fr] lg:gap-6">
           <motion.div
-            initial={{ opacity: 0, x: -16 }}
+            initial={{ x: -16 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.45, delay: 0.05 }}
@@ -111,7 +111,7 @@ export default function ProjectPlanner({ data }: { data: SiteData }) {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 16 }}
+            initial={{ x: 16 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.45, delay: 0.1 }}

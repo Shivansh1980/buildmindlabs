@@ -12,6 +12,7 @@ export interface SiteData {
   brand: {
     name: string;
     shortName: string;
+    alternateName: string;
     description: string;
     footerText: string;
     email: string;
@@ -23,9 +24,13 @@ export interface SiteData {
     title: string;
     description: string;
     canonicalUrl: string;
+    favicon: string;
     ogImage: string;
+    ogImageAlt: string;
+    locale: string;
     themeColor: string;
-    keywords: string[];
+    robots: string;
+    googleSiteVerification: string;
   };
   nav: LinkData[];
   navigation: {

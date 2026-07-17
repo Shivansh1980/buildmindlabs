@@ -51,7 +51,7 @@ function getPreferredTheme(): Theme {
 }
 
 export default function ThemeSwitcher({ copy }: ThemeSwitcherProps) {
-  const [theme, setTheme] = useState<Theme>(getPreferredTheme);
+  const [theme, setTheme] = useState<Theme>("light");
   const [isOpen, setIsOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -64,8 +64,10 @@ export default function ThemeSwitcher({ copy }: ThemeSwitcherProps) {
   }, []);
 
   useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-  }, [theme]);
+    const preferredTheme = getPreferredTheme();
+    setTheme(preferredTheme);
+    document.documentElement.dataset.theme = preferredTheme;
+  }, []);
 
   useEffect(() => {
     if (!isOpen) return;

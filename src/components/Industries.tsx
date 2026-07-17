@@ -12,7 +12,7 @@ export default function Industries({ data }: { data: SiteData }) {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 14 }}
+          initial={{ y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.35 }}
           transition={{ duration: 0.4 }}
@@ -33,7 +33,7 @@ export default function Industries({ data }: { data: SiteData }) {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.42, delay: 0.04 }}
@@ -59,7 +59,7 @@ export default function Industries({ data }: { data: SiteData }) {
           {industries.useCases.map((useCase, index) => (
             <motion.article
               key={useCase.industry}
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.4, delay: index * 0.05 }}

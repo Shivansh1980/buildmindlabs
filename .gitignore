@@ -2,6 +2,7 @@ node_modules/
 .pnpm-store/
 build/
 dist/
+.prerender/
 coverage/
 .DS_Store
 *.log

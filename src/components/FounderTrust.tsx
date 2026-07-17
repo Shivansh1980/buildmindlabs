@@ -85,7 +85,7 @@ export default function FounderTrust({ data }: { data: SiteData }) {
 
       <div className="relative mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16 lg:px-8">
         <motion.div
-          initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
+          initial={prefersReducedMotion ? false : { y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.5 }}
@@ -133,8 +133,8 @@ export default function FounderTrust({ data }: { data: SiteData }) {
           aria-roledescription="carousel"
           aria-label={founder.carouselLabel}
           style={{ y: cardY }}
-          initial={prefersReducedMotion ? false : { opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={prefersReducedMotion ? false : { y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.55, delay: 0.08 }}
           className={`relative overflow-hidden rounded-[2rem] border border-[var(--color-card-border)] bg-[var(--color-bg-card)] p-6 shadow-[0_30px_90px_-54px_var(--color-shadow)] sm:p-8 ${motionEnabled ? "will-change-transform" : ""}`}

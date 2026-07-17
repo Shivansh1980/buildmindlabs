@@ -15,7 +15,7 @@ export default function WhyChooseUs({ data }: { data: SiteData }) {
     <section id="delivery-trust" className="border-y border-[var(--color-card-border)] bg-[var(--color-bg-soft)] py-20 sm:py-24 lg:py-28">
       <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           className="lg:sticky lg:top-28 lg:self-start"
@@ -38,7 +38,7 @@ export default function WhyChooseUs({ data }: { data: SiteData }) {
             return (
               <motion.article
                 key={reason.title}
-                initial={{ opacity: 0, y: 18 }}
+                initial={{ y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.4, delay: index * 0.06 }}

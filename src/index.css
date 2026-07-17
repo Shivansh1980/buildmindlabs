@@ -210,3 +210,113 @@
     }
   }
 }
+
+@media (min-width: 64rem) and (prefers-reduced-motion: no-preference) {
+    html.has-js .hero-motion-scene {
+      min-height: 175svh;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    html.has-js .hero-motion-stage {
+      position: sticky;
+      top: 0;
+      display: flex;
+      height: 100svh;
+      min-height: 48rem;
+      align-items: center;
+    }
+
+    html.has-js .services-motion-layout {
+      display: grid;
+      grid-template-columns: 0.68fr 1.32fr;
+      gap: 4rem;
+    }
+
+    html.has-js .services-motion-copy {
+      position: sticky;
+      top: 8rem;
+    }
+
+    html.has-js .services-motion-progress {
+      display: flex;
+    }
+
+    html.has-js .services-motion-list {
+      display: block;
+      margin-top: -6svh;
+    }
+
+    html.has-js .service-motion-chapter {
+      display: flex;
+      min-height: 88svh;
+      align-items: center;
+      padding-top: 6svh;
+      padding-bottom: 6svh;
+    }
+
+    html.has-js .service-motion-card {
+      height: auto;
+      will-change: transform;
+    }
+
+    html.has-js .process-motion-layout {
+      grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+      gap: 5rem;
+    }
+
+    html.has-js .process-motion-copy {
+      position: sticky;
+      top: 6rem;
+      height: calc(100vh - 8rem);
+      align-self: start;
+    }
+
+    html.has-js .process-motion-progress {
+      display: block;
+    }
+
+    html.has-js .process-motion-list {
+      gap: 0;
+    }
+
+    html.has-js .process-motion-step {
+      display: flex;
+      min-height: 78vh;
+      align-items: center;
+    }
+
+    html.has-js .ai-motion-scene {
+      height: 176vh;
+    }
+
+    html.has-js .ai-motion-panel {
+      position: sticky;
+      top: 12vh;
+      display: flex;
+      min-height: 76vh;
+      align-items: center;
+    }
+
+    html.has-js .project-motion-story {
+      min-height: 112vh;
+    }
+
+    html.has-js .project-motion-visual-column {
+      position: sticky;
+      top: 6rem;
+      height: auto;
+    }
+
+    html.has-js .project-motion-visual-card,
+    html.has-js .project-motion-copy {
+      min-height: calc(100vh - 8rem);
+      height: auto;
+    }
+  }
+
+@media (min-width: 80rem) and (prefers-reduced-motion: no-preference) {
+    html.has-js .services-motion-layout {
+      gap: 6rem;
+    }
+}

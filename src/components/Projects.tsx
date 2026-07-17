@@ -326,7 +326,7 @@ function ProjectStory({
   const visualFirst = index % 2 === 0;
 
   return (
-    <li className={enableParallax ? "list-none lg:min-h-[112vh]" : "list-none"}>
+    <li className="project-motion-story list-none">
       <article
         ref={articleRef}
         aria-labelledby={headingId}
@@ -334,14 +334,12 @@ function ProjectStory({
       >
         <div className="grid gap-5 lg:grid-cols-2 lg:items-start lg:gap-8">
           <div
-            className={`${enableParallax ? "lg:sticky lg:top-24" : "lg:h-full"} ${
+            className={`project-motion-visual-column lg:h-full ${
               visualFirst ? "lg:order-1" : "lg:order-2"
             }`}
           >
             <div
-              className={`relative overflow-hidden rounded-[1.75rem] border border-[var(--color-card-border)] bg-[linear-gradient(145deg,var(--color-bg-base),var(--color-bg-soft))] shadow-[0_32px_90px_-58px_var(--color-shadow)] sm:rounded-[2.5rem] ${
-                enableParallax ? "lg:min-h-[calc(100vh-8rem)]" : "lg:h-full"
-              }`}
+              className="project-motion-visual-card relative overflow-hidden rounded-[1.75rem] border border-[var(--color-card-border)] bg-[linear-gradient(145deg,var(--color-bg-base),var(--color-bg-soft))] shadow-[0_32px_90px_-58px_var(--color-shadow)] sm:rounded-[2.5rem] lg:h-full"
             >
               <span
                 aria-hidden="true"
@@ -365,14 +363,12 @@ function ProjectStory({
           </div>
 
           <motion.div
-            initial={prefersReducedMotion ? false : { opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={prefersReducedMotion ? false : { y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.5 }}
             style={{ y: copyY }}
-            className={`relative flex min-h-full flex-col justify-center rounded-[1.75rem] border border-[var(--color-card-border)] bg-[var(--color-bg-card)] p-6 shadow-[0_28px_80px_-58px_var(--color-shadow)] sm:rounded-[2.5rem] sm:p-9 lg:p-12 ${
-              enableParallax ? "lg:min-h-[calc(100vh-8rem)]" : "lg:h-full"
-            } ${visualFirst ? "lg:order-2" : "lg:order-1"}`}
+            className={`project-motion-copy relative flex min-h-full flex-col justify-center rounded-[1.75rem] border border-[var(--color-card-border)] bg-[var(--color-bg-card)] p-6 shadow-[0_28px_80px_-58px_var(--color-shadow)] sm:rounded-[2.5rem] sm:p-9 lg:h-full lg:p-12 ${visualFirst ? "lg:order-2" : "lg:order-1"}`}
           >
             <div className="absolute bottom-12 top-12 hidden w-px bg-[var(--color-divider)] lg:block" style={{ left: visualFirst ? 0 : "auto", right: visualFirst ? "auto" : 0 }}>
               <motion.span
@@ -490,7 +486,7 @@ export default function Projects({ data }: { data: SiteData }) {
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
+          initial={prefersReducedMotion ? false : { y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           className="grid gap-7 lg:grid-cols-[0.95fr_1.05fr] lg:items-end"

@@ -64,7 +64,7 @@ export default function Cta({ data }: { data: SiteData }) {
 
       <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.82fr_1.18fr] lg:gap-16 lg:px-8 xl:gap-24">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.55 }}
@@ -125,7 +125,7 @@ export default function Cta({ data }: { data: SiteData }) {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 28 }}
+          initial={{ y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, delay: 0.08 }}

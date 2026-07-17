@@ -108,8 +108,13 @@ export default function Footer({ data }: { data: SiteData }) {
               </h3>
               <ul className="mt-5 space-y-3.5">
                 {data.services.items.slice(0, 5).map((service) => (
-                  <li key={service.id} className="text-sm">
-                    {service.title}
+                  <li key={service.id}>
+                    <a
+                      href={`#service-${service.id}`}
+                      className="text-sm transition-colors hover:text-[var(--color-accent)] focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+                    >
+                      {service.title}
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -150,7 +155,8 @@ export default function Footer({ data }: { data: SiteData }) {
 
         <div className="mt-12 flex flex-col gap-5 border-t border-[var(--color-card-border)] pt-7 text-xs sm:mt-16 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            &copy; {new Date().getFullYear()} {data.brand.name}. {data.footer.copyrightSuffix}
+            &copy; <span suppressHydrationWarning>{new Date().getFullYear()}</span>{" "}
+            {data.brand.name}. {data.footer.copyrightSuffix}
           </p>
           {legalLinks.length > 0 && (
             <div className="flex flex-wrap gap-x-6 gap-y-3">
@@ -173,7 +179,7 @@ export default function Footer({ data }: { data: SiteData }) {
         className="overflow-hidden border-t border-[var(--color-card-border)] bg-[var(--color-contrast-bg)] px-2 py-5 sm:px-4 sm:py-7"
       >
         <motion.p
-          initial={{ y: "35%", opacity: 0 }}
+          initial={{ y: "35%" }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true, amount: 0.45 }}
           transition={{ duration: 0.8 }}

@@ -46,9 +46,7 @@ function ProcessStep({
     <motion.li
       ref={stepRef}
       style={motionEnabled ? { opacity, y, scale } : undefined}
-      className={`relative ${
-        motionEnabled ? "lg:flex lg:min-h-[78vh] lg:items-center" : ""
-      }`}
+      className="process-motion-step relative"
     >
       <div className="relative flex min-h-72 w-full flex-col overflow-hidden rounded-3xl border border-[var(--color-card-border)] bg-[var(--color-bg-card)] p-6 shadow-[0_18px_60px_-42px_var(--color-shadow)] sm:p-8 lg:min-h-[26rem] lg:p-10">
         <span
@@ -102,20 +100,8 @@ export default function Process({ data }: { data: SiteData }) {
       className="bg-[var(--color-bg-base)] py-20 sm:py-24 lg:py-28"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div
-          className={`grid gap-10 ${
-            motionEnabled
-              ? "lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20"
-              : ""
-          }`}
-        >
-          <div
-            className={
-              motionEnabled
-                ? "lg:sticky lg:top-24 lg:h-[calc(100vh-8rem)] lg:self-start"
-                : ""
-            }
-          >
+        <div className="process-motion-layout grid gap-10">
+          <div className="process-motion-copy">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-accent)]">
               {data.process.eyebrow}
             </p>
@@ -126,20 +112,21 @@ export default function Process({ data }: { data: SiteData }) {
               {data.process.subtitle}
             </p>
 
-            {motionEnabled && (
-              <div
-                aria-hidden="true"
-                className="absolute bottom-10 left-0 top-[19rem] hidden w-px overflow-hidden bg-[var(--color-divider)] lg:block"
-              >
+            <div
+              aria-hidden="true"
+              className="process-motion-progress absolute bottom-10 left-0 top-[19rem] hidden w-px overflow-hidden bg-[var(--color-divider)]"
+            >
                 <motion.span
-                  style={{ scaleY: sectionProgress, transformOrigin: "top center" }}
+                  style={{
+                    scaleY: motionEnabled ? sectionProgress : 1,
+                    transformOrigin: "top center",
+                  }}
                   className="absolute inset-0 bg-[var(--color-accent)]"
                 />
-              </div>
-            )}
+            </div>
           </div>
 
-          <ol className={motionEnabled ? "grid gap-5 lg:gap-0" : "grid gap-5"}>
+          <ol className="process-motion-list grid gap-5">
             {data.process.steps.map((step, index) => (
               <ProcessStep
                 key={step.step}

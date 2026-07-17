@@ -74,7 +74,7 @@ export default function AiIntegration({ data }: { data: SiteData }) {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={motionEnabled ? { opacity: 0, y: 16 } : false}
+          initial={{ y: 16 }}
           whileInView={motionEnabled ? { opacity: 1, y: 0 } : undefined}
           viewport={{ once: true, amount: 0.35 }}
           transition={{ duration: 0.45 }}
@@ -96,15 +96,11 @@ export default function AiIntegration({ data }: { data: SiteData }) {
 
         <div
           ref={diagramSceneRef}
-          className={motionEnabled ? "relative lg:h-[176vh]" : "relative"}
+          className="ai-motion-scene relative"
         >
           <motion.div
             style={motionEnabled ? { scale: panelScale } : undefined}
-            className={`relative overflow-hidden rounded-[2rem] border border-[var(--color-card-border)] bg-[var(--color-bg-soft)] px-4 py-8 shadow-[0_24px_70px_-48px_var(--color-shadow)] sm:px-6 md:px-8 md:py-10 ${
-              motionEnabled
-                ? "lg:sticky lg:top-[12vh] lg:flex lg:min-h-[76vh] lg:items-center"
-                : ""
-            }`}
+            className="ai-motion-panel relative overflow-hidden rounded-[2rem] border border-[var(--color-card-border)] bg-[var(--color-bg-soft)] px-4 py-8 shadow-[0_24px_70px_-48px_var(--color-shadow)] sm:px-6 md:px-8 md:py-10"
           >
             <motion.div
               aria-hidden="true"
@@ -235,7 +231,7 @@ export default function AiIntegration({ data }: { data: SiteData }) {
           {aiIntegrations.benefits.map((benefit, index) => (
             <motion.li
               key={benefit.title}
-              initial={motionEnabled ? { opacity: 0, y: 12 } : false}
+              initial={{ y: 12 }}
               whileInView={motionEnabled ? { opacity: 1, y: 0 } : undefined}
               viewport={{ once: true, amount: 0.35 }}
               transition={{ duration: 0.4, delay: index * 0.05 }}

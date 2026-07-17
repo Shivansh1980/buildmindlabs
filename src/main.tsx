@@ -1,18 +1,15 @@
-import {StrictMode} from 'react';
-import {createRoot} from 'react-dom/client';
-import {MotionConfig} from 'motion/react';
-import App from './App.tsx';
+import { createRoot, hydrateRoot } from "react-dom/client";
+import AppRoot from "./AppRoot.tsx";
 import '@fontsource-variable/bricolage-grotesque/wght.css';
 import '@fontsource-variable/manrope/wght.css';
 import './index.css';
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <MotionConfig
-      reducedMotion="user"
-      transition={{duration: 0.55, ease: [0.22, 1, 0.36, 1]}}
-    >
-      <App />
-    </MotionConfig>
-  </StrictMode>,
-);
+const container = document.getElementById("root");
+
+if (!container) throw new Error("Application root was not found.");
+
+if (container.hasChildNodes()) {
+  hydrateRoot(container, <AppRoot />);
+} else {
+  createRoot(container).render(<AppRoot />);
+}

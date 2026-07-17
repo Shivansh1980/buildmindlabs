@@ -36,22 +36,17 @@ function ServiceChapter({
   return (
     <div
       ref={chapterRef}
-      className={
-        motionEnabled
-          ? "relative flex min-h-[88svh] items-center py-[6svh]"
-          : "relative"
-      }
+      className="service-motion-chapter relative"
     >
       <motion.article
+        id={`service-${service.id}`}
         aria-labelledby={headingId}
         style={{
           y: motionEnabled ? y : 0,
           scale: motionEnabled ? scale : 1,
           opacity: motionEnabled ? opacity : 1,
         }}
-        className={`group relative flex w-full flex-col overflow-hidden rounded-[2rem] border border-[var(--color-card-border)] bg-[var(--color-bg-card)] p-6 shadow-[0_24px_70px_var(--color-shadow)] sm:p-8 lg:p-10 ${
-          motionEnabled ? "will-change-transform" : "h-full"
-        }`}
+        className="service-motion-card group relative flex h-full w-full flex-col overflow-hidden rounded-[2rem] border border-[var(--color-card-border)] bg-[var(--color-bg-card)] p-6 shadow-[0_24px_70px_var(--color-shadow)] sm:p-8 lg:p-10"
       >
         <div
           aria-hidden="true"
@@ -146,16 +141,10 @@ export default function Services({ data }: { data: SiteData }) {
         className="pointer-events-none absolute -left-40 top-[24%] h-[34rem] w-[34rem] rounded-full bg-[var(--color-accent)] opacity-[0.055] blur-[140px]"
       />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div
-          className={
-            motionEnabled
-              ? "lg:grid lg:grid-cols-[0.68fr_1.32fr] lg:gap-16 xl:gap-24"
-              : ""
-          }
-        >
+        <div className="services-motion-layout">
           <motion.div
             initial={false}
-            className={motionEnabled ? "h-fit lg:sticky lg:top-32" : ""}
+            className="services-motion-copy h-fit"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-accent)]">
               {data.services.eyebrow}
@@ -170,28 +159,26 @@ export default function Services({ data }: { data: SiteData }) {
               {data.services.subtitle}
             </p>
 
-            {motionEnabled && (
-              <div className="mt-10 flex items-center gap-4" aria-hidden="true">
+            <div
+              className="services-motion-progress mt-10 hidden items-center gap-4"
+              aria-hidden="true"
+            >
                 <span className="h-24 w-px overflow-hidden bg-[var(--color-divider)]">
                   <motion.span
-                    style={{ scaleY: progressScale, transformOrigin: "50% 0%" }}
+                    style={{
+                      scaleY: motionEnabled ? progressScale : 1,
+                      transformOrigin: "50% 0%",
+                    }}
                     className="block h-full w-full bg-[var(--color-accent)]"
                   />
                 </span>
                 <span className="font-mono text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-[var(--color-text-subtle)] [writing-mode:vertical-rl]">
                   01 — 03
                 </span>
-              </div>
-            )}
+            </div>
           </motion.div>
 
-          <div
-            className={
-              motionEnabled
-                ? "lg:-mt-[6svh]"
-                : "mt-12 grid gap-5 lg:mt-16 lg:grid-cols-3"
-            }
-          >
+          <div className="services-motion-list mt-12 grid gap-5 lg:mt-16 lg:grid-cols-3">
             {data.services.items.map((service, index) => (
               <ServiceChapter
                 key={service.id}

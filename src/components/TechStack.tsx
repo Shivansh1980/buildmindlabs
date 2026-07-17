@@ -11,7 +11,7 @@ export default function TechStack({ data }: { data: SiteData }) {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 14 }}
+          initial={{ y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.4 }}
@@ -32,7 +32,7 @@ export default function TechStack({ data }: { data: SiteData }) {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 14 }}
+          initial={{ y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.45, delay: 0.05 }}

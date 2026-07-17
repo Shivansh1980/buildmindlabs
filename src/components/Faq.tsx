@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { SiteData } from "../types";
 
@@ -11,12 +11,13 @@ export default function Faq({ data }: { data: SiteData }) {
 
   return (
     <section
+      id="faq"
       aria-labelledby="faq-title"
       className="bg-[var(--color-bg-soft)] py-20 transition-colors duration-300 md:py-28"
     >
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 14 }}
+          initial={{ y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.35 }}
           transition={{ duration: 0.4 }}
@@ -37,7 +38,7 @@ export default function Faq({ data }: { data: SiteData }) {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.42, delay: 0.04 }}
@@ -79,23 +80,23 @@ export default function Faq({ data }: { data: SiteData }) {
                   </button>
                 </h3>
 
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      id={panelId}
-                      role="region"
-                      aria-labelledby={triggerId}
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.22, ease: "easeOut" }}
-                    >
-                      <p className="px-5 pb-6 pr-12 text-sm leading-6 text-[var(--color-text-muted)] sm:px-6 sm:pr-16 sm:text-base sm:leading-7">
-                        {faq.answer}
-                      </p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                <motion.div
+                  id={panelId}
+                  role="region"
+                  aria-labelledby={triggerId}
+                  aria-hidden={!isOpen}
+                  initial={false}
+                  animate={{
+                    height: isOpen ? "auto" : 0,
+                    opacity: isOpen ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.22, ease: "easeOut" }}
+                  className="overflow-hidden"
+                >
+                  <p className="px-5 pb-6 pr-12 text-sm leading-6 text-[var(--color-text-muted)] sm:px-6 sm:pr-16 sm:text-base sm:leading-7">
+                    {faq.answer}
+                  </p>
+                </motion.div>
               </div>
             );
           })}

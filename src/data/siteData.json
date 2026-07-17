@@ -2,6 +2,7 @@
   "brand": {
     "name": "CurvatureTech",
     "shortName": "CurvatureTech",
+    "alternateName": "Curvature Tech",
     "description": "Founder-led product engineering for conversion-focused websites, web applications, and practical AI systems.",
     "footerText": "We turn ambitious ideas and operational friction into clear, useful digital products—without the black-box agency experience.",
     "email": "hello@curvaturetech.com",
@@ -10,19 +11,16 @@
     "socialLinks": []
   },
   "seo": {
-    "title": "CurvatureTech | Websites, Web Apps & Practical AI Systems",
-    "description": "CurvatureTech is a founder-led product studio building conversion-ready websites, web apps, AI automations, and machine-learning systems.",
+    "title": "Web Development & AI Integration Studio | CurvatureTech",
+    "description": "Founder-led web development studio in India building conversion-focused websites, web apps, AI integrations, automation, and practical ML systems.",
     "canonicalUrl": "https://curvaturetech.com/",
+    "favicon": "/favicon.svg",
     "ogImage": "/og.png",
+    "ogImageAlt": "CurvatureTech — web development, web apps and practical AI systems",
+    "locale": "en_US",
     "themeColor": "#0f172a",
-    "keywords": [
-      "web development studio",
-      "AI integration",
-      "AI automation",
-      "machine learning development",
-      "SaaS development",
-      "conversion website"
-    ]
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "googleSiteVerification": ""
   },
   "nav": [
     { "label": "About", "href": "#about" },

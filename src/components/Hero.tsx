@@ -44,11 +44,7 @@ export default function Hero({ data }: { data: SiteData }) {
       ref={sectionRef}
       id="home"
       aria-labelledby="hero-heading"
-      className={`relative isolate overflow-clip bg-[var(--color-bg-base)] pb-16 pt-28 sm:pb-20 sm:pt-32 ${
-        motionEnabled
-          ? "lg:min-h-[175svh] lg:pb-0 lg:pt-0"
-          : "lg:pb-24 lg:pt-40"
-      }`}
+      className="hero-motion-scene relative isolate overflow-clip bg-[var(--color-bg-base)] pb-16 pt-28 sm:pb-20 sm:pt-32 lg:pb-24 lg:pt-40"
     >
       <div
         aria-hidden="true"
@@ -75,11 +71,7 @@ export default function Hero({ data }: { data: SiteData }) {
       </div>
 
       <div
-        className={`relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ${
-          motionEnabled
-            ? "lg:sticky lg:top-0 lg:flex lg:h-[100svh] lg:min-h-[48rem] lg:items-center"
-            : ""
-        }`}
+        className="hero-motion-stage relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
       >
         <div className="grid w-full items-center gap-12 lg:grid-cols-[1.04fr_0.96fr] lg:gap-14 xl:gap-20">
           <motion.div
