@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="surface" x1="8" y1="4" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#17243B" />
+      <stop offset="1" stop-color="#080D16" />
+    </linearGradient>
+    <linearGradient id="mark" x1="19" y1="17" x2="47" y2="47" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#77C4FF" />
+      <stop offset="0.54" stop-color="#8882FF" />
+      <stop offset="1" stop-color="#C783FF" />
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="17" fill="url(#surface)" />
+  <rect x="2.5" y="2.5" width="59" height="59" rx="16.5" fill="none" stroke="#FFFFFF" stroke-opacity="0.12" />
+  <path
+    fill="url(#mark)"
+    fill-rule="evenodd"
+    d="M14.5 47 28.8 16.7a3.55 3.55 0 0 1 6.4 0L49.5 47h-9.1l-3.1-7.2H26.7L23.6 47h-9.1Zm15-14h5l-2.5-6-2.5 6Z"
+    clip-rule="evenodd"
+  />
+  <path d="M47 12v7M43.5 15.5h7" fill="none" stroke="#FFB45F" stroke-width="2.5" stroke-linecap="round" />
+  <circle cx="51.5" cy="22" r="1.4" fill="#FFB45F" opacity="0.72" />
+</svg>

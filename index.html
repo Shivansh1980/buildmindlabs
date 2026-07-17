@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (() => {
+        const supportedThemes = [
+          "light",
+          "dark",
+          "midnight",
+          "sepia",
+          "clay",
+        ];
+        let theme;
+
+        try {
+          const savedTheme = localStorage.getItem("theme");
+          if (supportedThemes.includes(savedTheme)) {
+            theme = savedTheme;
+          } else if (savedTheme !== null) {
+            localStorage.removeItem("theme");
+          }
+        } catch {
+          // Storage can be unavailable in privacy-restricted browser contexts.
+        }
+
+        if (!theme) {
+          theme = matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+        }
+
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+
+    <title>%SEO_TITLE%</title>
+    <meta name="description" content="%SEO_DESCRIPTION%" />
+    <meta name="keywords" content="%SEO_KEYWORDS%" />
+    <meta name="theme-color" content="%SEO_THEME_COLOR%" />
+    <link rel="canonical" href="%SEO_CANONICAL%" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="%SEO_BRAND_NAME%" />
+    <meta property="og:title" content="%SEO_TITLE%" />
+    <meta property="og:description" content="%SEO_DESCRIPTION%" />
+    <meta property="og:url" content="%SEO_CANONICAL%" />
+    <meta property="og:image" content="%SEO_OG_IMAGE%" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="%SEO_BRAND_NAME%" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="%SEO_TITLE%" />
+    <meta name="twitter:description" content="%SEO_DESCRIPTION%" />
+    <meta name="twitter:image" content="%SEO_OG_IMAGE%" />
+    <meta name="twitter:image:alt" content="%SEO_BRAND_NAME%" />
+
+    <script type="application/ld+json">
+      %SEO_JSON_LD%
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

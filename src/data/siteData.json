@@ -1,0 +1,489 @@
+{
+  "brand": {
+    "name": "AI Forge Studio",
+    "shortName": "AI Forge",
+    "description": "Conversion-focused websites, web applications, and practical AI systems for founders and growing teams.",
+    "footerText": "We turn ambitious ideas and operational friction into clear, useful digital products—without the black-box agency experience.",
+    "email": "hello@aiforgestudio.com",
+    "location": "India · Working worldwide",
+    "responseTime": "Replies within one business day",
+    "socialLinks": []
+  },
+  "seo": {
+    "title": "AI Forge Studio | Websites, Web Apps & Practical AI Systems",
+    "description": "AI Forge Studio builds conversion-ready websites, web apps, AI automations, and machine-learning systems for founders and growing teams.",
+    "canonicalUrl": "https://aiforgestudio.com/",
+    "ogImage": "/og.png",
+    "themeColor": "#0f172a",
+    "keywords": [
+      "web development studio",
+      "AI integration",
+      "AI automation",
+      "machine learning development",
+      "SaaS development",
+      "conversion website"
+    ]
+  },
+  "nav": [
+    { "label": "Services", "href": "#services" },
+    { "label": "Work", "href": "#work" },
+    { "label": "Fit check", "href": "#fit-check" },
+    { "label": "Process", "href": "#process" },
+    { "label": "About", "href": "#about" },
+    { "label": "Contact", "href": "#contact" }
+  ],
+  "navigation": {
+    "skipLinkLabel": "Skip to main content",
+    "openMenuLabel": "Open navigation menu",
+    "closeMenuLabel": "Close navigation menu"
+  },
+  "actions": {
+    "startProject": { "label": "Get a scoped plan", "href": "#contact" },
+    "viewWork": { "label": "Explore our work", "href": "#work" },
+    "email": { "label": "Email us directly", "href": "mailto:hello@aiforgestudio.com" }
+  },
+  "themeSwitcher": {
+    "ariaLabel": "Choose a color theme",
+    "menuLabel": "Color theme",
+    "themes": {
+      "light": "Light",
+      "dark": "Dark",
+      "midnight": "Midnight",
+      "sepia": "Warm paper",
+      "clay": "Clay"
+    }
+  },
+  "hero": {
+    "eyebrow": "Web, AI & ML product studio · India to worldwide",
+    "headline": "Turn attention into a website—",
+    "headlineAccent": "and busywork into AI systems.",
+    "subheadline": "We help founders and growing teams launch conversion-ready websites, useful web apps, and practical AI or machine-learning features—with clear scope, weekly demos, and full code ownership.",
+    "availability": "Selective availability for focused new builds",
+    "responseNote": "A useful first reply within one business day",
+    "signalFlow": {
+      "eyebrow": "A practical build, end to end",
+      "title": "From social signal to shipped system",
+      "channels": ["X", "Threads", "LinkedIn"],
+      "steps": [
+        {
+          "icon": "Crosshair",
+          "label": "Capture intent",
+          "detail": "A clear page earns the next click."
+        },
+        {
+          "icon": "MessagesSquare",
+          "label": "Qualify the brief",
+          "detail": "Focused questions replace inbox guesswork."
+        },
+        {
+          "icon": "Workflow",
+          "label": "Ship the system",
+          "detail": "Product, data, and AI work as one flow."
+        }
+      ],
+      "resultLabel": "Designed outcome",
+      "result": "More qualified conversations. Less operational drag."
+    }
+  },
+  "stats": [
+    { "icon": "Map", "value": "Clear scope", "label": "before the first sprint" },
+    { "icon": "PlayCircle", "value": "Weekly demos", "label": "of working progress" },
+    { "icon": "GitBranch", "value": "Full ownership", "label": "of code and accounts" },
+    { "icon": "LifeBuoy", "value": "Launch support", "label": "with a documented handoff" }
+  ],
+  "services": {
+    "eyebrow": "Three ways we help",
+    "title": "Choose the business problem—not a wall of services.",
+    "subtitle": "Every engagement connects strategy, interface, engineering, and launch. We recommend the smallest useful build that can prove value.",
+    "outcomeLabel": "Built to",
+    "includesLabel": "Typical deliverables",
+    "items": [
+      {
+        "id": "websites",
+        "icon": "MonitorUp",
+        "title": "Websites that explain and convert",
+        "description": "For companies that look credible on social but lose trust after the click. We shape the message, interaction, and performance around qualified enquiries.",
+        "outcome": "Turn high-intent visits into better conversations.",
+        "deliverables": ["Marketing websites", "Landing pages", "Ecommerce experiences"],
+        "cta": "Discuss a website"
+      },
+      {
+        "id": "web-apps",
+        "icon": "PanelsTopLeft",
+        "title": "Web apps that make work simpler",
+        "description": "For workflows stuck across spreadsheets, inboxes, or disconnected tools. We build focused portals, dashboards, and SaaS experiences people can actually use.",
+        "outcome": "Replace repetitive coordination with one clear product.",
+        "deliverables": ["Client portals", "Internal tools", "SaaS MVPs"],
+        "cta": "Plan a web app"
+      },
+      {
+        "id": "ai-ml",
+        "icon": "BrainCircuit",
+        "title": "AI & ML that solve a real bottleneck",
+        "description": "For teams with a specific decision, document, support, or operations problem. We combine reliable workflows, human review, and the right model for the job.",
+        "outcome": "Remove manual drag without creating a fragile black box.",
+        "deliverables": ["AI assistants", "Workflow automation", "ML & data features"],
+        "cta": "Explore an AI build"
+      }
+    ]
+  },
+  "projects": {
+    "eyebrow": "Selected work & thinking",
+    "title": "Experience behind the studio. Thinking you can inspect.",
+    "subtitle": "AI Forge Studio is new, so we separate the founder's anonymized professional experience from our forward-looking build concepts. No borrowed logos, inflated metrics, or vague claims.",
+    "experienceEyebrow": "Experience behind the studio",
+    "experienceTitle": "Complex product work, generalized to respect confidentiality.",
+    "experienceNote": "These are anonymized founder contributions completed in prior and current professional roles—not AI Forge Studio client engagements. Client names, internal workflows, architecture, and proprietary details are intentionally omitted.",
+    "experienceItems": [
+      {
+        "id": "workflow-modernization",
+        "icon": "Workflow",
+        "title": "Enterprise workflow modernization",
+        "description": "Contributed to moving spreadsheet-heavy intake and operations into structured web workflows with clearer states and centralized information.",
+        "skills": [".NET", "React", "Operational UX"]
+      },
+      {
+        "id": "quality-sensitive-apis",
+        "icon": "ShieldCheck",
+        "title": "Quality-sensitive API delivery",
+        "description": "Built authenticated, testable backend features for healthcare and diagnostics contexts, with an emphasis on maintainability and predictable behavior.",
+        "skills": ["ASP.NET APIs", "SQL", "Automated testing"]
+      },
+      {
+        "id": "full-stack-workflows",
+        "icon": "PanelsTopLeft",
+        "title": "Full-stack workflow products",
+        "description": "Contributed across interface and service layers for form-driven enterprise workflows, including AI-assisted engineering practices where appropriate.",
+        "skills": ["Angular", "ASP.NET Core", "Product delivery"]
+      },
+      {
+        "id": "developer-intelligence",
+        "icon": "ScanSearch",
+        "title": "Developer intelligence tooling",
+        "description": "Built Python tooling that brought security and quality signals into a more remediation-oriented developer workflow without exposing internal integrations.",
+        "skills": ["Python", "Security tooling", "AI workflows"]
+      }
+    ],
+    "conceptsEyebrow": "Concept studies",
+    "conceptsTitle": "Scroll through how we turn a fuzzy brief into a buildable system.",
+    "conceptLabel": "Build concept",
+    "challengeLabel": "The friction",
+    "approachLabel": "What we would build",
+    "outcomeLabel": "Designed outcome",
+    "includesLabel": "What we would own",
+    "ctaLabel": "Discuss something similar",
+    "items": [
+      {
+        "id": "service-conversion-site",
+        "category": "Conversion website",
+        "title": "A service site built for high-intent visitors",
+        "description": "A fast, message-led website that carries the promise from a social post or referral into a focused enquiry path.",
+        "challenge": "A founder earns attention on social, but a generic site makes the offer hard to understand and the next step easy to postpone.",
+        "approach": "Tighten the positioning around one buyer journey, build modular proof and offer sections, and instrument the enquiry path.",
+        "designedOutcome": "Make the right prospect understand the offer and trust the next step quickly.",
+        "deliverables": ["Positioning", "Responsive UI", "Analytics & SEO"],
+        "variant": "website",
+        "featured": true
+      },
+      {
+        "id": "operations-copilot",
+        "category": "AI operations",
+        "title": "A knowledge copilot with human control",
+        "description": "A secure assistant that searches approved business knowledge, drafts useful responses, and shows the source behind every answer.",
+        "challenge": "Support and operations teams search scattered documents, then rewrite the same answers without a reliable source trail.",
+        "approach": "Index only approved knowledge, retrieve cited context, draft within guardrails, and route uncertain answers to human review.",
+        "designedOutcome": "Cut time spent finding and rewriting information while keeping people in control.",
+        "deliverables": ["Retrieval workflow", "Review controls", "Usage dashboard"],
+        "variant": "copilot",
+        "featured": false
+      },
+      {
+        "id": "decision-workspace",
+        "category": "Data & machine learning",
+        "title": "A decision workspace that surfaces the next move",
+        "description": "A focused analytics product combining operational data, forecasts, and clear explanations instead of another dashboard full of noise.",
+        "challenge": "Operational data exists, but teams discover risk late because dashboards show activity without explaining the next decision.",
+        "approach": "Unify the critical signals, surface forecasts with confidence and drivers, and pair each alert with a clear action.",
+        "designedOutcome": "Help a team notice risk and opportunity early enough to act.",
+        "deliverables": ["Data pipeline", "Forecasting model", "Decision interface"],
+        "variant": "analytics",
+        "featured": false
+      }
+    ]
+  },
+  "projectPlanner": {
+    "eyebrow": "Project Pathfinder",
+    "title": "Get a realistic starting point in thirty seconds.",
+    "subtitle": "Choose the outcome closest to yours. We’ll show the likely engagement, planning range, and what should be included—before you fill out a form.",
+    "questionTitle": "What would make the biggest difference right now?",
+    "goals": [
+      {
+        "id": "website",
+        "label": "Win more trust after the click",
+        "icon": "Globe2",
+        "recommendation": "Conversion website sprint",
+        "timeline": "Typically 3–6 weeks",
+        "budget": "Often starts around $3k",
+        "description": "Best when your offer is strong but the current website is unclear, dated, slow, or not converting social and referral traffic.",
+        "deliverables": ["Message & page strategy", "Responsive design", "CMS-ready build", "SEO and analytics setup"]
+      },
+      {
+        "id": "assistant",
+        "label": "Answer or process knowledge faster",
+        "icon": "Bot",
+        "recommendation": "AI assistant pilot",
+        "timeline": "Typically 4–8 weeks",
+        "budget": "Often starts around $5k",
+        "description": "Best for support, document, research, or internal knowledge work where answers must be grounded, reviewable, and useful.",
+        "deliverables": ["Use-case and data audit", "Grounded AI workflow", "Human review controls", "Pilot measurement plan"]
+      },
+      {
+        "id": "product",
+        "label": "Replace a manual workflow with a product",
+        "icon": "ChartNoAxesCombined",
+        "recommendation": "Focused web-app MVP",
+        "timeline": "Typically 6–12 weeks",
+        "budget": "Often starts around $8k",
+        "description": "Best when a repeatable process is spread across forms, spreadsheets, messages, and handoffs that no longer scale.",
+        "deliverables": ["Workflow mapping", "Clickable prototype", "Core application build", "Deployment and handoff"]
+      },
+      {
+        "id": "automation",
+        "label": "Automate repetitive operational work",
+        "icon": "Workflow",
+        "recommendation": "Automation & data workflow",
+        "timeline": "Typically 3–8 weeks",
+        "budget": "Often starts around $4k",
+        "description": "Best when your team repeatedly moves information between tools, prepares reports, qualifies leads, or handles predictable requests.",
+        "deliverables": ["Process and risk map", "Reliable integrations", "Exception handling", "Monitoring and documentation"]
+      }
+    ],
+    "labels": {
+      "recommendation": "Likely starting point",
+      "timeline": "Planning timeline",
+      "budget": "Typical investment",
+      "includes": "A responsible scope includes"
+    },
+    "cta": { "label": "Turn this into a scoped plan", "href": "#contact" },
+    "disclaimer": "Planning ranges are directional, not a quote. Complexity, integrations, data readiness, and compliance needs can change the final scope."
+  },
+  "aiIntegrations": {
+    "eyebrow": "Connected, not bolted on",
+    "title": "AI should fit the workflow your team already trusts.",
+    "subtitle": "We start with the decision or repetitive task, then connect the smallest reliable system across your existing tools. Every important output can include source context, review, and a fallback path.",
+    "hubLabel": "Your workflow",
+    "platforms": ["Website", "CRM", "Knowledge", "Inbox", "Database", "Analytics"],
+    "benefits": [
+      {
+        "title": "Grounded in approved data",
+        "description": "Use the information you choose, with citations or source links where they matter."
+      },
+      {
+        "title": "Human review by design",
+        "description": "Sensitive or uncertain actions can pause for approval instead of guessing."
+      },
+      {
+        "title": "Measured against a baseline",
+        "description": "Define usefulness, accuracy, time saved, or conversion before expanding the pilot."
+      },
+      {
+        "title": "Documented and portable",
+        "description": "Understand the workflow, accounts, costs, and failure paths you are taking ownership of."
+      }
+    ]
+  },
+  "process": {
+    "eyebrow": "A visible delivery process",
+    "title": "Small decisions, working demos, no surprise reveal.",
+    "subtitle": "You see the product take shape throughout the engagement, with scope, risks, and tradeoffs written down as we go.",
+    "steps": [
+      {
+        "step": "01",
+        "title": "Understand the real job",
+        "description": "We map the user, desired outcome, current friction, constraints, and the evidence that would make the build worthwhile.",
+        "meta": "Discovery · usually 2–3 working days"
+      },
+      {
+        "step": "02",
+        "title": "Scope the smallest useful version",
+        "description": "You receive a clear recommendation, feature boundary, assumptions, milestones, and planning range before committing to a larger build.",
+        "meta": "Blueprint · scope and prototype"
+      },
+      {
+        "step": "03",
+        "title": "Build in visible slices",
+        "description": "We design and engineer the highest-risk flow first, then share working progress and decisions through regular demos.",
+        "meta": "Delivery · weekly working demos"
+      },
+      {
+        "step": "04",
+        "title": "Launch with ownership intact",
+        "description": "We test the critical paths, deploy to your accounts, document the system, and agree on the support or improvement plan.",
+        "meta": "Launch · handoff and support"
+      }
+    ]
+  },
+  "techStack": {
+    "eyebrow": "Technology follows the job",
+    "title": "Modern tools, chosen for maintainability.",
+    "subtitle": "We are comfortable across the product stack, but we do not force a fashionable tool where a simpler one is safer.",
+    "categories": [
+      {
+        "name": "Experience",
+        "technologies": ["React", "Next.js", "TypeScript", "Tailwind CSS"]
+      },
+      {
+        "name": "Backend & data",
+        "technologies": ["Node.js", "Python", "PostgreSQL", "Supabase"]
+      },
+      {
+        "name": "AI & ML",
+        "technologies": ["OpenAI", "Gemini", "Anthropic", "PyTorch"]
+      },
+      {
+        "name": "Delivery",
+        "technologies": ["Vercel", "AWS", "Docker", "GitHub"]
+      }
+    ]
+  },
+  "whyChooseUs": {
+    "eyebrow": "Designed to de-risk the partnership",
+    "title": "The opposite of a black-box build.",
+    "subtitle": "Good delivery is not just the final interface. It is knowing what is happening, why a decision was made, and what you own when the work is done.",
+    "reasons": [
+      {
+        "icon": "ScanSearch",
+        "title": "Scope before code",
+        "description": "We challenge assumptions, surface risk, and recommend the smallest version that can prove the idea.",
+        "proof": "Written boundaries, milestones, assumptions, and tradeoffs"
+      },
+      {
+        "icon": "Presentation",
+        "title": "Working progress, every week",
+        "description": "You review the real product throughout delivery instead of waiting for a polished final reveal.",
+        "proof": "Regular demos with decisions and next steps"
+      },
+      {
+        "icon": "GitPullRequestArrow",
+        "title": "Your code, accounts, and IP",
+        "description": "The project is built for transferability, with access and ownership kept clear from the beginning.",
+        "proof": "Shared repository, deployment access, and documented handoff"
+      },
+      {
+        "icon": "ShieldCheck",
+        "title": "Practical support after launch",
+        "description": "We plan how issues, improvements, model costs, and operational ownership will work after release.",
+        "proof": "Defined launch window and an optional ongoing plan"
+      }
+    ]
+  },
+  "industries": {
+    "eyebrow": "A fit for meaningful friction",
+    "title": "Useful across industries. Specific to your workflow.",
+    "subtitle": "We work best where a clearer digital experience, better internal tool, or responsible AI workflow can remove a measurable bottleneck.",
+    "items": [
+      "Founder-led services",
+      "SaaS & startups",
+      "Ecommerce",
+      "Real estate",
+      "Agencies",
+      "Operations-heavy teams"
+    ],
+    "useCases": [
+      {
+        "industry": "Generate better demand",
+        "case": "Positioning, landing pages, and web experiences that match the promise made in outreach or social content."
+      },
+      {
+        "industry": "Reduce operational drag",
+        "case": "Portals, dashboards, automations, and assistants that replace repeated handoffs and manual updates."
+      },
+      {
+        "industry": "Make better decisions",
+        "case": "Data products and ML features that surface patterns, forecasts, and the context a team needs to act."
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "",
+    "items": []
+  },
+  "faqs": {
+    "eyebrow": "Straight answers",
+    "title": "Questions worth asking before you hire any studio.",
+    "subtitle": "If an answer affects trust, ownership, cost, or delivery, it should be clear before the project starts.",
+    "contactPrompt": "Have a question that is not covered here?",
+    "contactLabel": "Email it to us",
+    "items": [
+      {
+        "question": "Can you help us decide what to build first?",
+        "answer": "Yes. A focused discovery or blueprint is often the safest first engagement. We map the problem, users, risks, and smallest useful scope before recommending a full build."
+      },
+      {
+        "question": "How do pricing and payment usually work?",
+        "answer": "The Pathfinder ranges are directional. After discovery, we provide a clear scope and milestone-based estimate. Complexity, integrations, data readiness, security, and speed are the biggest variables."
+      },
+      {
+        "question": "Can you improve an existing website or product?",
+        "answer": "Yes. We can audit and improve an existing experience, work inside a current codebase, or rebuild only the parts where the expected benefit justifies it."
+      },
+      {
+        "question": "Who owns the code, designs, and project accounts?",
+        "answer": "You do after agreed payments are complete. We prefer shared access and client-owned production accounts so the system is portable and the handoff is straightforward."
+      },
+      {
+        "question": "How do you handle sensitive data in AI projects?",
+        "answer": "We define what data is allowed, choose suitable providers and retention settings, limit access, add review where needed, and document the flow. Regulated use cases may require specialist legal or security review."
+      },
+      {
+        "question": "How will we see progress during the build?",
+        "answer": "Through regular working demos, a shared view of scope and decisions, and direct discussion of blockers or tradeoffs. The cadence is agreed at kickoff."
+      },
+      {
+        "question": "What happens after launch?",
+        "answer": "Every build includes a defined launch and handoff window. We can also agree on maintenance, monitoring, iteration, or team support when the product needs ongoing care."
+      }
+    ]
+  },
+  "cta": {
+    "eyebrow": "Start with the useful part",
+    "title": "Tell us what should work better.",
+    "subtitle": "Share the goal, the current friction, and any constraints you already know. We’ll reply with useful questions and a realistic next step—not a generic sales sequence.",
+    "directContactLabel": "Prefer a normal email?",
+    "form": {
+      "subjectPrefix": "Project brief",
+      "fields": {
+        "name": { "label": "Your name", "placeholder": "Jane Smith" },
+        "email": { "label": "Work email", "placeholder": "jane@company.com" },
+        "company": { "label": "Company or project", "placeholder": "Company name" },
+        "projectType": { "label": "Closest project type" },
+        "budget": { "label": "Planning budget" },
+        "message": { "label": "What should work better?", "placeholder": "A few lines about the goal, current problem, users, and ideal timing..." }
+      },
+      "projectTypes": [
+        { "value": "website", "label": "Website or landing page" },
+        { "value": "web-app", "label": "Web app or SaaS product" },
+        { "value": "ai-assistant", "label": "AI assistant or integration" },
+        { "value": "automation", "label": "Workflow automation" },
+        { "value": "ml-data", "label": "Machine learning or data product" },
+        { "value": "unsure", "label": "Not sure yet" }
+      ],
+      "budgetRanges": [
+        { "value": "exploring", "label": "Exploring the right range" },
+        { "value": "3k-8k", "label": "$3k–$8k" },
+        { "value": "8k-20k", "label": "$8k–$20k" },
+        { "value": "20k-plus", "label": "$20k+" }
+      ],
+      "submitLabel": "Create an email brief",
+      "statusText": "Your email app should open with the project details. Review the draft and send it when you are ready.",
+      "privacyNote": "This button prepares an email on your device. Nothing is silently uploaded or marked as sent."
+    }
+  },
+  "footer": {
+    "navigationHeading": "Navigate",
+    "servicesHeading": "What we build",
+    "contactHeading": "Start a conversation",
+    "copyrightSuffix": "All rights reserved.",
+    "legalLinks": []
+  }
+}
