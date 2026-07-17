@@ -2,7 +2,7 @@
   "brand": {
     "name": "CurvatureTech",
     "shortName": "CurvatureTech",
-    "description": "Conversion-focused websites, web applications, and practical AI systems for founders and growing teams.",
+    "description": "Founder-led product engineering for conversion-focused websites, web applications, and practical AI systems.",
     "footerText": "We turn ambitious ideas and operational friction into clear, useful digital products—without the black-box agency experience.",
     "email": "hello@curvaturetech.com",
     "location": "India · Working worldwide",
@@ -11,7 +11,7 @@
   },
   "seo": {
     "title": "CurvatureTech | Websites, Web Apps & Practical AI Systems",
-    "description": "CurvatureTech builds conversion-ready websites, web apps, AI automations, and machine-learning systems for founders and growing teams.",
+    "description": "CurvatureTech is a founder-led product studio building conversion-ready websites, web apps, AI automations, and machine-learning systems.",
     "canonicalUrl": "https://curvaturetech.com/",
     "ogImage": "/og.png",
     "themeColor": "#0f172a",
@@ -25,11 +25,11 @@
     ]
   },
   "nav": [
+    { "label": "About", "href": "#about" },
     { "label": "Services", "href": "#services" },
     { "label": "Work", "href": "#work" },
     { "label": "Fit check", "href": "#fit-check" },
     { "label": "Process", "href": "#process" },
-    { "label": "About", "href": "#about" },
     { "label": "Contact", "href": "#contact" }
   ],
   "navigation": {
@@ -54,7 +54,7 @@
     }
   },
   "hero": {
-    "eyebrow": "Web, AI & ML product studio · India to worldwide",
+    "eyebrow": "Founder-led web, AI & ML studio · India to worldwide",
     "headline": "Turn attention into a website—",
     "headlineAccent": "and busywork into AI systems.",
     "subheadline": "We help founders and growing teams launch conversion-ready websites, useful web apps, and practical AI or machine-learning features—with clear scope, weekly demos, and full code ownership.",
@@ -91,6 +91,30 @@
     { "icon": "GitBranch", "value": "Full ownership", "label": "of code and accounts" },
     { "icon": "LifeBuoy", "value": "Launch support", "label": "with a documented handoff" }
   ],
+  "founder": {
+    "eyebrow": "Founder-led engineering",
+    "title": "The person responsible for your build is visible from day one.",
+    "subtitle": "CurvatureTech is deliberately founder-led. Strategy, technical decisions, and delivery stay connected instead of disappearing through layers of account management.",
+    "initials": "SS",
+    "name": "Shivansh Shrivastava",
+    "role": "Founder & Engineering Lead",
+    "location": "India · Working worldwide",
+    "bio": "A full-stack and AI engineer with more than four years of experience contributing to production web platforms, tested APIs, enterprise workflows, and developer tooling across quality-sensitive environments.",
+    "proofPoints": [
+      { "value": "4+ years", "label": "shipping production software" },
+      { "value": "Full stack", "label": ".NET, React, Angular and Python" },
+      { "value": "Quality-first", "label": "tested APIs and maintainable systems" },
+      { "value": "Applied AI", "label": "workflow and developer tooling" }
+    ],
+    "workingStyleTitle": "What working together means",
+    "workingStyle": [
+      "Direct access to the person shaping and building the system.",
+      "Working software and decisions shared through regular demos.",
+      "Clear boundaries between proven experience, proposed work, and measurable outcomes."
+    ],
+    "ctaLabel": "Talk directly with Shivansh",
+    "disclaimer": "Professional experience is summarized to respect employer and client confidentiality. The organizations behind that work are not presented as CurvatureTech clients or endorsements."
+  },
   "services": {
     "eyebrow": "Three ways we help",
     "title": "Choose the business problem—not a wall of services.",
@@ -129,39 +153,49 @@
   },
   "projects": {
     "eyebrow": "Selected work & thinking",
-    "title": "Experience behind the studio. Thinking you can inspect.",
-    "subtitle": "CurvatureTech is new, so we separate the founder's anonymized professional experience from our forward-looking build concepts. No borrowed logos, inflated metrics, or vague claims.",
-    "experienceEyebrow": "Experience behind the studio",
-    "experienceTitle": "Complex product work, generalized to respect confidentiality.",
-    "experienceNote": "These are anonymized founder contributions completed in prior and current professional roles—not CurvatureTech client engagements. Client names, internal workflows, architecture, and proprietary details are intentionally omitted.",
+    "title": "Shipped experience behind the studio. Thinking you can inspect.",
+    "subtitle": "CurvatureTech is new, so we separate Shivansh's anonymized professional contributions from our forward-looking build concepts. No borrowed logos, inflated metrics, or vague claims.",
+    "experienceEyebrow": "Founder professional experience",
+    "experienceTitle": "Three shipped-work patterns, specific enough to assess and generalized to protect confidentiality.",
+    "experienceNote": "These examples summarize Shivansh's contributions in prior and current employment. Names, interfaces, data, architecture, and proprietary details are omitted. CurvatureTech did not contract these engagements.",
+    "experienceLabels": {
+      "contribution": "Founder contribution",
+      "evidence": "What shipped",
+      "change": "What changed"
+    },
     "experienceItems": [
       {
         "id": "workflow-modernization",
         "icon": "Workflow",
-        "title": "Enterprise workflow modernization",
-        "description": "Contributed to moving spreadsheet-heavy intake and operations into structured web workflows with clearer states and centralized information.",
+        "context": "Enterprise operations · Anonymized",
+        "title": "From spreadsheet-heavy intake to a maintained web workflow",
+        "description": "A purpose-built application replaced fragmented operational handling with guided inquiry creation, explicit process states, and centralized information.",
+        "contribution": "Full-stack feature delivery across .NET services, React interfaces, operational forms, and workflow state.",
+        "evidence": ["Guided inquiry creation", "Procedure-based workflow states", "Centralized operational information"],
+        "change": "The process became easier to follow and the information easier for users to find.",
         "skills": [".NET", "React", "Operational UX"]
       },
       {
         "id": "quality-sensitive-apis",
         "icon": "ShieldCheck",
-        "title": "Quality-sensitive API delivery",
-        "description": "Built authenticated, testable backend features for healthcare and diagnostics contexts, with an emphasis on maintainability and predictable behavior.",
-        "skills": ["ASP.NET APIs", "SQL", "Automated testing"]
-      },
-      {
-        "id": "full-stack-workflows",
-        "icon": "PanelsTopLeft",
-        "title": "Full-stack workflow products",
-        "description": "Contributed across interface and service layers for form-driven enterprise workflows, including AI-assisted engineering practices where appropriate.",
-        "skills": ["Angular", "ASP.NET Core", "Product delivery"]
+        "context": "Healthcare & diagnostics · Anonymized",
+        "title": "Reliable APIs for quality-sensitive product environments",
+        "description": "Authenticated service paths and SQL-backed workflows were built for domains where predictable behavior and safe change matter.",
+        "contribution": "Backend API delivery covering authenticated CRUD features, service maintenance, SQL workflows, and automated testing.",
+        "evidence": ["Authenticated API operations", "xUnit and integration tests", "Maintainable service and data paths"],
+        "change": "Testable service boundaries improved confidence in changes and ongoing maintenance.",
+        "skills": ["ASP.NET APIs", "SQL", "xUnit"]
       },
       {
         "id": "developer-intelligence",
         "icon": "ScanSearch",
-        "title": "Developer intelligence tooling",
-        "description": "Built Python tooling that brought security and quality signals into a more remediation-oriented developer workflow without exposing internal integrations.",
-        "skills": ["Python", "Security tooling", "AI workflows"]
+        "context": "Developer tooling · Anonymized",
+        "title": "AI-assisted intelligence across fragmented delivery signals",
+        "description": "A Python integration layer brought security, code-quality, and pipeline context into one remediation-oriented developer workflow.",
+        "contribution": "Python tooling and MCP-style orchestration designed around context consolidation and actionable developer guidance.",
+        "evidence": ["Multi-source signal consolidation", "Pipeline-aware review context", "Remediation-oriented guidance"],
+        "change": "The workflow was designed to reduce tool switching and make review findings easier to act on.",
+        "skills": ["Python", "MCP", "AI workflows"]
       }
     ],
     "conceptsEyebrow": "Concept studies",

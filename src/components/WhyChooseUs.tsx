@@ -12,7 +12,7 @@ const iconMap: Record<string, ElementType> = {
 
 export default function WhyChooseUs({ data }: { data: SiteData }) {
   return (
-    <section id="about" className="border-y border-[var(--color-card-border)] bg-[var(--color-bg-soft)] py-20 sm:py-24 lg:py-28">
+    <section id="delivery-trust" className="border-y border-[var(--color-card-border)] bg-[var(--color-bg-soft)] py-20 sm:py-24 lg:py-28">
       <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 16 }}

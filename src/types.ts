@@ -74,6 +74,24 @@ export interface SiteData {
     value: string;
     label: string;
   }>;
+  founder: {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    initials: string;
+    name: string;
+    role: string;
+    location: string;
+    bio: string;
+    proofPoints: Array<{
+      value: string;
+      label: string;
+    }>;
+    workingStyleTitle: string;
+    workingStyle: string[];
+    ctaLabel: string;
+    disclaimer: string;
+  };
   services: {
     eyebrow: string;
     title: string;
@@ -97,11 +115,20 @@ export interface SiteData {
     experienceEyebrow: string;
     experienceTitle: string;
     experienceNote: string;
+    experienceLabels: {
+      contribution: string;
+      evidence: string;
+      change: string;
+    };
     experienceItems: Array<{
       id: string;
       icon: string;
+      context: string;
       title: string;
       description: string;
+      contribution: string;
+      evidence: string[];
+      change: string;
       skills: string[];
     }>;
     conceptsEyebrow: string;

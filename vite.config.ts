@@ -12,6 +12,11 @@ type SiteContent = {
     email: string;
     socialLinks: Array<{ href: string }>;
   };
+  founder: {
+    name: string;
+    role: string;
+    bio: string;
+  };
   seo: {
     title: string;
     description: string;
@@ -59,6 +64,7 @@ function createStructuredData(
   socialImageUrl: string,
 ): string {
   const organizationId = new URL("#organization", canonicalUrl).toString();
+  const founderId = new URL("#founder", canonicalUrl).toString();
   const socialLinks = siteData.brand.socialLinks.flatMap(({ href }) => {
     try {
       const url = new URL(href);
@@ -83,7 +89,16 @@ function createStructuredData(
         image: socialImageUrl,
         logo: new URL("/favicon.svg", canonicalUrl).toString(),
         serviceType: siteData.services.items.map(({ title }) => title),
+        founder: { "@id": founderId },
         ...(socialLinks.length > 0 ? { sameAs: socialLinks } : {}),
+      },
+      {
+        "@type": "Person",
+        "@id": founderId,
+        name: siteData.founder.name,
+        jobTitle: siteData.founder.role,
+        description: siteData.founder.bio,
+        worksFor: { "@id": organizationId },
       },
       {
         "@type": "FAQPage",

@@ -11,7 +11,6 @@ import {
   Bot,
   Check,
   Globe2,
-  PanelsTopLeft,
   ScanSearch,
   ShieldCheck,
   Sparkles,
@@ -27,7 +26,6 @@ type ExperienceItem = SiteData["projects"]["experienceItems"][number];
 const experienceIcons: Record<string, LucideIcon> = {
   Workflow,
   ShieldCheck,
-  PanelsTopLeft,
   ScanSearch,
 };
 
@@ -189,24 +187,71 @@ function ProjectVisual({ project }: { project: Project }) {
   );
 }
 
-function ExperienceCard({ item, index }: { item: ExperienceItem; index: number; key?: string }) {
+function ExperienceCard({
+  item,
+  index,
+  labels,
+}: {
+  item: ExperienceItem;
+  index: number;
+  labels: SiteData["projects"]["experienceLabels"];
+  key?: string;
+}) {
   const Icon = experienceIcons[item.icon] ?? Workflow;
 
   return (
     <article className="group relative border-t border-[var(--color-card-border)] p-6 first:border-t-0 sm:p-7 lg:border-l lg:border-t-0 lg:first:border-l-0">
       <div className="flex items-start justify-between gap-4">
         <span className="flex size-11 items-center justify-center rounded-2xl bg-[var(--color-accent-soft)] text-[var(--color-accent)] transition-transform duration-300 group-hover:-translate-y-1">
-          <Icon className="size-5" />
+          <Icon className="size-5" aria-hidden="true" />
         </span>
         <span className="font-display text-sm font-bold text-[var(--color-text-subtle)]">0{index + 1}</span>
       </div>
-      <h3 className="mt-7 text-xl font-semibold leading-7 tracking-[-0.025em] text-[var(--color-text-main)]">
+      <p className="mt-6 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[var(--color-accent)]">
+        {item.context}
+      </p>
+      <h3 className="mt-3 text-xl font-semibold leading-7 tracking-[-0.025em] text-[var(--color-text-main)]">
         {item.title}
       </h3>
       <p className="mt-3 text-sm leading-6 text-[var(--color-text-muted)]">
         {item.description}
       </p>
-      <div className="mt-5 flex flex-wrap gap-x-3 gap-y-2">
+      <dl className="mt-6 space-y-5 border-t border-[var(--color-divider)] pt-5">
+        <div>
+          <dt className="text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[var(--color-text-subtle)]">
+            {labels.contribution}
+          </dt>
+          <dd className="mt-2 text-sm leading-6 text-[var(--color-text-main)]">
+            {item.contribution}
+          </dd>
+        </div>
+        <div>
+          <dt className="text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[var(--color-text-subtle)]">
+            {labels.evidence}
+          </dt>
+          <dd className="mt-3">
+            <ul className="space-y-2.5">
+              {item.evidence.map((evidence) => (
+                <li key={evidence} className="flex items-start gap-2.5 text-sm leading-5 text-[var(--color-text-main)]">
+                  <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full bg-[var(--color-accent-soft)] text-[var(--color-accent)]">
+                    <Check className="size-2.5" strokeWidth={2.8} aria-hidden="true" />
+                  </span>
+                  {evidence}
+                </li>
+              ))}
+            </ul>
+          </dd>
+        </div>
+        <div className="rounded-2xl bg-[var(--color-bg-soft)] p-4">
+          <dt className="text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[var(--color-accent)]">
+            {labels.change}
+          </dt>
+          <dd className="mt-2 text-sm font-medium leading-6 text-[var(--color-text-main)]">
+            {item.change}
+          </dd>
+        </div>
+      </dl>
+      <div className="mt-6 flex flex-wrap gap-x-3 gap-y-2">
         {item.skills.map((skill) => (
           <span key={skill} className="text-[0.68rem] font-bold uppercase tracking-[0.1em] text-[var(--color-text-subtle)]">
             {skill}
@@ -464,8 +509,8 @@ export default function Projects({ data }: { data: SiteData }) {
         </motion.div>
 
         <div className="mt-16 overflow-hidden rounded-[2rem] border border-[var(--color-card-border)] bg-[var(--color-bg-card)] shadow-[0_34px_90px_-58px_rgba(0,0,0,0.65)] lg:mt-24">
-          <div className="grid lg:grid-cols-[0.78fr_1.22fr]">
-            <div className="flex flex-col justify-between bg-[var(--color-contrast-bg)] p-7 text-[var(--color-on-contrast)] sm:p-9">
+          <div className="grid bg-[var(--color-contrast-bg)] text-[var(--color-on-contrast)] lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+            <div className="p-7 sm:p-9 lg:p-10">
               <div>
                 <p className="text-[0.68rem] font-bold uppercase tracking-[0.16em] opacity-70">
                   {data.projects.experienceEyebrow}
@@ -474,16 +519,26 @@ export default function Projects({ data }: { data: SiteData }) {
                   {data.projects.experienceTitle}
                 </h3>
               </div>
-              <p className="mt-12 border-l border-current pl-4 text-xs leading-5 opacity-70">
-                {data.projects.experienceNote}
-              </p>
             </div>
+            <div className="border-t border-white/15 p-7 sm:p-9 lg:border-l lg:border-t-0 lg:p-10">
+              <div className="flex items-start gap-3">
+                <ShieldCheck className="mt-0.5 size-5 shrink-0 opacity-80" aria-hidden="true" />
+                <p className="text-xs leading-5 opacity-75 sm:text-sm sm:leading-6">
+                  {data.projects.experienceNote}
+                </p>
+              </div>
+            </div>
+          </div>
 
-            <div className="grid sm:grid-cols-2">
-              {data.projects.experienceItems.map((item, index) => (
-                <ExperienceCard key={item.id} item={item} index={index} />
-              ))}
-            </div>
+          <div className="grid lg:grid-cols-3">
+            {data.projects.experienceItems.map((item, index) => (
+              <ExperienceCard
+                key={item.id}
+                item={item}
+                index={index}
+                labels={data.projects.experienceLabels}
+              />
+            ))}
           </div>
         </div>
 

@@ -2,6 +2,7 @@ import siteData from './data/siteData.json';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Stats from './components/Stats';
+import FounderTrust from './components/FounderTrust';
 import Services from './components/Services';
 import Projects from './components/Projects';
 import ProjectPlanner from './components/ProjectPlanner';
@@ -30,6 +31,7 @@ export default function App() {
       <main id="main-content">
         <Hero data={data} />
         <Stats data={data} />
+        <FounderTrust data={data} />
         <Services data={data} />
         <Projects data={data} />
         <ProjectPlanner data={data} />
