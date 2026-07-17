@@ -156,6 +156,7 @@
 
   body {
     min-height: 100vh;
+    overflow-x: clip;
     @apply bg-[var(--color-bg-base)] text-[var(--color-text-main)] antialiased transition-colors duration-300;
   }
 
@@ -163,6 +164,7 @@
   h2,
   h3 {
     font-family: var(--font-display);
+    text-wrap: balance;
   }
 
   section[id],

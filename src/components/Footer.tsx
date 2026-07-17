@@ -14,6 +14,7 @@ import {
   Youtube,
   type LucideIcon,
 } from "lucide-react";
+import { motion } from "motion/react";
 import { SiteData } from "../types";
 
 const socialIconMap: Record<string, LucideIcon> = {
@@ -165,6 +166,30 @@ export default function Footer({ data }: { data: SiteData }) {
             </div>
           )}
         </div>
+      </div>
+
+      <div
+        aria-hidden="true"
+        className="overflow-hidden border-t border-[var(--color-card-border)] bg-[var(--color-contrast-bg)] px-2 py-5 sm:px-4 sm:py-7"
+      >
+        <motion.p
+          initial={{ y: "35%", opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true, amount: 0.45 }}
+          transition={{ duration: 0.8 }}
+          className="flex justify-center whitespace-nowrap font-display text-[clamp(3.5rem,13.6vw,13rem)] font-semibold leading-[0.78] tracking-[-0.085em] text-[var(--color-on-contrast)]"
+        >
+          {Array.from(data.brand.name.toUpperCase()).map((character, index) => (
+            <motion.span
+              key={`${character}-${index}`}
+              whileHover={{ y: -10, scaleY: 0.86 }}
+              transition={{ type: "spring", stiffness: 420, damping: 18 }}
+              className={character === " " ? "w-[0.22em]" : "inline-block origin-bottom"}
+            >
+              {character === " " ? "\u00a0" : character}
+            </motion.span>
+          ))}
+        </motion.p>
       </div>
     </footer>
   );

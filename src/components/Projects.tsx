@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import {
   motion,
-  useReducedMotion,
   useScroll,
+  useSpring,
   useTransform,
 } from "motion/react";
 import {
@@ -19,6 +19,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { SiteData } from "../types";
+import { sceneSpring, useDesktopMotion } from "./motion/useDesktopMotion";
 
 type Project = SiteData["projects"]["items"][number];
 type ExperienceItem = SiteData["projects"]["experienceItems"][number];
@@ -29,21 +30,6 @@ const experienceIcons: Record<string, LucideIcon> = {
   PanelsTopLeft,
   ScanSearch,
 };
-
-function useDesktopLayout() {
-  const [isDesktop, setIsDesktop] = useState(false);
-
-  useEffect(() => {
-    const query = window.matchMedia("(min-width: 1024px)");
-    const update = () => setIsDesktop(query.matches);
-
-    update();
-    query.addEventListener("change", update);
-    return () => query.removeEventListener("change", update);
-  }, []);
-
-  return isDesktop;
-}
 
 function VisualBackdrop() {
   return (
@@ -242,30 +228,52 @@ function ProjectStory({
   key?: string;
 }) {
   const articleRef = useRef<HTMLElement>(null);
-  const prefersReducedMotion = useReducedMotion();
-  const isDesktop = useDesktopLayout();
-  const enableParallax = isDesktop && !prefersReducedMotion;
+  const { motionEnabled: enableParallax, prefersReducedMotion } = useDesktopMotion();
   const { scrollYProgress } = useScroll({
     target: articleRef,
     offset: ["start end", "end start"],
   });
+  const sceneProgress = useSpring(scrollYProgress, sceneSpring);
   const visualY = useTransform(
-    scrollYProgress,
+    sceneProgress,
     [0, 1],
-    enableParallax ? [30, -30] : [0, 0],
+    enableParallax ? [72, -72] : [0, 0],
+  );
+  const visualX = useTransform(
+    sceneProgress,
+    [0, 1],
+    enableParallax
+      ? index % 2 === 0
+        ? [-22, 22]
+        : [22, -22]
+      : [0, 0],
   );
   const glowY = useTransform(
-    scrollYProgress,
+    sceneProgress,
     [0, 1],
-    enableParallax ? [-34, 34] : [0, 0],
+    enableParallax ? [-56, 56] : [0, 0],
   );
   const visualScale = useTransform(
-    scrollYProgress,
+    sceneProgress,
     [0, 0.5, 1],
-    enableParallax ? [0.985, 1, 0.985] : [1, 1, 1],
+    enableParallax ? [0.94, 1, 0.96] : [1, 1, 1],
+  );
+  const visualRotate = useTransform(
+    sceneProgress,
+    [0, 0.5, 1],
+    enableParallax
+      ? index % 2 === 0
+        ? [-1.25, 0, 0.8]
+        : [1.25, 0, -0.8]
+      : [0, 0, 0],
+  );
+  const copyY = useTransform(
+    sceneProgress,
+    [0, 0.5, 1],
+    enableParallax ? [28, 0, -22] : [0, 0, 0],
   );
   const progressScale = useTransform(
-    scrollYProgress,
+    sceneProgress,
     [0.15, 0.8],
     prefersReducedMotion ? [1, 1] : [0, 1],
   );
@@ -273,32 +281,53 @@ function ProjectStory({
   const visualFirst = index % 2 === 0;
 
   return (
-    <li className="list-none">
+    <li className={enableParallax ? "list-none lg:min-h-[112vh]" : "list-none"}>
       <article
         ref={articleRef}
         aria-labelledby={headingId}
-        className="relative rounded-[2rem] border border-[var(--color-card-border)] bg-[var(--color-bg-card)] shadow-[0_28px_80px_-54px_var(--color-shadow)] sm:rounded-[2.5rem]"
+        className="relative"
       >
-        <div className="grid lg:grid-cols-2 lg:items-start">
-          <div className={`p-3 sm:p-4 lg:sticky lg:top-24 ${visualFirst ? "lg:order-1" : "lg:order-2"}`}>
-            <div className="relative overflow-hidden rounded-[1.45rem] border border-[var(--color-card-border)] bg-[linear-gradient(145deg,var(--color-bg-base),var(--color-bg-soft))] sm:rounded-[2rem] lg:min-h-[42rem]">
+        <div className="grid gap-5 lg:grid-cols-2 lg:items-start lg:gap-8">
+          <div
+            className={`${enableParallax ? "lg:sticky lg:top-24" : "lg:h-full"} ${
+              visualFirst ? "lg:order-1" : "lg:order-2"
+            }`}
+          >
+            <div
+              className={`relative overflow-hidden rounded-[1.75rem] border border-[var(--color-card-border)] bg-[linear-gradient(145deg,var(--color-bg-base),var(--color-bg-soft))] shadow-[0_32px_90px_-58px_var(--color-shadow)] sm:rounded-[2.5rem] ${
+                enableParallax ? "lg:min-h-[calc(100vh-8rem)]" : "lg:h-full"
+              }`}
+            >
+              <span
+                aria-hidden="true"
+                className="absolute -right-3 -top-10 z-10 font-display text-[9rem] font-semibold leading-none tracking-[-0.09em] text-[var(--color-text-main)] opacity-[0.035] sm:text-[13rem]"
+              >
+                0{index + 1}
+              </span>
               <motion.div
                 aria-hidden="true"
                 style={{ y: glowY }}
                 className="absolute left-1/2 top-1/2 size-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-glow)] blur-3xl"
               />
-              <motion.div aria-hidden="true" style={{ y: visualY, scale: visualScale }} className="relative h-full">
+              <motion.div
+                aria-hidden="true"
+                style={{ x: visualX, y: visualY, scale: visualScale, rotate: visualRotate }}
+                className={`relative h-full ${enableParallax ? "will-change-transform" : ""}`}
+              >
                 <ProjectVisual project={project} />
               </motion.div>
             </div>
           </div>
 
           <motion.div
-            initial={prefersReducedMotion ? false : { opacity: 0, y: 22 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={prefersReducedMotion ? false : { opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.5 }}
-            className={`relative flex min-h-full flex-col justify-center p-6 sm:p-9 lg:min-h-[48rem] lg:p-12 ${visualFirst ? "lg:order-2" : "lg:order-1"}`}
+            style={{ y: copyY }}
+            className={`relative flex min-h-full flex-col justify-center rounded-[1.75rem] border border-[var(--color-card-border)] bg-[var(--color-bg-card)] p-6 shadow-[0_28px_80px_-58px_var(--color-shadow)] sm:rounded-[2.5rem] sm:p-9 lg:p-12 ${
+              enableParallax ? "lg:min-h-[calc(100vh-8rem)]" : "lg:h-full"
+            } ${visualFirst ? "lg:order-2" : "lg:order-1"}`}
           >
             <div className="absolute bottom-12 top-12 hidden w-px bg-[var(--color-divider)] lg:block" style={{ left: visualFirst ? 0 : "auto", right: visualFirst ? "auto" : 0 }}>
               <motion.span
@@ -384,15 +413,35 @@ function ProjectStory({
 }
 
 export default function Projects({ data }: { data: SiteData }) {
-  const prefersReducedMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const { motionEnabled, prefersReducedMotion } = useDesktopMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const sectionProgress = useSpring(scrollYProgress, sceneSpring);
+  const kineticX = useTransform(
+    sectionProgress,
+    [0, 1],
+    motionEnabled ? ["7%", "-36%"] : ["0%", "0%"],
+  );
 
   return (
     <section
+      ref={sectionRef}
       id="work"
       aria-labelledby="work-title"
-      className="relative overflow-clip border-y border-[var(--color-card-border)] bg-[var(--color-bg-soft)] py-20 sm:py-24 lg:py-28"
+      className="relative overflow-clip border-y border-[var(--color-card-border)] bg-[var(--color-contrast-bg)] py-20 sm:py-24 lg:py-32"
     >
-      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-72 bg-[radial-gradient(circle_at_50%_0%,var(--color-glow),transparent_70%)]" />
+      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-[40rem] bg-[radial-gradient(circle_at_50%_0%,var(--color-glow),transparent_70%)] opacity-80" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-16 overflow-hidden">
+        <motion.p
+          style={{ x: kineticX }}
+          className="whitespace-nowrap font-display text-[clamp(8rem,23vw,22rem)] font-semibold leading-none tracking-[-0.09em] text-[var(--color-on-contrast)] opacity-[0.045]"
+        >
+          WORK / WORK / WORK
+        </motion.p>
+      </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -402,19 +451,19 @@ export default function Projects({ data }: { data: SiteData }) {
           className="grid gap-7 lg:grid-cols-[0.95fr_1.05fr] lg:items-end"
         >
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-accent)]">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-on-contrast)] opacity-65">
               {data.projects.eyebrow}
             </p>
-            <h2 id="work-title" className="mt-4 max-w-3xl text-4xl font-semibold leading-[0.98] tracking-[-0.055em] text-[var(--color-text-main)] sm:text-5xl lg:text-6xl">
+            <h2 id="work-title" className="mt-4 max-w-4xl font-display text-4xl font-semibold leading-[0.94] tracking-[-0.065em] text-[var(--color-on-contrast)] sm:text-6xl lg:text-[5.5rem]">
               {data.projects.title}
             </h2>
           </div>
-          <p className="max-w-2xl text-base leading-7 text-[var(--color-text-muted)] sm:text-lg sm:leading-8 lg:justify-self-end">
+          <p className="max-w-2xl text-base leading-7 text-[var(--color-on-contrast)] opacity-70 sm:text-lg sm:leading-8 lg:justify-self-end">
             {data.projects.subtitle}
           </p>
         </motion.div>
 
-        <div className="mt-12 overflow-hidden rounded-[2rem] border border-[var(--color-card-border)] bg-[var(--color-bg-card)] shadow-[0_24px_70px_-52px_var(--color-shadow)] lg:mt-16">
+        <div className="mt-16 overflow-hidden rounded-[2rem] border border-[var(--color-card-border)] bg-[var(--color-bg-card)] shadow-[0_34px_90px_-58px_rgba(0,0,0,0.65)] lg:mt-24">
           <div className="grid lg:grid-cols-[0.78fr_1.22fr]">
             <div className="flex flex-col justify-between bg-[var(--color-contrast-bg)] p-7 text-[var(--color-on-contrast)] sm:p-9">
               <div>
@@ -438,16 +487,16 @@ export default function Projects({ data }: { data: SiteData }) {
           </div>
         </div>
 
-        <div className="mt-24 grid gap-6 lg:mt-32 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-accent)]">
+        <div className="mt-28 grid gap-6 lg:mt-44 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-on-contrast)] opacity-65">
             {data.projects.conceptsEyebrow}
           </p>
-          <h3 className="max-w-3xl text-3xl font-semibold leading-[1.03] tracking-[-0.045em] text-[var(--color-text-main)] sm:text-4xl lg:text-5xl">
+          <h3 className="max-w-4xl font-display text-3xl font-semibold leading-[0.98] tracking-[-0.055em] text-[var(--color-on-contrast)] sm:text-5xl lg:text-6xl">
             {data.projects.conceptsTitle}
           </h3>
         </div>
 
-        <ol className="mt-10 space-y-8 lg:mt-14 lg:space-y-14">
+        <ol className="mt-14 space-y-16 lg:mt-24 lg:space-y-28">
           {data.projects.items.map((project, index) => (
             <ProjectStory key={project.id} project={project} index={index} data={data} />
           ))}

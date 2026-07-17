@@ -1,5 +1,5 @@
-import type { ElementType } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { useRef, type ElementType } from "react";
+import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import {
   ArrowRight,
   CheckCircle2,
@@ -9,6 +9,7 @@ import {
   Workflow,
 } from "lucide-react";
 import { SiteData } from "../types";
+import { sceneSpring, useDesktopMotion } from "./motion/useDesktopMotion";
 
 const flowIcons: Record<string, ElementType> = {
   Crosshair,
@@ -17,13 +18,37 @@ const flowIcons: Record<string, ElementType> = {
 };
 
 export default function Hero({ data }: { data: SiteData }) {
-  const reduceMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const { motionEnabled } = useDesktopMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  });
+
+  const contentY = useSpring(useTransform(scrollYProgress, [0, 1], [18, -108]), sceneSpring);
+  const contentOpacity = useSpring(
+    useTransform(scrollYProgress, [0, 0.76, 1], [1, 1, 0.46]),
+    sceneSpring,
+  );
+  const cardY = useSpring(useTransform(scrollYProgress, [0, 1], [-12, 108]), sceneSpring);
+  const cardScale = useSpring(useTransform(scrollYProgress, [0, 0.55, 1], [0.985, 1, 0.82]), sceneSpring);
+  const cardOpacity = useSpring(
+    useTransform(scrollYProgress, [0, 0.78, 1], [1, 1, 0.54]),
+    sceneSpring,
+  );
+  const brandX = useSpring(useTransform(scrollYProgress, [0, 1], [0, -180]), sceneSpring);
+  const accentX = useSpring(useTransform(scrollYProgress, [0, 1], [-90, 120]), sceneSpring);
 
   return (
     <section
+      ref={sectionRef}
       id="home"
       aria-labelledby="hero-heading"
-      className="relative isolate overflow-hidden bg-[var(--color-bg-base)] pb-16 pt-28 sm:pb-20 sm:pt-32 lg:pb-24 lg:pt-40"
+      className={`relative isolate overflow-clip bg-[var(--color-bg-base)] pb-16 pt-28 sm:pb-20 sm:pt-32 ${
+        motionEnabled
+          ? "lg:min-h-[175svh] lg:pb-0 lg:pt-0"
+          : "lg:pb-24 lg:pt-40"
+      }`}
     >
       <div
         aria-hidden="true"
@@ -34,12 +59,35 @@ export default function Hero({ data }: { data: SiteData }) {
         className="pointer-events-none absolute right-[-12rem] top-24 -z-10 h-[30rem] w-[30rem] rounded-full bg-[var(--color-accent-strong)] opacity-[0.08] blur-[140px]"
       />
 
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.04fr_0.96fr] lg:gap-14 lg:px-8 xl:gap-20">
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+      <div className="pointer-events-none absolute inset-0 hidden overflow-hidden lg:block" aria-hidden="true">
+        <motion.span
+          style={{ x: motionEnabled ? brandX : 0 }}
+          className="absolute left-[-0.045em] top-[15%] whitespace-nowrap font-display text-[clamp(9rem,22vw,22rem)] font-semibold leading-none tracking-[-0.09em] text-[var(--color-text-main)] opacity-[0.035]"
         >
+          {data.brand.shortName}
+        </motion.span>
+        <motion.span
+          style={{ x: motionEnabled ? accentX : 0 }}
+          className="absolute bottom-[4%] right-[-12%] whitespace-nowrap font-display text-[clamp(6rem,13vw,13rem)] font-semibold leading-none tracking-[-0.075em] text-[var(--color-accent)] opacity-[0.055]"
+        >
+          {data.hero.headlineAccent}
+        </motion.span>
+      </div>
+
+      <div
+        className={`relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ${
+          motionEnabled
+            ? "lg:sticky lg:top-0 lg:flex lg:h-[100svh] lg:min-h-[48rem] lg:items-center"
+            : ""
+        }`}
+      >
+        <div className="grid w-full items-center gap-12 lg:grid-cols-[1.04fr_0.96fr] lg:gap-14 xl:gap-20">
+          <motion.div
+            style={{
+              y: motionEnabled ? contentY : 0,
+              opacity: motionEnabled ? contentOpacity : 1,
+            }}
+          >
           <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-[var(--color-card-border)] bg-[var(--color-bg-card)] px-3.5 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.15em] text-[var(--color-accent)] shadow-[0_10px_35px_var(--color-shadow)]">
             <Sparkles className="size-3.5" aria-hidden="true" />
             {data.hero.eyebrow}
@@ -86,14 +134,16 @@ export default function Hero({ data }: { data: SiteData }) {
             <span className="hidden h-4 w-px bg-[var(--color-divider)] sm:block" aria-hidden="true" />
             <span>{data.hero.responseNote}</span>
           </div>
-        </motion.div>
+          </motion.div>
 
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 24, scale: 0.98 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.7, delay: reduceMotion ? 0 : 0.12 }}
-          className="relative mx-auto w-full max-w-xl"
-        >
+          <motion.div
+            style={{
+              y: motionEnabled ? cardY : 0,
+              scale: motionEnabled ? cardScale : 1,
+              opacity: motionEnabled ? cardOpacity : 1,
+            }}
+            className={`relative mx-auto w-full max-w-xl ${motionEnabled ? "will-change-transform" : ""}`}
+          >
           <div
             aria-hidden="true"
             className="absolute -inset-5 -z-10 rounded-[2.5rem] bg-[var(--color-accent)] opacity-[0.06] blur-2xl"
@@ -168,7 +218,8 @@ export default function Hero({ data }: { data: SiteData }) {
               </div>
             </div>
           </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

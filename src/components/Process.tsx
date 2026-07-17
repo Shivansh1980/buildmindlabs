@@ -1,16 +1,120 @@
-import { motion } from "motion/react";
+import { useRef } from "react";
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "motion/react";
 import { ArrowDown } from "lucide-react";
 import { SiteData } from "../types";
+import {
+  sceneSpring,
+  useDesktopMotion,
+} from "./motion/useDesktopMotion";
+
+type ProcessStepData = SiteData["process"]["steps"][number];
+
+function ProcessStep({
+  step,
+  isLast,
+  motionEnabled,
+}: {
+  key?: string;
+  step: ProcessStepData;
+  isLast: boolean;
+  motionEnabled: boolean;
+}) {
+  const stepRef = useRef<HTMLLIElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: stepRef,
+    offset: ["start 88%", "end 18%"],
+  });
+  const stepProgress = useSpring(scrollYProgress, sceneSpring);
+  const opacity = useTransform(
+    stepProgress,
+    [0, 0.18, 0.78, 1],
+    [0.42, 1, 1, 0.68],
+  );
+  const y = useTransform(stepProgress, [0, 0.22, 0.78, 1], [46, 0, 0, -24]);
+  const scale = useTransform(
+    stepProgress,
+    [0, 0.2, 0.78, 1],
+    [0.965, 1, 1, 0.985],
+  );
+
+  return (
+    <motion.li
+      ref={stepRef}
+      style={motionEnabled ? { opacity, y, scale } : undefined}
+      className={`relative ${
+        motionEnabled ? "lg:flex lg:min-h-[78vh] lg:items-center" : ""
+      }`}
+    >
+      <div className="relative flex min-h-72 w-full flex-col overflow-hidden rounded-3xl border border-[var(--color-card-border)] bg-[var(--color-bg-card)] p-6 shadow-[0_18px_60px_-42px_var(--color-shadow)] sm:p-8 lg:min-h-[26rem] lg:p-10">
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-3 -top-10 select-none font-display text-[9rem] font-semibold leading-none tracking-[-0.08em] text-[var(--color-accent-soft)] opacity-70 sm:text-[11rem]"
+        >
+          {step.step}
+        </span>
+
+        <div className="flex items-center justify-between">
+          <span className="relative font-mono text-sm font-semibold text-[var(--color-accent)]">
+            {step.step}
+          </span>
+          {!isLast && (
+            <span className="flex size-8 items-center justify-center rounded-full bg-[var(--color-bg-soft)] text-[var(--color-text-subtle)] lg:absolute lg:bottom-10 lg:right-10 lg:z-10 lg:border lg:border-[var(--color-card-border)] lg:bg-[var(--color-bg-base)]">
+              <ArrowDown className="size-4" aria-hidden="true" />
+            </span>
+          )}
+        </div>
+
+        <div className="relative mt-20 max-w-xl sm:mt-24">
+          <h3 className="text-2xl font-semibold leading-8 tracking-[-0.035em] text-[var(--color-text-main)] sm:text-3xl sm:leading-9">
+            {step.title}
+          </h3>
+          <p className="mt-4 text-sm leading-6 text-[var(--color-text-muted)] sm:text-base sm:leading-7">
+            {step.description}
+          </p>
+        </div>
+
+        <p className="relative mt-auto border-t border-[var(--color-card-border)] pt-5 text-xs font-semibold leading-5 text-[var(--color-text-subtle)]">
+          {step.meta}
+        </p>
+      </div>
+    </motion.li>
+  );
+}
 
 export default function Process({ data }: { data: SiteData }) {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { motionEnabled } = useDesktopMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start 18%", "end 82%"],
+  });
+  const sectionProgress = useSpring(scrollYProgress, sceneSpring);
+
   return (
-    <section id="process" className="bg-[var(--color-bg-base)] py-20 sm:py-24 lg:py-28">
+    <section
+      ref={sectionRef}
+      id="process"
+      className="bg-[var(--color-bg-base)] py-20 sm:py-24 lg:py-28"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:gap-16">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
+        <div
+          className={`grid gap-10 ${
+            motionEnabled
+              ? "lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20"
+              : ""
+          }`}
+        >
+          <div
+            className={
+              motionEnabled
+                ? "lg:sticky lg:top-24 lg:h-[calc(100vh-8rem)] lg:self-start"
+                : ""
+            }
           >
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-accent)]">
               {data.process.eyebrow}
@@ -18,50 +122,34 @@ export default function Process({ data }: { data: SiteData }) {
             <h2 className="mt-4 max-w-3xl font-display text-3xl font-semibold leading-[1.08] tracking-[-0.045em] text-[var(--color-text-main)] sm:text-4xl lg:text-5xl">
               {data.process.title}
             </h2>
-          </motion.div>
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ delay: 0.08 }}
-            className="max-w-2xl text-base leading-7 text-[var(--color-text-muted)] sm:text-lg sm:leading-8 lg:ml-auto"
-          >
-            {data.process.subtitle}
-          </motion.p>
-        </div>
+            <p className="mt-6 max-w-2xl text-base leading-7 text-[var(--color-text-muted)] sm:text-lg sm:leading-8">
+              {data.process.subtitle}
+            </p>
 
-        <ol className="mt-12 grid gap-4 lg:mt-16 lg:grid-cols-4">
-          {data.process.steps.map((step, index) => (
-            <motion.li
-              key={step.step}
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.4, delay: index * 0.07 }}
-              className="relative flex min-h-72 flex-col rounded-3xl border border-[var(--color-card-border)] bg-[var(--color-bg-card)] p-6 shadow-[0_12px_38px_var(--color-shadow)] sm:p-7"
-            >
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-sm font-semibold text-[var(--color-accent)]">
-                  {step.step}
-                </span>
-                {index < data.process.steps.length - 1 && (
-                  <span className="flex size-8 items-center justify-center rounded-full bg-[var(--color-bg-soft)] text-[var(--color-text-subtle)] lg:absolute lg:-right-[1.05rem] lg:top-7 lg:z-10 lg:rotate-[-90deg] lg:border lg:border-[var(--color-card-border)] lg:bg-[var(--color-bg-base)]">
-                    <ArrowDown className="size-4" aria-hidden="true" />
-                  </span>
-                )}
+            {motionEnabled && (
+              <div
+                aria-hidden="true"
+                className="absolute bottom-10 left-0 top-[19rem] hidden w-px overflow-hidden bg-[var(--color-divider)] lg:block"
+              >
+                <motion.span
+                  style={{ scaleY: sectionProgress, transformOrigin: "top center" }}
+                  className="absolute inset-0 bg-[var(--color-accent)]"
+                />
               </div>
-              <h3 className="mt-10 text-xl font-semibold leading-7 tracking-[-0.03em] text-[var(--color-text-main)]">
-                {step.title}
-              </h3>
-              <p className="mt-3 text-sm leading-6 text-[var(--color-text-muted)]">
-                {step.description}
-              </p>
-              <p className="mt-auto border-t border-[var(--color-card-border)] pt-5 text-xs font-semibold leading-5 text-[var(--color-text-subtle)]">
-                {step.meta}
-              </p>
-            </motion.li>
-          ))}
-        </ol>
+            )}
+          </div>
+
+          <ol className={motionEnabled ? "grid gap-5 lg:gap-0" : "grid gap-5"}>
+            {data.process.steps.map((step, index) => (
+              <ProcessStep
+                key={step.step}
+                step={step}
+                isLast={index === data.process.steps.length - 1}
+                motionEnabled={motionEnabled}
+              />
+            ))}
+          </ol>
+        </div>
       </div>
     </section>
   );
