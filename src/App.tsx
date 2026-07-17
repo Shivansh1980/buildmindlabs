@@ -16,9 +16,10 @@ import Cta from './components/Cta';
 import Footer from './components/Footer';
 import { SiteData } from './types';
 
-export default function App() {
-  const data = siteData as SiteData;
+const founderData: SiteData['founder'] = siteData.founder;
+const data = { ...siteData, founder: founderData } as SiteData;
 
+export default function App() {
   return (
     <div className="min-h-screen overflow-x-clip bg-[var(--color-bg-base)] font-sans text-[var(--color-text-main)] transition-colors duration-300">
       <a

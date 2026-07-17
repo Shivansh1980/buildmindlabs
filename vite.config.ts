@@ -13,9 +13,14 @@ type SiteContent = {
     socialLinks: Array<{ href: string }>;
   };
   founder: {
-    name: string;
-    role: string;
-    bio: string;
+    primaryFounderId: string;
+    people: Array<{
+      id: string;
+      organizationRole: "founder" | "employee" | "collaborator";
+      name: string;
+      role: string;
+      bio: string;
+    }>;
   };
   seo: {
     title: string;
@@ -37,7 +42,35 @@ const projectRoot = path.dirname(fileURLToPath(import.meta.url));
 const siteDataPath = path.resolve(projectRoot, "src/data/siteData.json");
 
 function readSiteContent(): SiteContent {
-  return JSON.parse(readFileSync(siteDataPath, "utf8")) as SiteContent;
+  const siteData = JSON.parse(
+    readFileSync(siteDataPath, "utf8"),
+  ) as SiteContent;
+  const validOrganizationRoles = new Set([
+    "founder",
+    "employee",
+    "collaborator",
+  ]);
+  const people = siteData.founder.people;
+  const uniqueIds = new Set(people.map(({ id }) => id));
+  const primaryFounder = people.find(
+    ({ id }) => id === siteData.founder.primaryFounderId,
+  );
+
+  if (
+    people.length === 0 ||
+    uniqueIds.size !== people.length ||
+    !primaryFounder ||
+    primaryFounder.organizationRole !== "founder" ||
+    people.some(({ organizationRole }) =>
+      !validOrganizationRoles.has(organizationRole),
+    )
+  ) {
+    throw new Error(
+      "Founder people must have unique IDs, a valid organizationRole, and a matching primary founder.",
+    );
+  }
+
+  return siteData;
 }
 
 function escapeHtml(value: string): string {
@@ -64,7 +97,17 @@ function createStructuredData(
   socialImageUrl: string,
 ): string {
   const organizationId = new URL("#organization", canonicalUrl).toString();
-  const founderId = new URL("#founder", canonicalUrl).toString();
+  const people = siteData.founder.people;
+  const primaryFounder =
+    people.find(
+      ({ id, organizationRole }) =>
+        id === siteData.founder.primaryFounderId && organizationRole === "founder",
+    ) ?? people.find(({ organizationRole }) => organizationRole === "founder");
+  const employees = people.filter(
+    ({ organizationRole }) => organizationRole === "employee",
+  );
+  const personId = (id: string) =>
+    new URL(`#person-${id}`, canonicalUrl).toString();
   const socialLinks = siteData.brand.socialLinks.flatMap(({ href }) => {
     try {
       const url = new URL(href);
@@ -89,17 +132,25 @@ function createStructuredData(
         image: socialImageUrl,
         logo: new URL("/favicon.svg", canonicalUrl).toString(),
         serviceType: siteData.services.items.map(({ title }) => title),
-        founder: { "@id": founderId },
+        ...(primaryFounder
+          ? { founder: { "@id": personId(primaryFounder.id) } }
+          : {}),
+        ...(employees.length > 0
+          ? { employee: employees.map(({ id }) => ({ "@id": personId(id) })) }
+          : {}),
         ...(socialLinks.length > 0 ? { sameAs: socialLinks } : {}),
       },
-      {
+      ...people.map((person) => ({
         "@type": "Person",
-        "@id": founderId,
-        name: siteData.founder.name,
-        jobTitle: siteData.founder.role,
-        description: siteData.founder.bio,
-        worksFor: { "@id": organizationId },
-      },
+        "@id": personId(person.id),
+        name: person.name,
+        jobTitle: person.role,
+        description: person.bio,
+        ...(person.organizationRole === "founder" ||
+        person.organizationRole === "employee"
+          ? { worksFor: { "@id": organizationId } }
+          : {}),
+      })),
       {
         "@type": "FAQPage",
         "@id": new URL("#faq", canonicalUrl).toString(),

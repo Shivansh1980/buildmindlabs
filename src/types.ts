@@ -78,19 +78,32 @@ export interface SiteData {
     eyebrow: string;
     title: string;
     subtitle: string;
-    initials: string;
-    name: string;
-    role: string;
-    location: string;
-    bio: string;
-    proofPoints: Array<{
-      value: string;
-      label: string;
-    }>;
+    primaryFounderId: string;
+    carouselLabel: string;
+    previousPersonLabel: string;
+    nextPersonLabel: string;
+    slideLabel: string;
     workingStyleTitle: string;
     workingStyle: string[];
-    ctaLabel: string;
-    disclaimer: string;
+    people: Array<{
+      id: string;
+      organizationRole: string;
+      initials: string;
+      name: string;
+      role: string;
+      location: string;
+      bio: string;
+      ctaLabel: string;
+      disclaimer: string;
+      portrait?: {
+        src: string;
+        alt: string;
+      };
+      proofPoints: Array<{
+        value: string;
+        label: string;
+      }>;
+    }>;
   };
   services: {
     eyebrow: string;

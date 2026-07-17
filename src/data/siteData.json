@@ -93,27 +93,38 @@
   ],
   "founder": {
     "eyebrow": "Founder-led engineering",
-    "title": "The person responsible for your build is visible from day one.",
+    "title": "The people responsible for your build stay visible from day one.",
     "subtitle": "CurvatureTech is deliberately founder-led. Strategy, technical decisions, and delivery stay connected instead of disappearing through layers of account management.",
-    "initials": "SS",
-    "name": "Shivansh Shrivastava",
-    "role": "Founder & Engineering Lead",
-    "location": "India · Working worldwide",
-    "bio": "A full-stack and AI engineer with more than four years of experience contributing to production web platforms, tested APIs, enterprise workflows, and developer tooling across quality-sensitive environments.",
-    "proofPoints": [
-      { "value": "4+ years", "label": "shipping production software" },
-      { "value": "Full stack", "label": ".NET, React, Angular and Python" },
-      { "value": "Quality-first", "label": "tested APIs and maintainable systems" },
-      { "value": "Applied AI", "label": "workflow and developer tooling" }
-    ],
+    "primaryFounderId": "shivansh-shrivastava",
+    "carouselLabel": "People behind CurvatureTech",
+    "previousPersonLabel": "Show previous person",
+    "nextPersonLabel": "Show next person",
+    "slideLabel": "slide",
     "workingStyleTitle": "What working together means",
     "workingStyle": [
       "Direct access to the person shaping and building the system.",
       "Working software and decisions shared through regular demos.",
       "Clear boundaries between proven experience, proposed work, and measurable outcomes."
     ],
-    "ctaLabel": "Talk directly with Shivansh",
-    "disclaimer": "Professional experience is summarized to respect employer and client confidentiality. The organizations behind that work are not presented as CurvatureTech clients or endorsements."
+    "people": [
+      {
+        "id": "shivansh-shrivastava",
+        "organizationRole": "founder",
+        "initials": "SS",
+        "name": "Shivansh Shrivastava",
+        "role": "Founder & Engineering Lead",
+        "location": "India · Working worldwide",
+        "bio": "A full-stack and AI engineer with more than four years of experience contributing to production web platforms, tested APIs, enterprise workflows, and developer tooling across quality-sensitive environments.",
+        "ctaLabel": "Talk directly with Shivansh",
+        "disclaimer": "Professional experience is summarized to respect employer and client confidentiality. The organizations behind that work are not presented as CurvatureTech clients or endorsements.",
+        "proofPoints": [
+          { "value": "4+ years", "label": "shipping production software" },
+          { "value": "Full stack", "label": ".NET, React, Angular and Python" },
+          { "value": "Quality-first", "label": "tested APIs and maintainable systems" },
+          { "value": "Applied AI", "label": "workflow and developer tooling" }
+        ]
+      }
+    ]
   },
   "services": {
     "eyebrow": "Three ways we help",
