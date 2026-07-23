@@ -210,8 +210,10 @@
     "conceptsEyebrow": "Concept studies",
     "conceptsTitle": "Scroll through how we turn a fuzzy brief into a buildable system.",
     "conceptLabel": "Build concept",
+    "visualDisclosureLabel": "Illustrative concept · no client data",
     "challengeLabel": "The friction",
     "approachLabel": "What we would build",
+    "acceptanceLabel": "Acceptance check",
     "outcomeLabel": "Designed outcome",
     "includesLabel": "What we would own",
     "ctaLabel": "Discuss something similar",
@@ -223,10 +225,20 @@
         "description": "A fast, message-led website that carries the promise from a social post or referral into a focused enquiry path.",
         "challenge": "A founder earns attention on social, but a generic site makes the offer hard to understand and the next step easy to postpone.",
         "approach": "Tighten the positioning around one buyer journey, build modular proof and offer sections, and instrument the enquiry path.",
+        "acceptanceCriterion": "A visitor can identify the audience, offer, proof, and next step without guessing.",
         "designedOutcome": "Make the right prospect understand the offer and trust the next step quickly.",
-        "deliverables": ["Positioning", "Responsive UI", "Analytics & SEO"],
+        "deliverables": ["Message architecture", "Responsive build", "Search & conversion measurement"],
         "variant": "website",
-        "featured": true
+        "featured": true,
+        "visual": {
+          "eyebrow": "High-intent journey",
+          "title": "One promise. One clear next step.",
+          "status": "Journey instrumented",
+          "inputs": ["Social post", "Referral"],
+          "stages": ["Offer understood", "Proof inspected", "Brief started"],
+          "resultTitle": "Qualified enquiry",
+          "result": "Goal, timing, and fit captured"
+        }
       },
       {
         "id": "operations-copilot",
@@ -235,10 +247,20 @@
         "description": "A secure assistant that searches approved business knowledge, drafts useful responses, and shows the source behind every answer.",
         "challenge": "Support and operations teams search scattered documents, then rewrite the same answers without a reliable source trail.",
         "approach": "Index only approved knowledge, retrieve cited context, draft within guardrails, and route uncertain answers to human review.",
+        "acceptanceCriterion": "Every draft exposes its sources, and uncertain output routes to review before it can be used.",
         "designedOutcome": "Cut time spent finding and rewriting information while keeping people in control.",
-        "deliverables": ["Retrieval workflow", "Review controls", "Usage dashboard"],
+        "deliverables": ["Approved-source retrieval", "Citations & review controls", "Evaluation & monitoring"],
         "variant": "copilot",
-        "featured": false
+        "featured": false,
+        "visual": {
+          "eyebrow": "Approved knowledge",
+          "title": "Answer with evidence, not guesswork.",
+          "status": "Review required",
+          "inputs": ["Policy", "Product guide", "Support playbook"],
+          "stages": ["Retrieve", "Cite", "Draft"],
+          "resultTitle": "Human review",
+          "result": "Uncertain output pauses before sending"
+        }
       },
       {
         "id": "decision-workspace",
@@ -247,10 +269,20 @@
         "description": "A focused analytics product combining operational data, forecasts, and clear explanations instead of another dashboard full of noise.",
         "challenge": "Operational data exists, but teams discover risk late because dashboards show activity without explaining the next decision.",
         "approach": "Unify the critical signals, surface forecasts with confidence and drivers, and pair each alert with a clear action.",
+        "acceptanceCriterion": "Every alert pairs data freshness, drivers, and forecast context with a responsible next action.",
         "designedOutcome": "Help a team notice risk and opportunity early enough to act.",
-        "deliverables": ["Data pipeline", "Forecasting model", "Decision interface"],
+        "deliverables": ["Data integration", "Forecast validation", "Decision interface"],
         "variant": "analytics",
-        "featured": false
+        "featured": false,
+        "visual": {
+          "eyebrow": "Decision workspace",
+          "title": "See the signal. Understand the next move.",
+          "status": "Source health visible",
+          "inputs": ["Orders", "Capacity", "Support"],
+          "stages": ["Join signals", "Forecast", "Explain drivers"],
+          "resultTitle": "Next decision",
+          "result": "Review capacity this week"
+        }
       }
     ]
   },
@@ -314,8 +346,29 @@
     "eyebrow": "Connected, not bolted on",
     "title": "AI should fit the workflow your team already trusts.",
     "subtitle": "We start with the decision or repetitive task, then connect the smallest reliable system across your existing tools. Every important output can include source context, review, and a fallback path.",
-    "hubLabel": "Your workflow",
-    "platforms": ["Website", "CRM", "Knowledge", "Inbox", "Database", "Analytics"],
+    "sceneLabel": "Illustrative reliable workflow",
+    "statusLabel": "Human-controlled",
+    "inputLabel": "Work arrives",
+    "sources": [
+      { "label": "Website enquiry", "detail": "Intent and contact context" },
+      { "label": "Support question", "detail": "A task that needs an answer" },
+      { "label": "CRM follow-up", "detail": "A clear owner and next step" }
+    ],
+    "workflowLabel": "Reliability layer",
+    "workflowSteps": [
+      { "label": "Retrieve approved context", "detail": "Use only the sources and data you allow" },
+      { "label": "Apply rules + the right model", "detail": "Keep the system as small as the job requires" },
+      { "label": "Review uncertain actions", "detail": "Pause, explain, or fall back instead of guessing" }
+    ],
+    "outputLabel": "Useful outcomes",
+    "outputs": [
+      { "label": "Grounded reply", "detail": "Source context stays attached" },
+      { "label": "Logged action", "detail": "The workflow keeps its audit trail" },
+      { "label": "Measured result", "detail": "Compare the pilot with a baseline" }
+    ],
+    "connectedLabel": "Connects with",
+    "connectedSystems": ["Website", "CRM", "Knowledge", "Inbox", "Database", "Analytics"],
+    "exampleNote": "Adapted to your tools, data boundaries, approval rules, and success measure.",
     "benefits": [
       {
         "title": "Grounded in approved data",

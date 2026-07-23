@@ -7,18 +7,15 @@ import {
 } from "motion/react";
 import {
   ArrowUpRight,
-  BarChart3,
-  Bot,
   Check,
-  Globe2,
   ScanSearch,
   ShieldCheck,
-  Sparkles,
   Workflow,
   type LucideIcon,
 } from "lucide-react";
 import { SiteData } from "../types";
 import { sceneSpring, useDesktopMotion } from "./motion/useDesktopMotion";
+import ProjectConceptVisual from "./ProjectConceptVisual";
 
 type Project = SiteData["projects"]["items"][number];
 type ExperienceItem = SiteData["projects"]["experienceItems"][number];
@@ -28,164 +25,6 @@ const experienceIcons: Record<string, LucideIcon> = {
   ShieldCheck,
   ScanSearch,
 };
-
-function VisualBackdrop() {
-  return (
-    <>
-      <div
-        className="absolute inset-0 opacity-55"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, var(--color-divider) 1px, transparent 1px), linear-gradient(to bottom, var(--color-divider) 1px, transparent 1px)",
-          backgroundSize: "44px 44px",
-          maskImage:
-            "linear-gradient(to bottom, rgba(0,0,0,0.72), transparent 88%)",
-        }}
-      />
-      <div className="absolute -left-16 top-10 size-52 rounded-full bg-[var(--color-accent-secondary)] opacity-20 blur-3xl" />
-      <div className="absolute -right-12 bottom-8 size-48 rounded-full bg-[var(--color-accent-tertiary)] opacity-20 blur-3xl" />
-    </>
-  );
-}
-
-function ProjectVisual({ project }: { project: Project }) {
-  if (project.variant === "copilot") {
-    return (
-      <div className="relative flex h-full min-h-[22rem] items-center justify-center p-5 sm:p-8 lg:min-h-[38rem]">
-        <VisualBackdrop />
-        <div className="relative w-full max-w-lg">
-          <div className="absolute -right-2 -top-9 z-20 flex items-center gap-2 rounded-full border border-[var(--color-card-border)] bg-[var(--color-bg-card)] px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-[var(--color-text-muted)] shadow-[0_16px_45px_-28px_var(--color-shadow)] sm:right-3">
-            <span className="size-2 rounded-full bg-[var(--color-accent-secondary)]" />
-            Human review ready
-          </div>
-
-          <div className="rounded-[1.75rem] border border-[var(--color-card-border)] bg-[var(--color-bg-elevated)] p-4 shadow-[0_34px_80px_-48px_var(--color-shadow)] sm:p-5">
-            <div className="flex items-center gap-3 border-b border-[var(--color-card-border)] pb-4">
-              <span className="flex size-11 items-center justify-center rounded-2xl bg-[var(--color-accent)] text-[var(--color-on-accent)]">
-                <Bot className="size-5" />
-              </span>
-              <div className="flex-1">
-                <div className="h-2.5 w-32 rounded-full bg-[var(--color-divider)]" />
-                <div className="mt-2 h-2 w-20 rounded-full bg-[var(--color-card-border)]" />
-              </div>
-              <span className="rounded-full bg-[var(--color-accent-soft)] px-3 py-1.5 text-[0.62rem] font-bold uppercase tracking-[0.12em] text-[var(--color-accent)]">
-                Grounded
-              </span>
-            </div>
-
-            <div className="mt-5 ml-auto h-11 w-4/5 rounded-2xl rounded-br-md bg-[var(--color-bg-soft)]" />
-            <div className="mt-3 rounded-2xl rounded-tl-md border border-[var(--color-card-border)] bg-[var(--color-bg-card)] p-4">
-              <div className="space-y-2.5">
-                <div className="h-2 w-full rounded-full bg-[var(--color-divider)]" />
-                <div className="h-2 w-5/6 rounded-full bg-[var(--color-divider)]" />
-                <div className="h-2 w-2/3 rounded-full bg-[var(--color-divider)]" />
-              </div>
-              <div className="mt-5 grid gap-2 sm:grid-cols-2">
-                {["Source context", "Review control"].map((label) => (
-                  <span key={label} className="flex items-center gap-2 rounded-xl bg-[var(--color-bg-soft)] px-3 py-2.5 text-xs font-semibold text-[var(--color-text-muted)]">
-                    <Check className="size-3.5 text-[var(--color-accent)]" />
-                    {label}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (project.variant === "analytics") {
-    return (
-      <div className="relative flex h-full min-h-[22rem] items-center justify-center p-5 sm:p-8 lg:min-h-[38rem]">
-        <VisualBackdrop />
-        <div className="relative w-full max-w-lg">
-          <div className="absolute -left-1 -top-8 z-20 rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-bg-card)] px-4 py-3 shadow-[0_18px_50px_-30px_var(--color-shadow)] sm:left-4">
-            <p className="text-[0.6rem] font-bold uppercase tracking-[0.14em] text-[var(--color-text-subtle)]">Next decision</p>
-            <p className="mt-1 text-sm font-bold text-[var(--color-text-main)]">Review rising risk</p>
-          </div>
-
-          <div className="rounded-[1.75rem] border border-[var(--color-card-border)] bg-[var(--color-bg-elevated)] p-4 shadow-[0_34px_80px_-48px_var(--color-shadow)] sm:p-5">
-            <div className="flex items-center justify-between">
-              <span className="flex size-11 items-center justify-center rounded-2xl bg-[var(--color-accent-soft)] text-[var(--color-accent)]">
-                <BarChart3 className="size-5" />
-              </span>
-              <div className="h-8 w-28 rounded-full border border-[var(--color-card-border)] bg-[var(--color-bg-card)]" />
-            </div>
-
-            <div className="mt-5 grid grid-cols-3 gap-2.5">
-              {["45%", "68%", "84%"].map((height, index) => (
-                <div key={height} className="flex h-36 items-end rounded-2xl bg-[var(--color-bg-soft)] p-2.5">
-                  <div
-                    className={`w-full rounded-xl ${index === 2 ? "bg-[var(--color-accent)]" : index === 1 ? "bg-[var(--color-accent-secondary)]" : "bg-[var(--color-divider)]"}`}
-                    style={{ height }}
-                  />
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-3 grid grid-cols-2 gap-2.5">
-              <div className="rounded-xl border border-[var(--color-card-border)] bg-[var(--color-bg-card)] p-3">
-                <div className="h-2 w-12 rounded-full bg-[var(--color-card-border)]" />
-                <div className="mt-2 h-3 w-20 rounded-full bg-[var(--color-divider)]" />
-              </div>
-              <div className="rounded-xl border border-[var(--color-card-border)] bg-[var(--color-bg-card)] p-3">
-                <div className="h-2 w-16 rounded-full bg-[var(--color-card-border)]" />
-                <div className="mt-2 h-3 w-14 rounded-full bg-[var(--color-accent-tertiary)] opacity-75" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="relative flex h-full min-h-[22rem] items-center justify-center p-5 sm:p-8 lg:min-h-[38rem]">
-      <VisualBackdrop />
-      <div className="relative w-full max-w-xl">
-        <div className="absolute -right-1 -top-9 z-20 rounded-full border border-[var(--color-card-border)] bg-[var(--color-bg-card)] px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-[var(--color-text-muted)] shadow-[0_16px_45px_-28px_var(--color-shadow)] sm:right-5">
-          Social signal → qualified brief
-        </div>
-
-        <div className="overflow-hidden rounded-[1.75rem] border border-[var(--color-card-border)] bg-[var(--color-bg-elevated)] shadow-[0_34px_80px_-48px_var(--color-shadow)]">
-          <div className="flex items-center gap-2 border-b border-[var(--color-card-border)] px-4 py-3.5">
-            {[0, 1, 2].map((item) => (
-              <span key={item} className="size-2 rounded-full bg-[var(--color-divider)]" />
-            ))}
-            <span className="ml-auto flex size-8 items-center justify-center rounded-xl bg-[var(--color-accent-soft)] text-[var(--color-accent)]">
-              <Globe2 className="size-4" />
-            </span>
-          </div>
-
-          <div className="grid gap-5 p-5 sm:grid-cols-[1.1fr_0.9fr] sm:p-7">
-            <div className="py-2">
-              <div className="h-3 w-24 rounded-full bg-[var(--color-accent-secondary)]" />
-              <div className="mt-5 h-5 w-full rounded-full bg-[var(--color-divider)]" />
-              <div className="mt-2.5 h-5 w-4/5 rounded-full bg-[var(--color-divider)]" />
-              <div className="mt-5 h-2.5 w-5/6 rounded-full bg-[var(--color-card-border)]" />
-              <div className="mt-2.5 h-2.5 w-2/3 rounded-full bg-[var(--color-card-border)]" />
-              <div className="mt-6 h-10 w-32 rounded-full bg-[var(--color-accent)]" />
-            </div>
-            <div className="rounded-2xl bg-[var(--color-bg-soft)] p-3">
-              <div className="flex h-full min-h-44 flex-col justify-between rounded-xl border border-[var(--color-card-border)] bg-[var(--color-bg-card)] p-4">
-                <Sparkles className="size-5 text-[var(--color-accent-tertiary)]" />
-                <div className="space-y-2.5">
-                  <div className="h-2 w-full rounded-full bg-[var(--color-divider)]" />
-                  <div className="h-2 w-3/4 rounded-full bg-[var(--color-divider)]" />
-                  <div className="mt-4 flex gap-2">
-                    <span className="h-7 flex-1 rounded-lg bg-[var(--color-accent-soft)]" />
-                    <span className="h-7 w-8 rounded-lg bg-[var(--color-bg-hover)]" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function ExperienceCard({
   item,
@@ -282,40 +121,22 @@ function ProjectStory({
   const visualY = useTransform(
     sceneProgress,
     [0, 1],
-    enableParallax ? [72, -72] : [0, 0],
-  );
-  const visualX = useTransform(
-    sceneProgress,
-    [0, 1],
-    enableParallax
-      ? index % 2 === 0
-        ? [-22, 22]
-        : [22, -22]
-      : [0, 0],
+    enableParallax ? [20, -20] : [0, 0],
   );
   const glowY = useTransform(
     sceneProgress,
     [0, 1],
-    enableParallax ? [-56, 56] : [0, 0],
+    enableParallax ? [-24, 24] : [0, 0],
   );
   const visualScale = useTransform(
     sceneProgress,
     [0, 0.5, 1],
-    enableParallax ? [0.94, 1, 0.96] : [1, 1, 1],
-  );
-  const visualRotate = useTransform(
-    sceneProgress,
-    [0, 0.5, 1],
-    enableParallax
-      ? index % 2 === 0
-        ? [-1.25, 0, 0.8]
-        : [1.25, 0, -0.8]
-      : [0, 0, 0],
+    enableParallax ? [0.985, 1, 0.99] : [1, 1, 1],
   );
   const copyY = useTransform(
     sceneProgress,
     [0, 0.5, 1],
-    enableParallax ? [28, 0, -22] : [0, 0, 0],
+    enableParallax ? [10, 0, -8] : [0, 0, 0],
   );
   const progressScale = useTransform(
     sceneProgress,
@@ -354,19 +175,21 @@ function ProjectStory({
               />
               <motion.div
                 aria-hidden="true"
-                style={{ x: visualX, y: visualY, scale: visualScale, rotate: visualRotate }}
+                style={{ y: visualY, scale: visualScale }}
                 className={`relative h-full ${enableParallax ? "will-change-transform" : ""}`}
               >
-                <ProjectVisual project={project} />
+                <ProjectConceptVisual
+                  project={project}
+                  progress={sceneProgress}
+                  motionEnabled={enableParallax}
+                  disclosureLabel={data.projects.visualDisclosureLabel}
+                />
               </motion.div>
             </div>
           </div>
 
           <motion.div
-            initial={prefersReducedMotion ? false : { y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.5 }}
+            initial={false}
             style={{ y: copyY }}
             className={`project-motion-copy relative flex min-h-full flex-col justify-center rounded-[1.75rem] border border-[var(--color-card-border)] bg-[var(--color-bg-card)] p-6 shadow-[0_28px_80px_-58px_var(--color-shadow)] sm:rounded-[2.5rem] sm:p-9 lg:h-full lg:p-12 ${visualFirst ? "lg:order-2" : "lg:order-1"}`}
           >
@@ -416,7 +239,21 @@ function ProjectStory({
               </div>
             </dl>
 
-            <div className="mt-7 rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-bg-soft)] p-5">
+            <div className="mt-5 flex items-start gap-3 rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-bg-base)] p-4">
+              <span className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-lg bg-[var(--color-accent-soft)] text-[var(--color-accent)]">
+                <Check className="size-3.5" aria-hidden="true" />
+              </span>
+              <div>
+                <p className="text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[var(--color-text-subtle)]">
+                  {data.projects.acceptanceLabel}
+                </p>
+                <p className="mt-1.5 text-sm leading-6 text-[var(--color-text-main)]">
+                  {project.acceptanceCriterion}
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-4 rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-bg-soft)] p-5">
               <p className="text-[0.68rem] font-bold uppercase tracking-[0.14em] text-[var(--color-accent)]">
                 {data.projects.outcomeLabel}
               </p>
@@ -425,7 +262,7 @@ function ProjectStory({
               </p>
             </div>
 
-            <div className="mt-7">
+            <div className="mt-6">
               <p className="text-[0.68rem] font-bold uppercase tracking-[0.14em] text-[var(--color-text-subtle)]">
                 {data.projects.includesLabel}
               </p>
@@ -441,7 +278,7 @@ function ProjectStory({
             <a
               href={data.actions.startProject.href}
               aria-label={`${data.projects.ctaLabel}: ${project.title}`}
-              className="mt-9 inline-flex w-fit items-center gap-2 rounded-full bg-[var(--color-text-main)] px-5 py-3 text-sm font-bold text-[var(--color-bg-base)] transition-transform duration-200 hover:-translate-y-0.5"
+              className="mt-7 inline-flex w-fit items-center gap-2 rounded-full bg-[var(--color-text-main)] px-5 py-3 text-sm font-bold text-[var(--color-bg-base)] transition-transform duration-200 hover:-translate-y-0.5"
             >
               {data.projects.ctaLabel}
               <ArrowUpRight className="size-4" />
@@ -538,7 +375,10 @@ export default function Projects({ data }: { data: SiteData }) {
           </div>
         </div>
 
-        <div className="mt-28 grid gap-6 lg:mt-44 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
+        <div
+          id="concept-studies"
+          className="mt-24 grid scroll-mt-28 gap-6 lg:mt-36 lg:grid-cols-[0.72fr_1.28fr] lg:items-end"
+        >
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-on-contrast)] opacity-65">
             {data.projects.conceptsEyebrow}
           </p>
@@ -547,7 +387,7 @@ export default function Projects({ data }: { data: SiteData }) {
           </h3>
         </div>
 
-        <ol className="mt-14 space-y-16 lg:mt-24 lg:space-y-28">
+        <ol className="mt-14 space-y-14 lg:mt-20 lg:space-y-20">
           {data.projects.items.map((project, index) => (
             <ProjectStory key={project.id} project={project} index={index} data={data} />
           ))}

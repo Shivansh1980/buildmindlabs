@@ -287,30 +287,28 @@
     }
 
     html.has-js .ai-motion-scene {
-      height: 176vh;
+      height: 146svh;
     }
 
     html.has-js .ai-motion-panel {
       position: sticky;
-      top: 12vh;
-      display: flex;
-      min-height: 76vh;
-      align-items: center;
+      top: 5.5rem;
+      min-height: min(40rem, calc(100svh - 7.5rem));
     }
 
     html.has-js .project-motion-story {
-      min-height: 112vh;
+      min-height: 104svh;
     }
 
     html.has-js .project-motion-visual-column {
       position: sticky;
-      top: 6rem;
+      top: 5.25rem;
       height: auto;
     }
 
     html.has-js .project-motion-visual-card,
     html.has-js .project-motion-copy {
-      min-height: calc(100vh - 8rem);
+      min-height: min(42rem, calc(100svh - 7rem));
       height: auto;
     }
   }
@@ -318,5 +316,25 @@
 @media (min-width: 80rem) and (prefers-reduced-motion: no-preference) {
     html.has-js .services-motion-layout {
       gap: 6rem;
+    }
+}
+
+@media (min-width: 64rem) and (max-height: 43.999rem) and (prefers-reduced-motion: no-preference) {
+    html.has-js .ai-motion-scene,
+    html.has-js .project-motion-story {
+      height: auto;
+      min-height: 0;
+    }
+
+    html.has-js .ai-motion-panel,
+    html.has-js .project-motion-visual-column {
+      position: relative;
+      top: auto;
+    }
+
+    html.has-js .ai-motion-panel,
+    html.has-js .project-motion-visual-card,
+    html.has-js .project-motion-copy {
+      min-height: 0;
     }
 }

@@ -5,81 +5,62 @@ import {
   useSpring,
   useTransform,
 } from "motion/react";
-import { CheckCircle2, Workflow } from "lucide-react";
-import { SiteData } from "../types";
 import {
-  sceneSpring,
-  useDesktopMotion,
-} from "./motion/useDesktopMotion";
+  ArrowDown,
+  ArrowRight,
+  BarChart3,
+  CheckCircle2,
+  ClipboardCheck,
+  FileCheck2,
+  Globe2,
+  MessageSquareText,
+  ShieldCheck,
+  Sparkles,
+  Workflow,
+  type LucideIcon,
+} from "lucide-react";
+import { SiteData } from "../types";
+import { useDesktopMotion } from "./motion/useDesktopMotion";
+
+const inputIcons: LucideIcon[] = [Globe2, MessageSquareText, ClipboardCheck];
+const outputIcons: LucideIcon[] = [FileCheck2, ShieldCheck, BarChart3];
+
+const integrationSpring = {
+  stiffness: 105,
+  damping: 34,
+  mass: 0.58,
+};
 
 export default function AiIntegration({ data }: { data: SiteData }) {
   const { aiIntegrations } = data;
   const { motionEnabled } = useDesktopMotion();
-  const diagramSceneRef = useRef<HTMLDivElement>(null);
-  const splitAt = Math.ceil(aiIntegrations.platforms.length / 2);
-  const leftPlatforms = aiIntegrations.platforms.slice(0, splitAt);
-  const rightPlatforms = aiIntegrations.platforms.slice(splitAt);
+  const sceneRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
-    target: diagramSceneRef,
-    offset: ["start 78%", "end 28%"],
+    target: sceneRef,
+    offset: ["start 76%", "end 32%"],
   });
-  const sceneProgress = useSpring(scrollYProgress, sceneSpring);
-  const leftGroupX = useTransform(sceneProgress, [0.08, 0.48, 0.9], [-22, 8, 2]);
-  const rightGroupX = useTransform(sceneProgress, [0.08, 0.48, 0.9], [22, -8, -2]);
-  const groupOpacity = useTransform(sceneProgress, [0.04, 0.24, 0.9], [0.58, 1, 1]);
-  const connectorReveal = useTransform(sceneProgress, [0.18, 0.5], [0, 1]);
-  const connectorOpacity = useTransform(sceneProgress, [0.14, 0.32], [0.15, 1]);
-  const hubScale = useTransform(
-    sceneProgress,
-    [0.08, 0.42, 0.7, 0.94],
-    [0.94, 1.025, 0.995, 1],
-  );
-  const ringRotate = useTransform(sceneProgress, [0.12, 0.88], [-3, 4]);
-  const glowScale = useTransform(sceneProgress, [0.04, 0.5, 0.94], [0.78, 1.18, 1]);
-  const glowOpacity = useTransform(sceneProgress, [0.04, 0.42, 0.9], [0.18, 0.58, 0.42]);
-  const panelScale = useTransform(sceneProgress, [0, 0.24, 0.88, 1], [0.985, 1, 1, 0.99]);
-
-  const platformGroup = (platforms: string[], side: "left" | "right") => (
-    <motion.ul
-      style={
-        motionEnabled
-          ? {
-              x: side === "left" ? leftGroupX : rightGroupX,
-              opacity: groupOpacity,
-            }
-          : undefined
-      }
-      className="grid gap-3 sm:grid-cols-3 md:grid-cols-1 md:gap-4"
-    >
-      {platforms.map((platform) => (
-        <li
-          key={platform}
-          className="flex min-h-12 items-center justify-center gap-2 rounded-xl border border-[var(--color-card-border)] bg-[var(--color-bg-card)] px-3 py-2.5 text-center text-sm font-semibold text-[var(--color-text-main)] shadow-[0_12px_30px_-24px_var(--color-shadow)]"
-        >
-          <span
-            aria-hidden="true"
-            className="h-2 w-2 shrink-0 rounded-full bg-[var(--color-accent)] shadow-[0_0_0_4px_var(--color-bg-soft)]"
-          />
-          {platform}
-        </li>
-      ))}
-    </motion.ul>
-  );
+  const progress = useSpring(scrollYProgress, integrationSpring);
+  const inputX = useTransform(progress, [0.02, 0.14], [-14, 0]);
+  const inputOpacity = useTransform(progress, [0.02, 0.12], [0.76, 1]);
+  const firstPath = useTransform(progress, [0.08, 0.28], [0, 1]);
+  const workflowY = useTransform(progress, [0.12, 0.32], [10, 0]);
+  const workflowOpacity = useTransform(progress, [0.1, 0.28], [0.8, 1]);
+  const secondPath = useTransform(progress, [0.24, 0.45], [0, 1]);
+  const outputX = useTransform(progress, [0.32, 0.52], [14, 0]);
+  const outputOpacity = useTransform(progress, [0.3, 0.5], [0.74, 1]);
+  const safeguardsY = useTransform(progress, [0.44, 0.62], [9, 0]);
+  const safeguardsOpacity = useTransform(progress, [0.42, 0.6], [0.84, 1]);
+  const glowX = useTransform(progress, [0.08, 0.82], ["-28%", "28%"]);
 
   return (
     <section
+      id="ai-integration"
       aria-labelledby="ai-integration-title"
       className="bg-[var(--color-bg-base)] py-20 transition-colors duration-300 md:py-28"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ y: 16 }}
-          whileInView={motionEnabled ? { opacity: 1, y: 0 } : undefined}
-          viewport={{ once: true, amount: 0.35 }}
-          transition={{ duration: 0.45 }}
-          className="mx-auto mb-10 max-w-3xl text-center md:mb-14"
-        >
+        <div className="mx-auto mb-10 max-w-3xl text-center md:mb-14">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-accent)]">
             {aiIntegrations.eyebrow}
           </p>
@@ -92,165 +73,257 @@ export default function AiIntegration({ data }: { data: SiteData }) {
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-[var(--color-text-muted)] md:text-lg">
             {aiIntegrations.subtitle}
           </p>
-        </motion.div>
-
-        <div
-          ref={diagramSceneRef}
-          className="ai-motion-scene relative"
-        >
-          <motion.div
-            style={motionEnabled ? { scale: panelScale } : undefined}
-            className="ai-motion-panel relative overflow-hidden rounded-[2rem] border border-[var(--color-card-border)] bg-[var(--color-bg-soft)] px-4 py-8 shadow-[0_24px_70px_-48px_var(--color-shadow)] sm:px-6 md:px-8 md:py-10"
-          >
-            <motion.div
-              aria-hidden="true"
-              style={
-                motionEnabled
-                  ? { scale: glowScale, opacity: glowOpacity }
-                  : undefined
-              }
-              className="pointer-events-none absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-glow)] opacity-50 blur-[80px]"
-            />
-
-            <div className="relative grid w-full gap-0 md:grid-cols-[minmax(0,1fr)_4.5rem_auto_4.5rem_minmax(0,1fr)] md:items-center">
-              {platformGroup(leftPlatforms, "left")}
-
-              <div aria-hidden="true" className="relative mx-auto h-8 w-8 md:h-48 md:w-full">
-                <span className="absolute left-1/2 top-0 h-full w-px bg-[var(--color-divider)] md:hidden" />
-                <motion.span
-                  style={
-                    motionEnabled
-                      ? {
-                          scaleY: connectorReveal,
-                          opacity: connectorOpacity,
-                          transformOrigin: "center center",
-                        }
-                      : undefined
-                  }
-                  className="absolute left-0 top-[13%] hidden h-[74%] w-px bg-[var(--color-divider)] md:block"
-                />
-                <motion.span
-                  style={
-                    motionEnabled
-                      ? {
-                          scaleX: connectorReveal,
-                          opacity: connectorOpacity,
-                          transformOrigin: "right center",
-                        }
-                      : undefined
-                  }
-                  className="absolute left-0 top-1/2 hidden h-px w-full bg-[var(--color-divider)] md:block"
-                />
-                <motion.span
-                  style={motionEnabled ? { opacity: connectorOpacity } : undefined}
-                  className="absolute right-0 top-1/2 hidden h-2 w-2 -translate-y-1/2 translate-x-1/2 rounded-full bg-[var(--color-accent)] md:block"
-                />
-                <motion.span
-                  style={motionEnabled ? { opacity: connectorOpacity } : undefined}
-                  className="absolute -left-1 top-[13%] hidden h-2 w-2 -translate-y-1/2 rounded-full border border-[var(--color-accent)] bg-[var(--color-bg-soft)] md:block"
-                />
-                <motion.span
-                  style={motionEnabled ? { opacity: connectorOpacity } : undefined}
-                  className="absolute -left-1 top-1/2 hidden h-2 w-2 -translate-y-1/2 rounded-full border border-[var(--color-accent)] bg-[var(--color-bg-soft)] md:block"
-                />
-                <motion.span
-                  style={motionEnabled ? { opacity: connectorOpacity } : undefined}
-                  className="absolute -left-1 top-[87%] hidden h-2 w-2 -translate-y-1/2 rounded-full border border-[var(--color-accent)] bg-[var(--color-bg-soft)] md:block"
-                />
-              </div>
-
-              <motion.div
-                style={motionEnabled ? { scale: hubScale } : undefined}
-                className="relative mx-auto flex h-36 w-36 items-center justify-center rounded-full border border-[var(--color-card-border)] bg-[var(--color-bg-elevated)] p-4 shadow-[0_22px_50px_-32px_var(--color-shadow)] sm:h-40 sm:w-40"
-              >
-                <motion.span
-                  aria-hidden="true"
-                  style={motionEnabled ? { rotate: ringRotate } : undefined}
-                  className="absolute inset-3 rounded-full border border-[var(--color-divider)]"
-                />
-                <span className="relative flex flex-col items-center gap-2.5 text-center">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-accent)] text-[var(--color-on-accent)] shadow-[0_12px_28px_-16px_var(--color-shadow)]">
-                    <Workflow aria-hidden="true" className="h-5 w-5" strokeWidth={1.9} />
-                  </span>
-                  <span className="max-w-24 text-sm font-semibold leading-5 text-[var(--color-text-main)]">
-                    {aiIntegrations.hubLabel}
-                  </span>
-                </span>
-              </motion.div>
-
-              <div aria-hidden="true" className="relative mx-auto h-8 w-8 md:h-48 md:w-full">
-                <span className="absolute left-1/2 top-0 h-full w-px bg-[var(--color-divider)] md:hidden" />
-                <motion.span
-                  style={
-                    motionEnabled
-                      ? {
-                          scaleY: connectorReveal,
-                          opacity: connectorOpacity,
-                          transformOrigin: "center center",
-                        }
-                      : undefined
-                  }
-                  className="absolute right-0 top-[13%] hidden h-[74%] w-px bg-[var(--color-divider)] md:block"
-                />
-                <motion.span
-                  style={
-                    motionEnabled
-                      ? {
-                          scaleX: connectorReveal,
-                          opacity: connectorOpacity,
-                          transformOrigin: "left center",
-                        }
-                      : undefined
-                  }
-                  className="absolute left-0 top-1/2 hidden h-px w-full bg-[var(--color-divider)] md:block"
-                />
-                <motion.span
-                  style={motionEnabled ? { opacity: connectorOpacity } : undefined}
-                  className="absolute left-0 top-1/2 hidden h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-accent)] md:block"
-                />
-                <motion.span
-                  style={motionEnabled ? { opacity: connectorOpacity } : undefined}
-                  className="absolute -right-1 top-[13%] hidden h-2 w-2 -translate-y-1/2 rounded-full border border-[var(--color-accent)] bg-[var(--color-bg-soft)] md:block"
-                />
-                <motion.span
-                  style={motionEnabled ? { opacity: connectorOpacity } : undefined}
-                  className="absolute -right-1 top-1/2 hidden h-2 w-2 -translate-y-1/2 rounded-full border border-[var(--color-accent)] bg-[var(--color-bg-soft)] md:block"
-                />
-                <motion.span
-                  style={motionEnabled ? { opacity: connectorOpacity } : undefined}
-                  className="absolute -right-1 top-[87%] hidden h-2 w-2 -translate-y-1/2 rounded-full border border-[var(--color-accent)] bg-[var(--color-bg-soft)] md:block"
-                />
-              </div>
-
-              {platformGroup(rightPlatforms, "right")}
-            </div>
-          </motion.div>
         </div>
 
-        <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:mt-8 lg:grid-cols-4">
-          {aiIntegrations.benefits.map((benefit, index) => (
-            <motion.li
-              key={benefit.title}
-              initial={{ y: 12 }}
-              whileInView={motionEnabled ? { opacity: 1, y: 0 } : undefined}
-              viewport={{ once: true, amount: 0.35 }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-bg-card)] p-5 shadow-[0_16px_40px_-34px_var(--color-shadow)]"
-            >
-              <CheckCircle2
-                aria-hidden="true"
-                className="mb-4 h-5 w-5 text-[var(--color-accent)]"
-                strokeWidth={2}
-              />
-              <h3 className="text-base font-semibold tracking-[-0.02em] text-[var(--color-text-main)]">
-                {benefit.title}
-              </h3>
-              <p className="mt-2 text-sm leading-6 text-[var(--color-text-muted)]">
-                {benefit.description}
-              </p>
-            </motion.li>
-          ))}
-        </ul>
+        <div ref={sceneRef} className="ai-motion-scene relative">
+          <div className="ai-motion-panel relative overflow-hidden rounded-[2rem] border border-[var(--color-card-border)] bg-[var(--color-bg-soft)] p-4 shadow-[0_28px_80px_-54px_var(--color-shadow)] sm:p-6 lg:p-7">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 opacity-45"
+              style={{
+                backgroundImage:
+                  "linear-gradient(to right, var(--color-divider) 1px, transparent 1px), linear-gradient(to bottom, var(--color-divider) 1px, transparent 1px)",
+                backgroundSize: "52px 52px",
+                maskImage:
+                  "linear-gradient(to bottom, rgba(0,0,0,0.52), transparent 72%)",
+              }}
+            />
+            <motion.div
+              aria-hidden="true"
+              style={motionEnabled ? { x: glowX } : undefined}
+              className="pointer-events-none absolute -top-24 left-1/3 h-72 w-72 rounded-full bg-[var(--color-glow)] opacity-60 blur-[90px]"
+            />
+
+            <div className="relative">
+              <div className="flex flex-col gap-4 border-b border-[var(--color-divider)] pb-5 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex items-center gap-3">
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-2xl bg-[var(--color-accent)] text-[var(--color-on-accent)] shadow-[0_14px_32px_-22px_var(--color-shadow)]">
+                    <Workflow className="size-5" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <p className="text-[0.68rem] font-bold uppercase tracking-[0.15em] text-[var(--color-accent)]">
+                      {aiIntegrations.sceneLabel}
+                    </p>
+                    <p className="mt-1 text-sm text-[var(--color-text-muted)]">
+                      {aiIntegrations.exampleNote}
+                    </p>
+                  </div>
+                </div>
+                <span className="inline-flex w-fit items-center gap-2 rounded-full border border-[var(--color-card-border)] bg-[var(--color-bg-card)] px-3 py-2 text-[0.66rem] font-bold uppercase tracking-[0.12em] text-[var(--color-text-main)]">
+                  <span className="size-2 rounded-full bg-[var(--color-accent-secondary)] shadow-[0_0_0_4px_var(--color-accent-soft)]" />
+                  {aiIntegrations.statusLabel}
+                </span>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2 border-b border-[var(--color-divider)] py-4">
+                <span className="mr-1 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[var(--color-text-subtle)]">
+                  {aiIntegrations.connectedLabel}
+                </span>
+                {aiIntegrations.connectedSystems.map((system) => (
+                  <span
+                    key={system}
+                    className="rounded-full border border-[var(--color-card-border)] bg-[var(--color-bg-card)] px-2.5 py-1.5 text-[0.68rem] font-semibold text-[var(--color-text-muted)]"
+                  >
+                    {system}
+                  </span>
+                ))}
+              </div>
+
+              <div className="grid gap-4 py-5 lg:grid-cols-[minmax(0,0.82fr)_2.75rem_minmax(18rem,1.18fr)_2.75rem_minmax(0,0.82fr)] lg:items-center lg:gap-3">
+                <motion.div
+                  style={
+                    motionEnabled
+                      ? { x: inputX, opacity: inputOpacity }
+                      : undefined
+                  }
+                >
+                  <p className="mb-3 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[var(--color-text-subtle)]">
+                    {aiIntegrations.inputLabel}
+                  </p>
+                  <ul className="grid gap-2.5">
+                    {aiIntegrations.sources.map((source, index) => {
+                      const Icon = inputIcons[index] ?? Sparkles;
+                      return (
+                        <li
+                          key={source.label}
+                          className="flex items-center gap-3 rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-bg-card)] p-3 shadow-[0_14px_36px_-32px_var(--color-shadow)]"
+                        >
+                          <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-[var(--color-accent-soft)] text-[var(--color-accent)]">
+                            <Icon className="size-4" aria-hidden="true" />
+                          </span>
+                          <span className="min-w-0">
+                            <span className="block text-sm font-semibold text-[var(--color-text-main)]">
+                              {source.label}
+                            </span>
+                            <span className="mt-0.5 block text-xs leading-5 text-[var(--color-text-subtle)]">
+                              {source.detail}
+                            </span>
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </motion.div>
+
+                <div
+                  aria-hidden="true"
+                  className="flex items-center justify-center lg:h-full"
+                >
+                  <div className="relative hidden h-px w-full bg-[var(--color-card-border)] lg:block">
+                    <motion.span
+                      style={
+                        motionEnabled
+                          ? { scaleX: firstPath, transformOrigin: "left center" }
+                          : undefined
+                      }
+                      className="absolute inset-0 bg-[var(--color-accent)]"
+                    />
+                    <ArrowRight className="absolute -right-1.5 top-1/2 size-4 -translate-y-1/2 text-[var(--color-accent)]" />
+                  </div>
+                  <ArrowDown className="size-4 text-[var(--color-accent)] lg:hidden" />
+                </div>
+
+                <motion.div
+                  style={
+                    motionEnabled
+                      ? { y: workflowY, opacity: workflowOpacity }
+                      : undefined
+                  }
+                  className="rounded-[1.7rem] border border-[var(--color-accent)] bg-[var(--color-bg-elevated)] p-4 shadow-[0_24px_60px_-42px_var(--color-shadow)]"
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[var(--color-accent)]">
+                      {aiIntegrations.workflowLabel}
+                    </p>
+                    <ShieldCheck
+                      className="size-4 text-[var(--color-accent)]"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <ol className="mt-3 grid gap-2">
+                    {aiIntegrations.workflowSteps.map((step, index) => (
+                      <li
+                        key={step.label}
+                        className="relative overflow-hidden rounded-xl border border-[var(--color-card-border)] bg-[var(--color-bg-card)] p-3"
+                      >
+                        <div className="flex gap-3">
+                          <span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-[var(--color-accent-soft)] font-display text-xs font-bold text-[var(--color-accent)]">
+                            0{index + 1}
+                          </span>
+                          <span>
+                            <span className="block text-sm font-semibold text-[var(--color-text-main)]">
+                              {step.label}
+                            </span>
+                            <span className="mt-0.5 block text-xs leading-5 text-[var(--color-text-subtle)]">
+                              {step.detail}
+                            </span>
+                          </span>
+                        </div>
+                        <motion.span
+                          aria-hidden="true"
+                          style={
+                            motionEnabled
+                              ? {
+                                  scaleX: firstPath,
+                                  transformOrigin: "left center",
+                                }
+                              : undefined
+                          }
+                          className="absolute inset-x-0 bottom-0 h-px bg-[var(--color-accent)]"
+                        />
+                      </li>
+                    ))}
+                  </ol>
+                </motion.div>
+
+                <div
+                  aria-hidden="true"
+                  className="flex items-center justify-center lg:h-full"
+                >
+                  <div className="relative hidden h-px w-full bg-[var(--color-card-border)] lg:block">
+                    <motion.span
+                      style={
+                        motionEnabled
+                          ? { scaleX: secondPath, transformOrigin: "left center" }
+                          : undefined
+                      }
+                      className="absolute inset-0 bg-[var(--color-accent)]"
+                    />
+                    <ArrowRight className="absolute -right-1.5 top-1/2 size-4 -translate-y-1/2 text-[var(--color-accent)]" />
+                  </div>
+                  <ArrowDown className="size-4 text-[var(--color-accent)] lg:hidden" />
+                </div>
+
+                <motion.div
+                  style={
+                    motionEnabled
+                      ? { x: outputX, opacity: outputOpacity }
+                      : undefined
+                  }
+                >
+                  <p className="mb-3 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[var(--color-text-subtle)]">
+                    {aiIntegrations.outputLabel}
+                  </p>
+                  <ul className="grid gap-2.5">
+                    {aiIntegrations.outputs.map((output, index) => {
+                      const Icon = outputIcons[index] ?? CheckCircle2;
+                      return (
+                        <li
+                          key={output.label}
+                          className="flex items-center gap-3 rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-bg-card)] p-3 shadow-[0_14px_36px_-32px_var(--color-shadow)]"
+                        >
+                          <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-[var(--color-accent-soft)] text-[var(--color-accent)]">
+                            <Icon className="size-4" aria-hidden="true" />
+                          </span>
+                          <span className="min-w-0">
+                            <span className="block text-sm font-semibold text-[var(--color-text-main)]">
+                              {output.label}
+                            </span>
+                            <span className="mt-0.5 block text-xs leading-5 text-[var(--color-text-subtle)]">
+                              {output.detail}
+                            </span>
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </motion.div>
+              </div>
+
+              <motion.ul
+                style={
+                  motionEnabled
+                    ? { y: safeguardsY, opacity: safeguardsOpacity }
+                    : undefined
+                }
+                className="grid gap-px overflow-hidden rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-divider)] sm:grid-cols-2 xl:grid-cols-4"
+              >
+                {aiIntegrations.benefits.map((benefit) => (
+                  <li
+                    key={benefit.title}
+                    className="bg-[var(--color-bg-card)] p-4"
+                  >
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2
+                        aria-hidden="true"
+                        className="mt-0.5 size-4 shrink-0 text-[var(--color-accent)]"
+                        strokeWidth={2}
+                      />
+                      <div>
+                        <h3 className="text-sm font-semibold tracking-[-0.015em] text-[var(--color-text-main)]">
+                          {benefit.title}
+                        </h3>
+                        <p className="mt-1 text-xs leading-5 text-[var(--color-text-muted)]">
+                          {benefit.description}
+                        </p>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </motion.ul>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

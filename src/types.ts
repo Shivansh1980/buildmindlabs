@@ -152,8 +152,10 @@ export interface SiteData {
     conceptsEyebrow: string;
     conceptsTitle: string;
     conceptLabel: string;
+    visualDisclosureLabel: string;
     challengeLabel: string;
     approachLabel: string;
+    acceptanceLabel: string;
     outcomeLabel: string;
     includesLabel: string;
     ctaLabel: string;
@@ -164,10 +166,20 @@ export interface SiteData {
       description: string;
       challenge: string;
       approach: string;
+      acceptanceCriterion: string;
       designedOutcome: string;
       deliverables: string[];
       variant: "website" | "copilot" | "analytics";
       featured: boolean;
+      visual: {
+        eyebrow: string;
+        title: string;
+        status: string;
+        inputs: string[];
+        stages: string[];
+        resultTitle: string;
+        result: string;
+      };
     }>;
   };
   projectPlanner: {
@@ -198,8 +210,26 @@ export interface SiteData {
     eyebrow: string;
     title: string;
     subtitle: string;
-    hubLabel: string;
-    platforms: string[];
+    sceneLabel: string;
+    statusLabel: string;
+    inputLabel: string;
+    sources: Array<{
+      label: string;
+      detail: string;
+    }>;
+    workflowLabel: string;
+    workflowSteps: Array<{
+      label: string;
+      detail: string;
+    }>;
+    outputLabel: string;
+    outputs: Array<{
+      label: string;
+      detail: string;
+    }>;
+    connectedLabel: string;
+    connectedSystems: string[];
+    exampleNote: string;
     benefits: Array<{
       title: string;
       description: string;
