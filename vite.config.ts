@@ -42,6 +42,15 @@ type SiteContent = {
 
 const projectRoot = path.dirname(fileURLToPath(import.meta.url));
 const siteDataPath = path.resolve(projectRoot, "src/data/siteData.json");
+const contactApiTarget = "https://ryzenshivansh.pythonanywhere.com";
+
+const contactApiProxy = {
+  "/api/v1/contact": {
+    target: contactApiTarget,
+    changeOrigin: true,
+    secure: true,
+  },
+};
 
 function readSiteContent(): SiteContent {
   const siteData = JSON.parse(
@@ -313,8 +322,13 @@ export default defineConfig({
     },
   },
   server: {
-    allowedHosts: ["876c-103-133-65-214.ngrok-free.app"],
+    allowedHosts: true,
     hmr: process.env.DISABLE_HMR !== "true",
+    proxy: contactApiProxy,
     watch: process.env.DISABLE_HMR === "true" ? null : {},
+  },
+  preview: {
+    allowedHosts: true,
+    proxy: contactApiProxy,
   },
 });

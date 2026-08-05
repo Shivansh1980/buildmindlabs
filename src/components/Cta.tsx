@@ -1,19 +1,54 @@
 import { useState, type FormEvent } from "react";
-import { ArrowUpRight, Clock3, Mail, MapPin, Send } from "lucide-react";
+import {
+  ArrowUpRight,
+  Clock3,
+  LoaderCircle,
+  Mail,
+  MapPin,
+  Send,
+} from "lucide-react";
 import { motion } from "motion/react";
 import { SiteData } from "../types";
+import {
+  CONTACT_FIELD_LIMITS,
+  ContactApiError,
+  getClientRateLimit,
+  recordClientSubmission,
+  submitContact,
+  type ContactRateLimitConfig,
+} from "../lib/contactApi";
 
 const fieldClassName =
   "w-full rounded-xl border border-[var(--color-card-border)] bg-[var(--color-bg-soft)] px-4 py-3.5 text-sm text-[var(--color-text-main)] outline-none transition placeholder:text-[var(--color-text-subtle)] hover:border-[var(--color-divider)] focus:border-[var(--color-accent)] focus:ring-4 focus:ring-[var(--color-glow)]";
 
+type FormStatus = {
+  kind: "idle" | "submitting" | "success" | "error";
+  message: string;
+};
+
 export default function Cta({ data }: { data: SiteData }) {
-  const [statusMessage, setStatusMessage] = useState("");
+  const [formStatus, setFormStatus] = useState<FormStatus>({
+    kind: "idle",
+    message: "",
+  });
   const { fields } = data.cta.form;
+  const isSubmitting = formStatus.kind === "submitting";
+  const endpoint =
+    import.meta.env.VITE_CONTACT_API_URL?.trim() || data.cta.form.endpoint;
+  const rateLimitConfig: ContactRateLimitConfig = {
+    cooldownSeconds: data.cta.form.clientRateLimit.cooldownSeconds,
+    windowSeconds: data.cta.form.clientRateLimit.windowSeconds,
+    maxSubmissions: data.cta.form.clientRateLimit.maxSubmissions,
+  };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (isSubmitting) {
+      return;
+    }
 
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     const valueFor = (name: string) => String(formData.get(name) ?? "").trim();
     const name = valueFor("name");
     const email = valueFor("email");
@@ -21,28 +56,86 @@ export default function Cta({ data }: { data: SiteData }) {
     const projectTypeValue = valueFor("projectType");
     const budgetValue = valueFor("budget");
     const message = valueFor("message");
-    const projectType =
-      data.cta.form.projectTypes.find((option) => option.value === projectTypeValue)?.label ??
-      projectTypeValue;
-    const budget =
-      data.cta.form.budgetRanges.find((option) => option.value === budgetValue)?.label ??
-      budgetValue;
+    const website = valueFor("website");
+    const projectType = data.cta.form.projectTypes.find(
+      (option) => option.value === projectTypeValue,
+    )?.label;
+    const budget = data.cta.form.budgetRanges.find(
+      (option) => option.value === budgetValue,
+    )?.label;
 
-    const subject = [data.cta.form.subjectPrefix, company || name]
-      .filter(Boolean)
-      .join(" — ");
-    const details = [
-      `${fields.name.label}: ${name}`,
-      `${fields.email.label}: ${email}`,
-      ...(company ? [`${fields.company.label}: ${company}`] : []),
-      `${fields.projectType.label}: ${projectType}`,
-      `${fields.budget.label}: ${budget}`,
-    ];
-    const body = [...details, "", `${fields.message.label}:`, message].join("\n");
-    const mailtoHref = `mailto:${data.brand.email.trim()}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    if (website) {
+      form.reset();
+      setFormStatus({
+        kind: "success",
+        message: data.cta.form.successText,
+      });
+      return;
+    }
 
-    setStatusMessage(data.cta.form.statusText);
-    window.location.href = mailtoHref;
+    if (!projectType || !budget) {
+      setFormStatus({
+        kind: "error",
+        message: data.cta.form.validationErrorText,
+      });
+      return;
+    }
+
+    const clientLimit = getClientRateLimit(rateLimitConfig);
+    if (clientLimit.limited) {
+      setFormStatus({
+        kind: "error",
+        message: data.cta.form.rateLimitText.replace(
+          "{seconds}",
+          String(clientLimit.retryAfterSeconds),
+        ),
+      });
+      return;
+    }
+
+    setFormStatus({
+      kind: "submitting",
+      message: data.cta.form.submittingText,
+    });
+
+    try {
+      await submitContact(
+        endpoint,
+        {
+          name,
+          email,
+          company,
+          projectType,
+          budget,
+          message,
+          website,
+        },
+        data.cta.form.requestTimeoutMs,
+      );
+      recordClientSubmission(rateLimitConfig);
+      form.reset();
+      setFormStatus({
+        kind: "success",
+        message: data.cta.form.successText,
+      });
+    } catch (error) {
+      const isRateLimited =
+        error instanceof ContactApiError && error.code === "rate-limited";
+      const retryAfterSeconds =
+        error instanceof ContactApiError ? error.retryAfterSeconds : undefined;
+
+      setFormStatus({
+        kind: "error",
+        message: isRateLimited
+          ? data.cta.form.rateLimitText.replace(
+              "{seconds}",
+              String(retryAfterSeconds ?? 60),
+            )
+          : error instanceof ContactApiError && error.code === "validation"
+            ? data.cta.form.validationErrorText
+            : data.cta.form.errorText,
+      });
+    }
   };
 
   const configuredEmailHref = data.actions.email.href.trim();
@@ -131,7 +224,27 @@ export default function Cta({ data }: { data: SiteData }) {
           transition={{ duration: 0.6, delay: 0.08 }}
           className="rounded-3xl border border-[var(--color-card-border)] bg-[var(--color-bg-card)] p-5 shadow-[0_20px_70px_var(--color-shadow)] sm:p-7 lg:p-8"
         >
-          <form onSubmit={handleSubmit} aria-labelledby="contact-heading" className="space-y-5">
+          <form
+            onSubmit={handleSubmit}
+            aria-labelledby="contact-heading"
+            aria-busy={isSubmitting}
+            className="relative space-y-5"
+          >
+            <div
+              className="pointer-events-none absolute -left-[10000px] top-auto size-px overflow-hidden opacity-0"
+              aria-hidden="true"
+            >
+              <label htmlFor="contact-website">Leave this field empty</label>
+              <input
+                id="contact-website"
+                name="website"
+                type="text"
+                autoComplete="off"
+                maxLength={CONTACT_FIELD_LIMITS.website.max}
+                tabIndex={-1}
+              />
+            </div>
+
             <div className="grid gap-5 sm:grid-cols-2">
               <div className="space-y-2">
                 <label htmlFor="contact-name" className="block text-sm font-semibold text-[var(--color-text-main)]">
@@ -143,6 +256,8 @@ export default function Cta({ data }: { data: SiteData }) {
                   name="name"
                   type="text"
                   autoComplete="name"
+                  minLength={CONTACT_FIELD_LIMITS.name.min}
+                  maxLength={CONTACT_FIELD_LIMITS.name.max}
                   className={fieldClassName}
                   placeholder={fields.name.placeholder}
                 />
@@ -157,6 +272,7 @@ export default function Cta({ data }: { data: SiteData }) {
                   name="email"
                   type="email"
                   autoComplete="email"
+                  maxLength={CONTACT_FIELD_LIMITS.email.max}
                   className={fieldClassName}
                   placeholder={fields.email.placeholder}
                 />
@@ -172,6 +288,7 @@ export default function Cta({ data }: { data: SiteData }) {
                 name="company"
                 type="text"
                 autoComplete="organization"
+                maxLength={CONTACT_FIELD_LIMITS.company.max}
                 className={fieldClassName}
                 placeholder={fields.company.placeholder}
               />
@@ -185,8 +302,13 @@ export default function Cta({ data }: { data: SiteData }) {
                 <select
                   id="contact-project-type"
                   name="projectType"
+                  required
+                  defaultValue=""
                   className={`${fieldClassName} appearance-none`}
                 >
+                  <option value="" disabled>
+                    {fields.projectType.placeholder}
+                  </option>
                   {data.cta.form.projectTypes.map((option) => (
                     <option key={option.value} value={option.value}>
                       {option.label}
@@ -201,8 +323,13 @@ export default function Cta({ data }: { data: SiteData }) {
                 <select
                   id="contact-budget"
                   name="budget"
+                  required
+                  defaultValue=""
                   className={`${fieldClassName} appearance-none`}
                 >
+                  <option value="" disabled>
+                    {fields.budget.placeholder}
+                  </option>
                   {data.cta.form.budgetRanges.map((option) => (
                     <option key={option.value} value={option.value}>
                       {option.label}
@@ -221,6 +348,8 @@ export default function Cta({ data }: { data: SiteData }) {
                 id="contact-message"
                 name="message"
                 rows={5}
+                minLength={CONTACT_FIELD_LIMITS.message.min}
+                maxLength={CONTACT_FIELD_LIMITS.message.max}
                 className={`${fieldClassName} resize-y`}
                 placeholder={fields.message.placeholder}
               />
@@ -229,17 +358,34 @@ export default function Cta({ data }: { data: SiteData }) {
             <div className="pt-1">
               <button
                 type="submit"
-                className="group inline-flex w-full items-center justify-center gap-2.5 rounded-xl bg-[var(--color-accent)] px-5 py-4 text-sm font-semibold text-[var(--color-on-accent)] shadow-[0_12px_30px_var(--color-glow)] transition duration-300 hover:-translate-y-0.5 hover:bg-[var(--color-accent-strong)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--color-glow)] active:translate-y-0"
+                disabled={isSubmitting}
+                className="group inline-flex w-full items-center justify-center gap-2.5 rounded-xl bg-[var(--color-accent)] px-5 py-4 text-sm font-semibold text-[var(--color-on-accent)] shadow-[0_12px_30px_var(--color-glow)] transition duration-300 hover:-translate-y-0.5 hover:bg-[var(--color-accent-strong)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--color-glow)] active:translate-y-0 disabled:cursor-wait disabled:opacity-70 disabled:hover:translate-y-0"
               >
-                {data.cta.form.submitLabel}
-                <Send className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                {isSubmitting
+                  ? data.cta.form.submittingLabel
+                  : data.cta.form.submitLabel}
+                {isSubmitting ? (
+                  <LoaderCircle
+                    className="size-4 animate-spin"
+                    aria-hidden="true"
+                  />
+                ) : (
+                  <Send
+                    className="size-4 transition-transform group-hover:translate-x-0.5"
+                    aria-hidden="true"
+                  />
+                )}
               </button>
               <p
-                role="status"
-                aria-live="polite"
-                className="mt-3 min-h-5 text-center text-sm font-medium text-[var(--color-accent)]"
+                role={formStatus.kind === "error" ? "alert" : "status"}
+                aria-live={formStatus.kind === "error" ? "assertive" : "polite"}
+                className={`mt-3 min-h-5 text-center text-sm font-medium ${
+                  formStatus.kind === "error"
+                    ? "text-[var(--color-danger,var(--color-text-main))]"
+                    : "text-[var(--color-accent)]"
+                }`}
               >
-                {statusMessage}
+                {formStatus.message}
               </p>
               <p className="mt-1 text-center text-xs leading-5 text-[var(--color-text-subtle)]">
                 {data.cta.form.privacyNote}

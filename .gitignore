@@ -3,6 +3,7 @@ node_modules/
 build/
 dist/
 .prerender/
+.vercel/
 coverage/
 .DS_Store
 *.log

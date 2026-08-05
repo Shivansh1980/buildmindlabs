@@ -301,19 +301,30 @@ export interface SiteData {
     subtitle: string;
     directContactLabel: string;
     form: {
-      subjectPrefix: string;
+      endpoint: string;
+      requestTimeoutMs: number;
+      clientRateLimit: {
+        cooldownSeconds: number;
+        windowSeconds: number;
+        maxSubmissions: number;
+      };
       fields: {
         name: { label: string; placeholder: string };
         email: { label: string; placeholder: string };
         company: { label: string; placeholder: string };
-        projectType: { label: string };
-        budget: { label: string };
+        projectType: { label: string; placeholder: string };
+        budget: { label: string; placeholder: string };
         message: { label: string; placeholder: string };
       };
       projectTypes: OptionData[];
       budgetRanges: OptionData[];
       submitLabel: string;
-      statusText: string;
+      submittingLabel: string;
+      submittingText: string;
+      successText: string;
+      errorText: string;
+      validationErrorText: string;
+      rateLimitText: string;
       privacyNote: string;
     };
   };

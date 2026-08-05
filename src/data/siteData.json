@@ -547,13 +547,19 @@
     "subtitle": "Share the goal, the current friction, and any constraints you already know. We’ll reply with useful questions and a realistic next step—not a generic sales sequence.",
     "directContactLabel": "Prefer a normal email?",
     "form": {
-      "subjectPrefix": "Project brief",
+      "endpoint": "/api/v1/contact",
+      "requestTimeoutMs": 12000,
+      "clientRateLimit": {
+        "cooldownSeconds": 60,
+        "windowSeconds": 600,
+        "maxSubmissions": 3
+      },
       "fields": {
         "name": { "label": "Your name", "placeholder": "Jane Smith" },
         "email": { "label": "Work email", "placeholder": "jane@company.com" },
         "company": { "label": "Company or project", "placeholder": "Company name" },
-        "projectType": { "label": "Closest project type" },
-        "budget": { "label": "Planning budget" },
+        "projectType": { "label": "Closest project type", "placeholder": "Select a project type" },
+        "budget": { "label": "Planning budget", "placeholder": "Select a planning range" },
         "message": { "label": "What should work better?", "placeholder": "A few lines about the goal, current problem, users, and ideal timing..." }
       },
       "projectTypes": [
@@ -570,9 +576,14 @@
         { "value": "8k-20k", "label": "$8k–$20k" },
         { "value": "20k-plus", "label": "$20k+" }
       ],
-      "submitLabel": "Create an email brief",
-      "statusText": "Your email app should open with the project details. Review the draft and send it when you are ready.",
-      "privacyNote": "This button prepares an email on your device. Nothing is silently uploaded or marked as sent."
+      "submitLabel": "Send project enquiry",
+      "submittingLabel": "Sending enquiry…",
+      "submittingText": "Sending your enquiry securely…",
+      "successText": "Thanks—your enquiry is in. We’ll reply within one business day.",
+      "errorText": "We couldn’t send your enquiry. Please try again or email us directly.",
+      "validationErrorText": "Please check each required field and add at least 10 characters to your message.",
+      "rateLimitText": "A recent enquiry was already received. Please try again in {seconds} seconds.",
+      "privacyNote": "Your details are sent to CurvatureTech only when you submit this form and are used to respond to your enquiry."
     }
   },
   "footer": {
