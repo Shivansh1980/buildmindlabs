@@ -1,22 +1,22 @@
 {
   "brand": {
-    "name": "CurvatureTech",
-    "shortName": "CurvatureTech",
-    "alternateName": "Curvature Tech",
+    "name": "BuildMind Labs",
+    "shortName": "BuildMind Labs",
+    "alternateName": "BuildMindLabs",
     "description": "Founder-led product engineering for conversion-focused websites, web applications, and practical AI systems.",
     "footerText": "We turn ambitious ideas and operational friction into clear, useful digital products—without the black-box agency experience.",
-    "email": "hello@curvaturetech.com",
+    "email": "hello@buildmindlabs.com",
     "location": "India · Working worldwide",
     "responseTime": "Replies within one business day",
     "socialLinks": []
   },
   "seo": {
-    "title": "Web Development & AI Integration Studio | CurvatureTech",
+    "title": "Web Development & AI Integration Studio | BuildMind Labs",
     "description": "Founder-led web development studio in India building conversion-focused websites, web apps, AI integrations, automation, and practical ML systems.",
-    "canonicalUrl": "https://curvaturetech.com/",
+    "canonicalUrl": "https://buildmindlabs.vercel.app/",
     "favicon": "/favicon.svg",
     "ogImage": "/og.png",
-    "ogImageAlt": "CurvatureTech — web development, web apps and practical AI systems",
+    "ogImageAlt": "BuildMind Labs — web development, web apps and practical AI systems",
     "locale": "en_US",
     "themeColor": "#0f172a",
     "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
@@ -38,7 +38,7 @@
   "actions": {
     "startProject": { "label": "Get a scoped plan", "href": "#contact" },
     "viewWork": { "label": "Explore our work", "href": "#work" },
-    "email": { "label": "Email us directly", "href": "mailto:hello@curvaturetech.com" }
+    "email": { "label": "Email us directly", "href": "mailto:hello@buildmindlabs.com" }
   },
   "themeSwitcher": {
     "ariaLabel": "Choose a color theme",
@@ -92,9 +92,9 @@
   "founder": {
     "eyebrow": "Founder-led engineering",
     "title": "The people responsible for your build stay visible from day one.",
-    "subtitle": "CurvatureTech is deliberately founder-led. Strategy, technical decisions, and delivery stay connected instead of disappearing through layers of account management.",
+    "subtitle": "BuildMind Labs is deliberately founder-led. Strategy, technical decisions, and delivery stay connected instead of disappearing through layers of account management.",
     "primaryFounderId": "shivansh-shrivastava",
-    "carouselLabel": "People behind CurvatureTech",
+    "carouselLabel": "People behind BuildMind Labs",
     "previousPersonLabel": "Show previous person",
     "nextPersonLabel": "Show next person",
     "slideLabel": "slide",
@@ -114,7 +114,7 @@
         "location": "India · Working worldwide",
         "bio": "A full-stack and AI engineer with more than four years of experience contributing to production web platforms, tested APIs, enterprise workflows, and developer tooling across quality-sensitive environments.",
         "ctaLabel": "Talk directly with Shivansh",
-        "disclaimer": "Professional experience is summarized to respect employer and client confidentiality. The organizations behind that work are not presented as CurvatureTech clients or endorsements.",
+        "disclaimer": "Professional experience is summarized to respect employer and client confidentiality. The organizations behind that work are not presented as BuildMind Labs clients or endorsements.",
         "proofPoints": [
           { "value": "4+ years", "label": "shipping production software" },
           { "value": "Full stack", "label": ".NET, React, Angular and Python" },
@@ -163,10 +163,10 @@
   "projects": {
     "eyebrow": "Selected work & thinking",
     "title": "Shipped experience behind the studio. Thinking you can inspect.",
-    "subtitle": "CurvatureTech is new, so we separate Shivansh's anonymized professional contributions from our forward-looking build concepts. No borrowed logos, inflated metrics, or vague claims.",
+    "subtitle": "BuildMind Labs is new, so we separate Shivansh's anonymized professional contributions from our forward-looking build concepts. No borrowed logos, inflated metrics, or vague claims.",
     "experienceEyebrow": "Founder professional experience",
     "experienceTitle": "Three shipped-work patterns, specific enough to assess and generalized to protect confidentiality.",
-    "experienceNote": "These examples summarize Shivansh's contributions in prior and current employment. Names, interfaces, data, architecture, and proprietary details are omitted. CurvatureTech did not contract these engagements.",
+    "experienceNote": "These examples summarize Shivansh's contributions in prior and current employment. Names, interfaces, data, architecture, and proprietary details are omitted. BuildMind Labs did not contract these engagements.",
     "experienceLabels": {
       "contribution": "Founder contribution",
       "evidence": "What shipped",
@@ -583,7 +583,7 @@
       "errorText": "We couldn’t send your enquiry. Please try again or email us directly.",
       "validationErrorText": "Please check each required field and add at least 10 characters to your message.",
       "rateLimitText": "A recent enquiry was already received. Please try again in {seconds} seconds.",
-      "privacyNote": "Your details are sent to CurvatureTech only when you submit this form and are used to respond to your enquiry."
+      "privacyNote": "Your details are sent to BuildMind Labs only when you submit this form and are used to respond to your enquiry."
     }
   },
   "footer": {

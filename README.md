@@ -1,6 +1,6 @@
-# CurvatureTech
+# BuildMind Labs
 
-The public website for CurvatureTech. It presents the startup's website, web-application, AI-integration, and machine-learning services through a responsive React and TypeScript experience with five accessible color themes.
+The public website for BuildMind Labs. It presents the startup's website, web-application, AI-integration, and machine-learning services through a responsive React and TypeScript experience with five accessible color themes.
 
 ## Stack
 
@@ -101,8 +101,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://curvaturetech.com",
-        "https://www.curvaturetech.com",
+        "https://buildmindlabs.vercel.app",
         "http://localhost:3000",
         "http://127.0.0.1:3000",
     ],

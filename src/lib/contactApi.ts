@@ -70,7 +70,7 @@ export const CONTACT_FIELD_LIMITS = {
   website: { max: 200 },
 } as const;
 
-const STORAGE_KEY = "curvaturetech:contact-submissions:v1";
+const STORAGE_KEY = "buildmindlabs:contact-submissions:v1";
 let inMemorySubmissionTimes: number[] = [];
 
 function normalizeValues(values: ContactFormValues): ContactFormValues {
