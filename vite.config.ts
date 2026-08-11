@@ -177,7 +177,7 @@ function createStructuredData(
         alternateName: siteData.brand.alternateName,
         description: siteData.brand.description,
         url: canonicalUrl,
-        email: siteData.brand.email,
+        ...(siteData.brand.email.trim() ? { email: siteData.brand.email } : {}),
         image: {
           "@type": "ImageObject",
           url: socialImageUrl,
@@ -191,12 +191,16 @@ function createStructuredData(
           width: 512,
           height: 512,
         },
-        contactPoint: {
-          "@type": "ContactPoint",
-          contactType: "sales",
-          email: siteData.brand.email,
-          availableLanguage: ["English"],
-        },
+        ...(siteData.brand.email.trim()
+          ? {
+              contactPoint: {
+                "@type": "ContactPoint",
+                contactType: "sales",
+                email: siteData.brand.email,
+                availableLanguage: ["English"],
+              },
+            }
+          : {}),
         hasOfferCatalog: {
           "@type": "OfferCatalog",
           name: "Web development and AI integration services",

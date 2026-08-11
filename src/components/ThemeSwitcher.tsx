@@ -45,9 +45,7 @@ function getPreferredTheme(): Theme {
     // Storage can be unavailable in privacy-restricted browser contexts.
   }
 
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+  return "light";
 }
 
 export default function ThemeSwitcher({ copy }: ThemeSwitcherProps) {

@@ -38,10 +38,20 @@ export default function Navbar({ data }: { data: SiteData }) {
           <a
             href="#home"
             onClick={() => closeMenu()}
-            className="inline-flex min-h-11 shrink-0 items-center rounded-lg font-display text-[18px] font-semibold tracking-[-0.45px] text-[var(--color-text-main)] transition-colors hover:text-[var(--color-accent)]"
+            className="group inline-flex min-h-11 shrink-0 items-center gap-2.5 rounded-xl font-display text-[17px] font-semibold tracking-[-0.4px] text-[var(--color-text-main)] transition-colors hover:text-[var(--color-accent)]"
             aria-label={data.brand.name}
           >
-            {data.brand.shortName}
+            <span className="relative flex size-9 shrink-0 overflow-hidden rounded-xl shadow-[0_8px_22px_var(--color-shadow)] transition duration-300 group-hover:-translate-y-0.5 group-hover:shadow-[0_12px_28px_var(--color-glow)]">
+              <img
+                src={data.seo.favicon}
+                alt=""
+                width="36"
+                height="36"
+                className="size-full"
+                aria-hidden="true"
+              />
+            </span>
+            <span>{data.brand.shortName}</span>
           </a>
 
           <div className="hidden min-w-0 flex-1 items-center justify-end gap-1 lg:flex">

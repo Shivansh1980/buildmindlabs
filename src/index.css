@@ -25,9 +25,9 @@
     --color-bg-elevated: #ffffff;
     --color-bg-soft: #edf3fa;
     --color-bg-hover: #e8eef5;
-    --color-card-border: #d8e0e9;
-    --color-divider: #dfe5ec;
-    --color-shadow: rgba(15, 23, 42, 0.14);
+    --color-card-border: #c7d3e1;
+    --color-divider: #d1dae6;
+    --color-shadow: rgba(15, 23, 42, 0.18);
     --color-glow: rgba(7, 95, 200, 0.24);
 
     /* Compatibility aliases used by the existing sections. */
@@ -287,13 +287,13 @@
     }
 
     html.has-js .ai-motion-scene {
-      height: 146svh;
+      height: auto;
     }
 
     html.has-js .ai-motion-panel {
-      position: sticky;
-      top: 5.5rem;
-      min-height: min(40rem, calc(100svh - 7.5rem));
+      position: relative;
+      top: auto;
+      min-height: 0;
     }
 
     html.has-js .project-motion-story {
@@ -317,6 +317,148 @@
     html.has-js .services-motion-layout {
       gap: 6rem;
     }
+}
+
+.process-section {
+  background:
+    radial-gradient(
+      circle at 84% 18%,
+      color-mix(in srgb, var(--color-glow) 42%, transparent) 0,
+      transparent 30rem
+    ),
+    linear-gradient(
+      180deg,
+      var(--color-bg-base) 0%,
+      color-mix(in srgb, var(--color-bg-soft) 38%, var(--color-bg-base)) 48%,
+      var(--color-bg-base) 100%
+    );
+}
+
+.process-card {
+  isolation: isolate;
+  border-color: color-mix(
+    in srgb,
+    var(--color-card-border) 68%,
+    var(--color-accent) 32%
+  );
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--color-bg-elevated) 96%, var(--color-accent) 4%) 0%,
+      var(--color-bg-card) 54%,
+      color-mix(in srgb, var(--color-bg-card) 92%, var(--color-bg-soft) 8%) 100%
+    );
+  box-shadow:
+    0 30px 72px -38px var(--color-shadow),
+    0 10px 28px -20px color-mix(in srgb, var(--color-shadow) 78%, var(--color-accent) 22%),
+    inset 0 1px 0 color-mix(in srgb, var(--color-text-main) 10%, transparent);
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.process-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 100% 0%,
+    var(--color-accent-soft) 0,
+    transparent 38%
+  );
+  opacity: 0.72;
+}
+
+.process-card::after {
+  content: "";
+  position: absolute;
+  inset: 0 2rem auto;
+  height: 2px;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-accent),
+    var(--color-accent-secondary),
+    transparent
+  );
+  opacity: 0.72;
+}
+
+.process-step-badge,
+.process-card-arrow {
+  border: 1px solid color-mix(
+    in srgb,
+    var(--color-card-border) 58%,
+    var(--color-accent) 42%
+  );
+  background: color-mix(
+    in srgb,
+    var(--color-accent-soft) 72%,
+    var(--color-bg-card) 28%
+  );
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-text-main) 9%, transparent);
+}
+
+.process-card-proof {
+  border-color: color-mix(
+    in srgb,
+    var(--color-card-border) 78%,
+    var(--color-accent) 22%
+  );
+  background: color-mix(
+    in srgb,
+    var(--color-bg-soft) 74%,
+    var(--color-bg-card) 26%
+  );
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .process-card:hover {
+    border-color: color-mix(
+      in srgb,
+      var(--color-card-border) 50%,
+      var(--color-accent) 50%
+    );
+    box-shadow:
+      0 34px 80px -38px var(--color-shadow),
+      0 12px 34px -20px color-mix(in srgb, var(--color-shadow) 68%, var(--color-accent) 32%),
+      inset 0 1px 0 color-mix(in srgb, var(--color-text-main) 12%, transparent);
+  }
+}
+
+.ai-machine-art {
+  -webkit-mask-image: radial-gradient(ellipse 98% 96% at center, #000 72%, transparent 100%);
+  mask-image: radial-gradient(ellipse 98% 96% at center, #000 72%, transparent 100%);
+}
+
+.ai-machine-art--dark,
+.ai-machine-art--clay {
+  display: none;
+}
+
+[data-theme="dark"] .ai-machine-art--light,
+[data-theme="midnight"] .ai-machine-art--light {
+  display: none;
+}
+
+[data-theme="dark"] .ai-machine-art--dark,
+[data-theme="midnight"] .ai-machine-art--dark {
+  display: block;
+}
+
+[data-theme="clay"] .ai-machine-art--light {
+  display: none;
+}
+
+[data-theme="clay"] .ai-machine-art--clay {
+  display: block;
+}
+
+[data-theme="sepia"] .ai-machine-art--light {
+  filter: sepia(0.12) saturate(0.92);
 }
 
 @media (min-width: 64rem) and (max-height: 43.999rem) and (prefers-reduced-motion: no-preference) {

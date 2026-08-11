@@ -90,6 +90,7 @@ export interface SiteData {
     slideLabel: string;
     workingStyleTitle: string;
     workingStyle: string[];
+    trustStatement: string;
     people: Array<{
       id: string;
       organizationRole: string;
@@ -243,6 +244,7 @@ export interface SiteData {
       step: string;
       title: string;
       description: string;
+      proof: string;
       meta: string;
     }>;
   };
@@ -253,6 +255,11 @@ export interface SiteData {
     categories: Array<{
       name: string;
       technologies: string[];
+    }>;
+    principles: Array<{
+      icon: string;
+      title: string;
+      description: string;
     }>;
   };
   whyChooseUs: {
@@ -294,6 +301,13 @@ export interface SiteData {
       question: string;
       answer: string;
     }>;
+  };
+  community: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    label: string;
+    href: string;
   };
   cta: {
     eyebrow: string;

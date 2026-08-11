@@ -5,7 +5,7 @@
     "alternateName": "BuildMindLabs",
     "description": "Founder-led product engineering for conversion-focused websites, web applications, and practical AI systems.",
     "footerText": "We turn ambitious ideas and operational friction into clear, useful digital products—without the black-box agency experience.",
-    "email": "hello@buildmindlabs.com",
+    "email": "",
     "location": "India · Working worldwide",
     "responseTime": "Replies within one business day",
     "socialLinks": []
@@ -25,8 +25,6 @@
   "nav": [
     { "label": "About", "href": "#about" },
     { "label": "Services", "href": "#services" },
-    { "label": "Work", "href": "#work" },
-    { "label": "Fit check", "href": "#fit-check" },
     { "label": "Process", "href": "#process" },
     { "label": "Contact", "href": "#contact" }
   ],
@@ -37,8 +35,8 @@
   },
   "actions": {
     "startProject": { "label": "Get a scoped plan", "href": "#contact" },
-    "viewWork": { "label": "Explore our work", "href": "#work" },
-    "email": { "label": "Email us directly", "href": "mailto:hello@buildmindlabs.com" }
+    "viewWork": { "label": "Explore our services", "href": "#services" },
+    "email": { "label": "", "href": "" }
   },
   "themeSwitcher": {
     "ariaLabel": "Choose a color theme",
@@ -91,8 +89,8 @@
   ],
   "founder": {
     "eyebrow": "Founder-led engineering",
-    "title": "The people responsible for your build stay visible from day one.",
-    "subtitle": "BuildMind Labs is deliberately founder-led. Strategy, technical decisions, and delivery stay connected instead of disappearing through layers of account management.",
+    "title": "Meet the people accountable for the work.",
+    "subtitle": "See who is responsible, then open a profile for relevant experience, working style, and the boundaries we keep clear.",
     "primaryFounderId": "shivansh-shrivastava",
     "carouselLabel": "People behind BuildMind Labs",
     "previousPersonLabel": "Show previous person",
@@ -104,6 +102,7 @@
       "Working software and decisions shared through regular demos.",
       "Clear boundaries between proven experience, proposed work, and measurable outcomes."
     ],
+    "trustStatement": "BuildMind Labs is new, so we separate Shivansh's anonymized professional contributions from our forward-looking build concepts. No borrowed logos, inflated metrics, or vague claims.",
     "people": [
       {
         "id": "shivansh-shrivastava",
@@ -125,28 +124,19 @@
     ]
   },
   "services": {
-    "eyebrow": "Three ways we help",
+    "eyebrow": "Two focused ways we help",
     "title": "Choose the business problem—not a wall of services.",
-    "subtitle": "Every engagement connects strategy, interface, engineering, and launch. We recommend the smallest useful build that can prove value.",
+    "subtitle": "Choose the outcome closest to your bottleneck. We shape the smallest useful build around it.",
     "outcomeLabel": "Built to",
-    "includesLabel": "Typical deliverables",
+    "includesLabel": "Common starting points — not a fixed menu",
     "items": [
-      {
-        "id": "websites",
-        "icon": "MonitorUp",
-        "title": "Websites that explain and convert",
-        "description": "For companies that look credible on social but lose trust after the click. We shape the message, interaction, and performance around qualified enquiries.",
-        "outcome": "Turn high-intent visits into better conversations.",
-        "deliverables": ["Marketing websites", "Landing pages", "Ecommerce experiences"],
-        "cta": "Discuss a website"
-      },
       {
         "id": "web-apps",
         "icon": "PanelsTopLeft",
-        "title": "Web apps that make work simpler",
+        "title": "Websites and web apps built around the business",
         "description": "For workflows stuck across spreadsheets, inboxes, or disconnected tools. We build focused portals, dashboards, and SaaS experiences people can actually use.",
         "outcome": "Replace repetitive coordination with one clear product.",
-        "deliverables": ["Client portals", "Internal tools", "SaaS MVPs"],
+        "deliverables": ["Website development & redesign", "Landing pages & conversion improvements", "Web apps, portals & SaaS products"],
         "cta": "Plan a web app"
       },
       {
@@ -155,7 +145,7 @@
         "title": "AI & ML that solve a real bottleneck",
         "description": "For teams with a specific decision, document, support, or operations problem. We combine reliable workflows, human review, and the right model for the job.",
         "outcome": "Remove manual drag without creating a fragile black box.",
-        "deliverables": ["AI assistants", "Workflow automation", "ML & data features"],
+        "deliverables": ["AI assistants & integrations", "Workflow automation & internal tools", "ML, data & recommendation features"],
         "cta": "Explore an AI build"
       }
     ]
@@ -345,46 +335,46 @@
   "aiIntegrations": {
     "eyebrow": "Connected, not bolted on",
     "title": "AI should fit the workflow your team already trusts.",
-    "subtitle": "We start with the decision or repetitive task, then connect the smallest reliable system across your existing tools. Every important output can include source context, review, and a fallback path.",
-    "sceneLabel": "Illustrative reliable workflow",
-    "statusLabel": "Human-controlled",
-    "inputLabel": "Work arrives",
+    "subtitle": "We start with the decision or repetitive task, then connect the smallest reliable system across your existing tools.",
+    "sceneLabel": "See how the work gets done",
+    "statusLabel": "Done",
+    "inputLabel": "Work comes in",
     "sources": [
-      { "label": "Website enquiry", "detail": "Intent and contact context" },
-      { "label": "Support question", "detail": "A task that needs an answer" },
-      { "label": "CRM follow-up", "detail": "A clear owner and next step" }
+      { "label": "Customer asks a question", "detail": "Website or product enquiry" },
+      { "label": "Support ticket arrives", "detail": "A request that needs an answer" },
+      { "label": "Internal request or task", "detail": "A clear owner and next step" }
     ],
-    "workflowLabel": "Reliability layer",
+    "workflowLabel": "AI works within your rules",
     "workflowSteps": [
-      { "label": "Retrieve approved context", "detail": "Use only the sources and data you allow" },
-      { "label": "Apply rules + the right model", "detail": "Keep the system as small as the job requires" },
-      { "label": "Review uncertain actions", "detail": "Pause, explain, or fall back instead of guessing" }
+      { "label": "Find the right information", "detail": "Uses only what you allow" },
+      { "label": "Decide the next step", "detail": "Follows your rules and business logic" },
+      { "label": "Ask a person when needed", "detail": "Human review for uncertain or risky actions" }
     ],
-    "outputLabel": "Useful outcomes",
+    "outputLabel": "Work gets done",
     "outputs": [
-      { "label": "Grounded reply", "detail": "Source context stays attached" },
-      { "label": "Logged action", "detail": "The workflow keeps its audit trail" },
-      { "label": "Measured result", "detail": "Compare the pilot with a baseline" }
+      { "label": "Answer with context", "detail": "Approved sources stay attached" },
+      { "label": "Update the right system", "detail": "Keep the workflow in sync" },
+      { "label": "Track what improved", "detail": "Measure against a baseline" }
     ],
     "connectedLabel": "Connects with",
     "connectedSystems": ["Website", "CRM", "Knowledge", "Inbox", "Database", "Analytics"],
-    "exampleNote": "Adapted to your tools, data boundaries, approval rules, and success measure.",
+    "exampleNote": "Built around your tools, rules, and approvals.",
     "benefits": [
       {
-        "title": "Grounded in approved data",
-        "description": "Use the information you choose, with citations or source links where they matter."
+        "title": "Uses only what you allow",
+        "description": "Grounded in approved data and sources."
       },
       {
-        "title": "Human review by design",
-        "description": "Sensitive or uncertain actions can pause for approval instead of guessing."
+        "title": "Asks before risky actions",
+        "description": "Human review by design keeps you in control."
       },
       {
-        "title": "Measured against a baseline",
-        "description": "Define usefulness, accuracy, time saved, or conversion before expanding the pilot."
+        "title": "Proves it helped",
+        "description": "Every action is measured against a baseline."
       },
       {
-        "title": "Documented and portable",
-        "description": "Understand the workflow, accounts, costs, and failure paths you are taking ownership of."
+        "title": "You keep control",
+        "description": "Documented, auditable, and portable across your tools."
       }
     ]
   },
@@ -395,34 +385,38 @@
     "steps": [
       {
         "step": "01",
-        "title": "Understand the real job",
-        "description": "We map the user, desired outcome, current friction, constraints, and the evidence that would make the build worthwhile.",
+        "title": "Scope before code",
+        "description": "We challenge assumptions, surface risk, and recommend the smallest version that can prove the idea.",
+        "proof": "Written boundaries, milestones, assumptions, and tradeoffs",
         "meta": "Discovery · usually 2–3 working days"
       },
       {
         "step": "02",
-        "title": "Scope the smallest useful version",
-        "description": "You receive a clear recommendation, feature boundary, assumptions, milestones, and planning range before committing to a larger build.",
+        "title": "Working progress, every week",
+        "description": "You review the real product throughout delivery instead of waiting for a polished final reveal.",
+        "proof": "Regular demos with decisions and next steps",
         "meta": "Blueprint · scope and prototype"
       },
       {
         "step": "03",
-        "title": "Build in visible slices",
-        "description": "We design and engineer the highest-risk flow first, then share working progress and decisions through regular demos.",
+        "title": "Your code, accounts, and IP",
+        "description": "The project is built for transferability, with access and ownership kept clear from the beginning.",
+        "proof": "Shared repository, deployment access, and documented handoff",
         "meta": "Delivery · weekly working demos"
       },
       {
         "step": "04",
-        "title": "Launch with ownership intact",
-        "description": "We test the critical paths, deploy to your accounts, document the system, and agree on the support or improvement plan.",
+        "title": "Practical support after launch",
+        "description": "We plan how issues, improvements, model costs, and operational ownership will work after release.",
+        "proof": "Defined launch window and an optional ongoing plan",
         "meta": "Launch · handoff and support"
       }
     ]
   },
   "techStack": {
-    "eyebrow": "Technology follows the job",
-    "title": "Modern tools, chosen for maintainability.",
-    "subtitle": "We are comfortable across the product stack, but we do not force a fashionable tool where a simpler one is safer.",
+    "eyebrow": "Modern where it matters",
+    "title": "Current technology, selected around your outcome.",
+    "subtitle": "We use modern, proven technology to deliver a fast, secure, and maintainable solution. You do not need to choose the tools—we make those decisions around your users, constraints, and long-term ownership.",
     "categories": [
       {
         "name": "Experience",
@@ -440,6 +434,12 @@
         "name": "Delivery",
         "technologies": ["Vercel", "AWS", "Docker", "GitHub"]
       }
+    ],
+    "principles": [
+      { "icon": "Sparkles", "title": "Modern by default", "description": "Current capabilities without chasing trends for their own sake." },
+      { "icon": "Gauge", "title": "Fast and accessible", "description": "Responsive experiences designed to feel clear on every device." },
+      { "icon": "ShieldCheck", "title": "Secure by design", "description": "Sensible safeguards and data boundaries built into the solution." },
+      { "icon": "Layers3", "title": "Ready to evolve", "description": "Maintainable foundations that can grow with the real business need." }
     ]
   },
   "whyChooseUs": {
@@ -508,8 +508,8 @@
     "eyebrow": "Straight answers",
     "title": "Questions worth asking before you hire any studio.",
     "subtitle": "If an answer affects trust, ownership, cost, or delivery, it should be clear before the project starts.",
-    "contactPrompt": "Have a question that is not covered here?",
-    "contactLabel": "Email it to us",
+    "contactPrompt": "Not ready to start a project?",
+    "contactLabel": "Stay connected",
     "items": [
       {
         "question": "Can you help us decide what to build first?",
@@ -517,7 +517,7 @@
       },
       {
         "question": "How do pricing and payment usually work?",
-        "answer": "The Pathfinder ranges are directional. After discovery, we provide a clear scope and milestone-based estimate. Complexity, integrations, data readiness, security, and speed are the biggest variables."
+        "answer": "After a focused discovery, we provide a clear scope and milestone-based estimate. Complexity, integrations, data readiness, security, and delivery pace are the biggest variables."
       },
       {
         "question": "Can you improve an existing website or product?",
@@ -541,11 +541,18 @@
       }
     ]
   },
+  "community": {
+    "eyebrow": "Stay connected",
+    "title": "Not building yet? Join the conversation.",
+    "description": "Join our Discord for future build ideas, practical product discussions, and an easy way to reconnect when the timing is right.",
+    "label": "Join our Discord",
+    "href": "https://discord.gg/D9tNAxgjt"
+  },
   "cta": {
     "eyebrow": "Start with the useful part",
     "title": "Tell us what should work better.",
     "subtitle": "Share the goal, the current friction, and any constraints you already know. We’ll reply with useful questions and a realistic next step—not a generic sales sequence.",
-    "directContactLabel": "Prefer a normal email?",
+    "directContactLabel": "",
     "form": {
       "endpoint": "/api/v1/contact",
       "requestTimeoutMs": 12000,
@@ -580,7 +587,7 @@
       "submittingLabel": "Sending enquiry…",
       "submittingText": "Sending your enquiry securely…",
       "successText": "Thanks—your enquiry is in. We’ll reply within one business day.",
-      "errorText": "We couldn’t send your enquiry. Please try again or email us directly.",
+      "errorText": "We couldn’t send your enquiry. Please try again shortly or connect with us on Discord.",
       "validationErrorText": "Please check each required field and add at least 10 characters to your message.",
       "rateLimitText": "A recent enquiry was already received. Please try again in {seconds} seconds.",
       "privacyNote": "Your details are sent to BuildMind Labs only when you submit this form and are used to respond to your enquiry."

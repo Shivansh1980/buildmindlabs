@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import { ArrowUpRight, ChevronDown } from "lucide-react";
+import { ArrowUpRight, ChevronDown, MessagesSquare } from "lucide-react";
 import { SiteData } from "../types";
 
 export default function Faq({ data }: { data: SiteData }) {
@@ -102,19 +102,41 @@ export default function Faq({ data }: { data: SiteData }) {
           })}
         </motion.div>
 
-        <div className="mt-8 flex flex-col items-center justify-center gap-2 text-center text-sm text-[var(--color-text-muted)] sm:flex-row">
-          <p>{faqs.contactPrompt}</p>
+        <motion.div
+          initial={{ y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.45 }}
+          className="mt-8 flex flex-col gap-5 rounded-3xl border border-[var(--color-card-border)] bg-[var(--color-bg-card)] p-5 shadow-[0_18px_50px_-42px_var(--color-shadow)] sm:flex-row sm:items-center sm:justify-between sm:p-6"
+        >
+          <div className="flex items-start gap-4">
+            <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-[var(--color-accent-soft)] text-[var(--color-accent)]">
+              <MessagesSquare className="size-5" aria-hidden="true" />
+            </span>
+            <div>
+              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.15em] text-[var(--color-accent)]">
+                {data.community.eyebrow}
+              </p>
+              <p className="mt-1 font-display text-lg font-semibold tracking-[-0.025em] text-[var(--color-text-main)]">
+                {data.community.title}
+              </p>
+              <p className="mt-1 max-w-xl text-sm leading-6 text-[var(--color-text-muted)]">
+                {data.community.description}
+              </p>
+            </div>
+          </div>
           <a
-            href={data.actions.email.href}
-            className="group inline-flex items-center gap-1.5 rounded-md font-semibold text-[var(--color-accent)] outline-none transition-colors hover:text-[var(--color-accent-strong)] focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--color-bg-soft)]"
+            href={data.community.href}
+            target="_blank"
+            rel="noreferrer"
+            className="group inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-5 text-sm font-semibold text-[var(--color-on-accent)] shadow-[0_12px_30px_var(--color-glow)] transition hover:-translate-y-0.5 hover:bg-[var(--color-accent-strong)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--color-glow)]"
           >
-            {faqs.contactLabel}
+            {data.community.label}
             <ArrowUpRight
               aria-hidden="true"
-              className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
             />
           </a>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

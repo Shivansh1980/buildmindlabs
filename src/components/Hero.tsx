@@ -87,7 +87,7 @@ export default function Hero({ data }: { data: SiteData }) {
 
           <h1
             id="hero-heading"
-            className="max-w-3xl font-display text-[clamp(2.8rem,7vw,5.75rem)] font-semibold leading-[0.98] tracking-[-0.06em] text-[var(--color-text-main)]"
+            className="max-w-3xl font-display text-[clamp(2.35rem,5.6vw,4.75rem)] font-semibold leading-[1.01] tracking-[-0.055em] text-[var(--color-text-main)]"
           >
             {data.hero.headline}{" "}
             <span className="bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-strong)] bg-clip-text text-transparent">

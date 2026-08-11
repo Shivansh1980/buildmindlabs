@@ -48,7 +48,7 @@ function ProcessStep({
       style={motionEnabled ? { opacity, y, scale } : undefined}
       className="process-motion-step relative"
     >
-      <div className="relative flex min-h-72 w-full flex-col overflow-hidden rounded-3xl border border-[var(--color-card-border)] bg-[var(--color-bg-card)] p-6 shadow-[0_18px_60px_-42px_var(--color-shadow)] sm:p-8 lg:min-h-[26rem] lg:p-10">
+      <div className="process-card relative flex min-h-72 w-full flex-col overflow-hidden rounded-3xl border p-6 sm:p-8 lg:min-h-[26rem] lg:p-10">
         <span
           aria-hidden="true"
           className="pointer-events-none absolute -right-3 -top-10 select-none font-display text-[9rem] font-semibold leading-none tracking-[-0.08em] text-[var(--color-accent-soft)] opacity-70 sm:text-[11rem]"
@@ -57,11 +57,11 @@ function ProcessStep({
         </span>
 
         <div className="flex items-center justify-between">
-          <span className="relative font-mono text-sm font-semibold text-[var(--color-accent)]">
+          <span className="process-step-badge relative inline-flex min-w-10 items-center justify-center rounded-full px-3 py-1.5 font-mono text-xs font-semibold text-[var(--color-accent)]">
             {step.step}
           </span>
           {!isLast && (
-            <span className="flex size-8 items-center justify-center rounded-full bg-[var(--color-bg-soft)] text-[var(--color-text-subtle)] lg:absolute lg:bottom-10 lg:right-10 lg:z-10 lg:border lg:border-[var(--color-card-border)] lg:bg-[var(--color-bg-base)]">
+            <span className="process-card-arrow flex size-8 items-center justify-center rounded-full text-[var(--color-text-subtle)] lg:absolute lg:bottom-10 lg:right-10 lg:z-10">
               <ArrowDown className="size-4" aria-hidden="true" />
             </span>
           )}
@@ -76,8 +76,8 @@ function ProcessStep({
           </p>
         </div>
 
-        <p className="relative mt-auto border-t border-[var(--color-card-border)] pt-5 text-xs font-semibold leading-5 text-[var(--color-text-subtle)]">
-          {step.meta}
+        <p className="process-card-proof relative mt-auto rounded-2xl border px-4 py-4 pr-12 text-xs font-semibold leading-5 text-[var(--color-text-subtle)]">
+          {step.proof}
         </p>
       </div>
     </motion.li>
@@ -97,7 +97,7 @@ export default function Process({ data }: { data: SiteData }) {
     <section
       ref={sectionRef}
       id="process"
-      className="bg-[var(--color-bg-base)] py-20 sm:py-24 lg:py-28"
+      className="process-section py-20 sm:py-24 lg:py-28"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="process-motion-layout grid gap-10">
