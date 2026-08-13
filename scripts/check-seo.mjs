@@ -35,7 +35,6 @@ const robots = readFileSync(resolve(distRoot, "robots.txt"), "utf8");
 const sitemap = readFileSync(resolve(distRoot, "sitemap.xml"), "utf8");
 const favicon = readFileSync(
   resolve(distRoot, siteData.seo.favicon.replace(/^\//, "")),
-  "utf8",
 );
 const socialImage = readFileSync(
   resolve(distRoot, siteData.seo.ogImage.replace(/^\//, "")),
@@ -70,7 +69,7 @@ if (/noindex|nofollow/i.test(siteData.seo.robots)) {
 if (!html.includes(`property="og:image" content="${socialImageUrl}"`)) {
   fail("Open Graph image is not an absolute canonical URL");
 }
-if (!html.includes(`rel="icon" type="image/svg+xml" sizes="any" href="${siteData.seo.favicon}"`)) {
+if (!html.includes(`rel="icon" type="image/png" sizes="512x512" href="${siteData.seo.favicon}"`)) {
   fail("favicon URL does not match siteData.json");
 }
 if (
@@ -144,8 +143,12 @@ for (const faq of siteData.faqs.items) {
   }
 }
 
-if (!/width="512"\s+height="512"/.test(favicon)) {
-  fail("favicon does not declare a search-friendly square size");
+const pngSignature = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
+if (!favicon.subarray(0, 8).equals(pngSignature)) {
+  fail("favicon is not a valid PNG image");
+}
+if (favicon.readUInt32BE(16) !== 512 || favicon.readUInt32BE(20) !== 512) {
+  fail("favicon must use a search-friendly 512 by 512 square size");
 }
 if (
   socialImage.length < 24 ||

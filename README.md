@@ -123,7 +123,7 @@ This is a portable static build: upload the contents of `dist/` to any HTTPS sta
 1. Confirm that `seo.canonicalUrl` is the final public domain and that you control it.
 2. Run `pnpm build` and `pnpm check:seo`.
 3. On Vercel, keep `vercel.json` enabled so the contact proxy, security headers, and immutable asset caching are applied. On Cloudflare Pages or Netlify, ensure the host applies `public/_headers` and configure an equivalent contact proxy.
-4. Ensure `/`, `/robots.txt`, `/sitemap.xml`, `/favicon.svg`, and `/og.png` return HTTP 200, while nonexistent URLs return a real 404. Redirect HTTP and alternate hostnames to the canonical HTTPS URL.
+4. Ensure `/`, `/robots.txt`, `/sitemap.xml`, `/buildmind-labs-icon.png`, and `/og.png` return HTTP 200, while nonexistent URLs return a real 404. Redirect HTTP and alternate hostnames to the canonical HTTPS URL.
 5. Verify the domain in Google Search Console. For URL-prefix verification, place Google's token in `seo.googleSiteVerification`; domain-property verification normally uses DNS.
 6. Submit `https://your-domain.example/sitemap.xml`, inspect the homepage URL, and request indexing after the production page is live.
 

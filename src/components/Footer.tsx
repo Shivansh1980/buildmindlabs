@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { motion } from "motion/react";
 import { SiteData } from "../types";
+import BrandLockup from "./BrandLockup";
 
 const socialIconMap: Record<string, LucideIcon> = {
   dribbble: Dribbble,
@@ -51,9 +52,7 @@ export default function Footer({ data }: { data: SiteData }) {
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
           <div className="sm:col-span-2 lg:col-span-4 lg:pr-10">
-            <p className="font-display text-xl font-semibold tracking-[-0.03em] text-[var(--color-text-main)]">
-              {data.brand.name}
-            </p>
+            <BrandLockup name={data.brand.name} variant="footer" />
             <p className="mt-4 max-w-md text-sm leading-6 text-[var(--color-text-muted)]">
               {data.brand.footerText || data.brand.description}
             </p>

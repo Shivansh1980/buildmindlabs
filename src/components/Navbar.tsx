@@ -2,6 +2,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { SiteData } from "../types";
+import BrandLockup from "./BrandLockup";
 import ThemeSwitcher from "./ThemeSwitcher";
 
 const MOBILE_MENU_ID = "site-navigation-menu";
@@ -38,20 +39,13 @@ export default function Navbar({ data }: { data: SiteData }) {
           <a
             href="#home"
             onClick={() => closeMenu()}
-            className="group inline-flex min-h-11 shrink-0 items-center gap-2.5 rounded-xl font-display text-[17px] font-semibold tracking-[-0.4px] text-[var(--color-text-main)] transition-colors hover:text-[var(--color-accent)]"
+            className="group inline-flex min-h-11 shrink-0 items-center rounded-xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--color-glow)]"
             aria-label={data.brand.name}
           >
-            <span className="relative flex size-9 shrink-0 overflow-hidden rounded-xl shadow-[0_8px_22px_var(--color-shadow)] transition duration-300 group-hover:-translate-y-0.5 group-hover:shadow-[0_12px_28px_var(--color-glow)]">
-              <img
-                src={data.seo.favicon}
-                alt=""
-                width="36"
-                height="36"
-                className="size-full"
-                aria-hidden="true"
-              />
-            </span>
-            <span>{data.brand.shortName}</span>
+            <BrandLockup
+              name={data.brand.name}
+              className="transition-transform duration-300 group-hover:-translate-y-0.5"
+            />
           </a>
 
           <div className="hidden min-w-0 flex-1 items-center justify-end gap-1 lg:flex">
