@@ -5,6 +5,7 @@ import Stats from './components/Stats';
 import FounderCompact from './components/FounderCompact';
 import CompactServices from './components/CompactServices';
 import AiIntegration from './components/AiIntegration';
+import Work from './components/Work';
 import Process from './components/Process';
 import ModernTechnology from './components/ModernTechnology';
 import Faq from './components/Faq';
@@ -31,6 +32,7 @@ export default function App() {
         <CompactServices data={data} />
         <AiIntegration data={data} />
         <Process data={data} />
+        <Work data={data} />
         <ModernTechnology data={data} />
         <FounderCompact data={data} />
         <Faq data={data} />

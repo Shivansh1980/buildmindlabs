@@ -150,6 +150,138 @@
       }
     ]
   },
+  "work": {
+    "eyebrow": "Selected work · Public and inspectable",
+    "title": "Products that show how we think, build, and finish.",
+    "subtitle": "Two working products, not borrowed mockups: an open-source AI workflow toolkit used through npm and a full-stack notes workspace you can open in the browser.",
+    "ctaLabel": "Build something this considered",
+    "caseStudyLabel": "Case study",
+    "galleryLabel": "Product view",
+    "challengeLabel": "The product problem",
+    "solutionLabel": "What was built",
+    "outcomeLabel": "Why it matters",
+    "capabilitiesLabel": "What you can inspect",
+    "proofPoints": [
+      {
+        "label": "Real products",
+        "detail": "Every featured project has a public package, live product, or source you can inspect."
+      },
+      {
+        "label": "End-to-end ownership",
+        "detail": "Product thinking, interaction design, frontend, backend, testing, and release work."
+      },
+      {
+        "label": "Claims with context",
+        "detail": "Metrics are dated and product capabilities are tied to working screens or public documentation."
+      }
+    ],
+    "items": [
+      {
+        "id": "ai-node-editor",
+        "kind": "package",
+        "category": "Open-source developer product",
+        "status": "Published on npm",
+        "frameLabel": "npmjs.com/package/@ai-node-editor/core",
+        "title": "AI Node Editor",
+        "summary": "A reusable React and TypeScript foundation for teams building visual AI workflow products, from RAG pipelines and agents to automation and evaluation flows.",
+        "challenge": "Visual AI builders need much more than draggable boxes: typed connections, validation, persistence, execution state, extensibility, and accessible interaction all have to agree.",
+        "solution": "An original node-graph editor and pure TypeScript engine with registries, graph utilities, schema-driven configuration, routed edges, templates, theming, and execution controls.",
+        "outcome": "A public MIT package that turns a difficult product surface into an embeddable starting point, demonstrating reusable component architecture and practical AI workflow design.",
+        "verification": "npm package and adoption metric reviewed 14 August 2026.",
+        "metrics": [
+          { "value": "21", "label": "Weekly downloads" },
+          { "value": "v0.3.0", "label": "Public release" },
+          { "value": "0", "label": "Runtime dependencies" }
+        ],
+        "capabilities": [
+          "Typed graph model, validation, serialization, and execution",
+          "AI node packs and ten provider-neutral workflow templates",
+          "Resizable shapes, routed edges, minimap, and inspector",
+          "Four themes plus public render, hook, and style APIs"
+        ],
+        "stack": ["React", "TypeScript", "Vite", "Vitest", "CSS variables"],
+        "links": [
+          {
+            "label": "View npm package",
+            "href": "https://www.npmjs.com/package/@ai-node-editor/core",
+            "kind": "npm"
+          }
+        ],
+        "media": {
+          "kind": "gallery",
+          "images": [
+            {
+              "src": "/work/ai-node-editor.png",
+              "alt": "AI Node Editor showing a visual Website RAG workflow with connected typed nodes, inspector, controls, and minimap.",
+              "label": "Workflow canvas"
+            },
+            {
+              "src": "/work/ai-node-editor-templates.png",
+              "alt": "AI Node Editor template gallery showing reusable workflows for RAG, agents, document AI, evaluation, automation, and model training.",
+              "label": "Template gallery"
+            },
+            {
+              "src": "/work/ai-node-editor-validation.png",
+              "alt": "AI Node Editor validation report displayed above a visual RAG workflow.",
+              "label": "Validation report"
+            }
+          ]
+        }
+      },
+      {
+        "id": "notes-workspace",
+        "kind": "product",
+        "category": "Full-stack productivity product",
+        "status": "Live product",
+        "frameLabel": "notes-app-shivansh.vercel.app",
+        "title": "Notes — a block-first workspace",
+        "summary": "A focused, Notion-style workspace for private notes, structured pages, and lightweight knowledge management without forcing the writing experience into a generic text area.",
+        "challenge": "Personal and small-team knowledge work often becomes fragmented across documents, tasks, links, and recurring subscription tools that are difficult to adapt.",
+        "solution": "A responsive full-stack product with authenticated workspaces, nested pages, block-level editing, search, comments, uploads, favorites, sharing controls, trash recovery, and calendar hooks.",
+        "outcome": "A working productivity product that demonstrates application architecture, stateful interaction design, API delivery, and the small details that make an editor feel dependable.",
+        "verification": "Account creation, page editing, block controls, persistence, and 390px layout reviewed 14 August 2026.",
+        "metrics": [
+          { "value": "9", "label": "Core block types" },
+          { "value": "390px", "label": "Mobile verified" },
+          { "value": "Full stack", "label": "Product delivery" }
+        ],
+        "capabilities": [
+          "Authenticated private workspaces and nested pages",
+          "Headings, tasks, lists, quotes, code, and block actions",
+          "Search, comments, favorites, sharing, and trash recovery",
+          "Responsive editor shell with optional calendar connection"
+        ],
+        "stack": ["React", "TypeScript", "FastAPI", "React Query", "TipTap"],
+        "links": [
+          {
+            "label": "Open live product",
+            "href": "https://notes-app-shivansh.vercel.app/",
+            "kind": "live"
+          },
+          {
+            "label": "View source",
+            "href": "https://github.com/Shivansh1980/NotesApp",
+            "kind": "source"
+          }
+        ],
+        "media": {
+          "kind": "notes",
+          "label": "Verified editor view",
+          "workspaceName": "BuildMind Labs",
+          "workspaceType": "Private workspace",
+          "navigationLabel": "Workspace navigation",
+          "navigationItems": ["Home", "Search", "Comments", "Settings"],
+          "pagesLabel": "Pages",
+          "pageTitle": "Client launch system",
+          "editedLabel": "Edited 14 Aug 2026",
+          "shareLabel": "Share",
+          "intro": "A focused workspace for launch planning, decisions, and client-ready notes.",
+          "heading": "Launch checklist",
+          "task": "Confirm launch scope and owners"
+        }
+      }
+    ]
+  },
   "projects": {
     "eyebrow": "Selected work & thinking",
     "title": "Shipped experience behind the studio. Thinking you can inspect.",

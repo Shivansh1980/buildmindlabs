@@ -87,6 +87,8 @@ The React components consume this JSON at runtime. During development and produc
 
 Static brand artwork is stored in `public/`. If the social-card filename changes, update `seo.ogImage` in `src/data/siteData.json`.
 
+Evidence, verification notes, and media provenance for the public portfolio are maintained in [`docs/work-case-studies.md`](docs/work-case-studies.md). Update that document with the Work section so public claims remain dated and inspectable.
+
 ## Contact API
 
 The contact form posts to the same-origin path configured at `cta.form.endpoint` in `src/data/siteData.json`. During local development, Vite proxies that route to PythonAnywhere; on Vercel, `vercel.json` applies the equivalent narrow rewrite. This keeps browser CORS out of the production request path. A deployment can still override the public URL with `VITE_CONTACT_API_URL`; it is not a secret and is bundled into the browser build.
