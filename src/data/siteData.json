@@ -422,7 +422,7 @@
         "icon": "Globe2",
         "recommendation": "Conversion website sprint",
         "timeline": "Typically 3–6 weeks",
-        "budget": "Often starts around $3k",
+        "budget": "Often $500–$1,000",
         "description": "Best when your offer is strong but the current website is unclear, dated, slow, or not converting social and referral traffic.",
         "deliverables": ["Message & page strategy", "Responsive design", "CMS-ready build", "SEO and analytics setup"]
       },
@@ -432,7 +432,7 @@
         "icon": "Bot",
         "recommendation": "AI assistant pilot",
         "timeline": "Typically 4–8 weeks",
-        "budget": "Often starts around $5k",
+        "budget": "Often $750–$1,500",
         "description": "Best for support, document, research, or internal knowledge work where answers must be grounded, reviewable, and useful.",
         "deliverables": ["Use-case and data audit", "Grounded AI workflow", "Human review controls", "Pilot measurement plan"]
       },
@@ -442,7 +442,7 @@
         "icon": "ChartNoAxesCombined",
         "recommendation": "Focused web-app MVP",
         "timeline": "Typically 6–12 weeks",
-        "budget": "Often starts around $8k",
+        "budget": "Often $1,000–$1,500",
         "description": "Best when a repeatable process is spread across forms, spreadsheets, messages, and handoffs that no longer scale.",
         "deliverables": ["Workflow mapping", "Clickable prototype", "Core application build", "Deployment and handoff"]
       },
@@ -452,7 +452,7 @@
         "icon": "Workflow",
         "recommendation": "Automation & data workflow",
         "timeline": "Typically 3–8 weeks",
-        "budget": "Often starts around $4k",
+        "budget": "Often $500–$1,250",
         "description": "Best when your team repeatedly moves information between tools, prepares reports, qualifies leads, or handles predictable requests.",
         "deliverables": ["Process and risk map", "Reliable integrations", "Exception handling", "Monitoring and documentation"]
       }
@@ -698,9 +698,9 @@
       "fields": {
         "name": { "label": "Your name", "placeholder": "Jane Smith" },
         "email": { "label": "Work email", "placeholder": "jane@company.com" },
-        "company": { "label": "Company or project", "placeholder": "Company name" },
-        "projectType": { "label": "Closest project type", "placeholder": "Select a project type" },
-        "budget": { "label": "Planning budget", "placeholder": "Select a planning range" },
+        "company": { "label": "Company or project (optional)", "placeholder": "Company name" },
+        "projectType": { "label": "Closest project type (optional)", "placeholder": "Select a project type" },
+        "budget": { "label": "Planning budget (optional)", "placeholder": "Select a planning range" },
         "message": { "label": "What should work better?", "placeholder": "A few lines about the goal, current problem, users, and ideal timing..." }
       },
       "projectTypes": [
@@ -713,9 +713,9 @@
       ],
       "budgetRanges": [
         { "value": "exploring", "label": "Exploring the right range" },
-        { "value": "3k-8k", "label": "$3k–$8k" },
-        { "value": "8k-20k", "label": "$8k–$20k" },
-        { "value": "20k-plus", "label": "$20k+" }
+        { "value": "under-500", "label": "Under $500" },
+        { "value": "500-1000", "label": "$500–$1,000" },
+        { "value": "1000-1500", "label": "$1,000–$1,500" }
       ],
       "submitLabel": "Send project enquiry",
       "submittingLabel": "Sending enquiry…",
