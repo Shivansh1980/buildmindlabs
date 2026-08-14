@@ -1,5 +1,4 @@
 import { useEffect, useLayoutEffect, useState } from "react";
-import { useReducedMotion } from "motion/react";
 
 const useHydrationSafeLayoutEffect =
   typeof window === "undefined" ? useEffect : useLayoutEffect;
@@ -11,7 +10,6 @@ export const sceneSpring = {
 };
 
 export function useDesktopMotion(minWidth = 1024) {
-  const rawPrefersReducedMotion = useReducedMotion();
   const [isMounted, setIsMounted] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
 
@@ -25,12 +23,9 @@ export function useDesktopMotion(minWidth = 1024) {
     return () => query.removeEventListener("change", update);
   }, [minWidth]);
 
-  const prefersReducedMotion =
-    isMounted && Boolean(rawPrefersReducedMotion);
-
   return {
     isDesktop: isMounted && isDesktop,
-    prefersReducedMotion,
-    motionEnabled: isMounted && isDesktop && !prefersReducedMotion,
+    prefersReducedMotion: false,
+    motionEnabled: isMounted && isDesktop,
   };
 }

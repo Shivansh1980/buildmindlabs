@@ -88,4 +88,4 @@ The authenticated workspace has no public screenshot asset in its repository. Th
 3. Add a concise case study to `work.items` in `src/data/siteData.json`.
 4. Prefer outcomes that can be demonstrated. Do not invent revenue, conversion, performance, adoption, or client metrics.
 5. Add optimized local media under `public/work/` with useful alt text, or build a clearly labeled product view when authenticated data cannot be published.
-6. Test every external link, all five site themes, reduced motion, keyboard focus, and mobile widths before release.
+6. Test every external link, all five site themes, always-on motion, keyboard focus, and mobile widths before release.

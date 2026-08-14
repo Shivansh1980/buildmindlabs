@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import type { Attributes, ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import type { Attributes, ReactNode, RefObject } from "react";
 import {
   motion,
   useScroll,
@@ -23,6 +23,7 @@ import {
   Settings,
   Share2,
   Star,
+  X,
 } from "lucide-react";
 import { SiteData } from "../types";
 import { sceneSpring, useDesktopMotion } from "./motion/useDesktopMotion";
@@ -36,6 +37,7 @@ type WorkStoryProps = Readonly<{
   project: WorkItem;
   index: number;
   data: SiteData;
+  onOpenDetails: (projectId: string, trigger: HTMLButtonElement) => void;
 }> & Attributes;
 
 const linkIcons = {
@@ -369,165 +371,247 @@ function WorkStory({
   project,
   index,
   data,
+  onOpenDetails,
 }: WorkStoryProps) {
-  const articleRef = useRef<HTMLElement>(null);
-  const { motionEnabled, prefersReducedMotion } = useDesktopMotion();
-  const { scrollYProgress } = useScroll({
-    target: articleRef,
-    offset: ["start end", "end start"],
-  });
-  const progress = useSpring(scrollYProgress, sceneSpring);
-  const visualY = useTransform(
-    progress,
-    [0, 1],
-    motionEnabled ? [12, -12] : [0, 0],
-  );
-  const copyY = useTransform(
-    progress,
-    [0, 0.5, 1],
-    motionEnabled ? [6, 0, -4] : [0, 0, 0],
-  );
-  const visualScale = useTransform(
-    progress,
-    [0, 0.5, 1],
-    motionEnabled ? [0.995, 1, 0.997] : [1, 1, 1],
-  );
   const headingId = `work-${project.id}-title`;
   const ProductIcon = project.kind === "package" ? PackageOpen : PanelsTopLeft;
+  const previewLink = project.links[0];
+  const visibleStack = project.stack.slice(0, 3);
+  const remainingStackCount = project.stack.length - visibleStack.length;
 
   return (
-    <li className="list-none">
+    <motion.li
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -6 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.5 }}
+      className="group h-full list-none"
+    >
       <article
-        ref={articleRef}
         aria-labelledby={headingId}
-        className="relative border-t border-white/15 pt-10 sm:pt-14 lg:pt-16"
+        style={{ backgroundColor: "var(--color-bg-card)" }}
+        className="relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[var(--color-card-border)] shadow-[0_28px_80px_-52px_var(--color-shadow)] transition-[border-color,box-shadow] duration-300 group-hover:border-[var(--color-accent)] group-hover:shadow-[0_34px_90px_-48px_var(--color-shadow)] sm:rounded-[2rem]"
       >
-        <motion.header initial={false} style={{ y: copyY }}>
+        <span aria-hidden="true" className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent opacity-70" />
+
+        <header className="p-5 pb-4 sm:p-7 sm:pb-5">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-[var(--color-on-contrast)]">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-card-border)] bg-[var(--color-accent-soft)] px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-[var(--color-accent)]">
               <ProductIcon className="size-3.5 text-[var(--color-accent)]" aria-hidden="true" />
               {project.category}
             </span>
-            <span className="text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[var(--color-on-contrast)] opacity-50">
+            <span className="text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[var(--color-text-subtle)]">
               {data.work.caseStudyLabel} 0{index + 1}
             </span>
           </div>
 
-          <div className="mt-6 grid gap-6 lg:grid-cols-[1.08fr_0.92fr] lg:items-end lg:gap-16">
-            <h3
-              id={headingId}
-              className="max-w-3xl font-display text-4xl font-semibold leading-[0.98] tracking-[-0.05em] text-[var(--color-on-contrast)] sm:text-5xl lg:text-7xl"
-            >
-              {project.title}
-            </h3>
-            <div>
-              <p className="max-w-2xl text-base leading-7 text-[var(--color-on-contrast)] opacity-72 sm:text-lg sm:leading-8">
-                {project.summary}
-              </p>
-              <div className="mt-5 flex flex-wrap gap-2.5">
-                {project.links.map((link) => (
-                  <WorkLinkButton key={link.href} link={link} />
-                ))}
+          <h3
+            id={headingId}
+            className="mt-5 font-display text-3xl font-semibold leading-[1.02] tracking-[-0.045em] text-[var(--color-text-main)] sm:text-4xl"
+          >
+            {project.title}
+          </h3>
+          <p className="mt-3 line-clamp-3 min-h-[4.5rem] text-sm leading-6 text-[var(--color-text-muted)] sm:text-base sm:leading-7">
+            {project.summary}
+          </p>
+
+          <dl className="mt-5 grid grid-cols-3 divide-x divide-[var(--color-divider)] border-y border-[var(--color-divider)] py-4">
+            {project.metrics.map((metric) => (
+              <div key={metric.label} className="min-w-0 px-2 first:pl-0 last:pr-0 sm:px-4">
+                <dt className="break-words text-[0.55rem] font-bold uppercase leading-4 tracking-[0.07em] text-[var(--color-text-subtle)] sm:text-[0.62rem] sm:tracking-[0.1em]">
+                  {metric.label}
+                </dt>
+                <dd className="mt-1.5 break-words font-display text-lg font-semibold leading-6 text-[var(--color-text-main)] sm:text-xl">
+                  {metric.value}
+                </dd>
               </div>
-            </div>
-          </div>
-        </motion.header>
+            ))}
+          </dl>
+        </header>
 
-        <dl className="mt-8 grid grid-cols-3 divide-x divide-white/12 border-y border-white/12 py-5 sm:mt-10 sm:py-6">
-          {project.metrics.map((metric) => (
-            <div key={metric.label} className="min-w-0 px-2 first:pl-0 last:pr-0 sm:px-6">
-              <dt className="break-words text-[0.6rem] font-bold uppercase leading-4 tracking-[0.08em] text-[var(--color-on-contrast)] opacity-48 sm:text-[0.68rem] sm:tracking-[0.14em]">
-                {metric.label}
-              </dt>
-              <dd className="mt-2 break-words font-display text-xl font-semibold leading-6 text-[var(--color-on-contrast)] sm:text-3xl sm:leading-8">
-                {metric.value}
-              </dd>
-            </div>
-          ))}
-        </dl>
-
-        <motion.div
-          style={{ y: visualY, scale: visualScale }}
-          className={`mt-8 min-w-0 sm:mt-10 lg:mt-12 ${motionEnabled ? "will-change-transform" : ""}`}
-        >
+        <div className="min-w-0 px-3 sm:px-4">
           <WorkMedia
             project={project}
             galleryLabel={data.work.galleryLabel}
-            prefersReducedMotion={prefersReducedMotion}
+            prefersReducedMotion={false}
           />
-        </motion.div>
-
-        <div className="mt-10 grid border-y border-white/12 sm:mt-12 lg:grid-cols-3 lg:divide-x lg:divide-white/12">
-          <div className="py-6 lg:pr-8">
-            <p className="text-[0.66rem] font-bold uppercase tracking-[0.14em] text-[var(--color-on-contrast)] opacity-48">
-              {data.work.challengeLabel}
-            </p>
-            <p className="mt-3 text-sm leading-6 text-[var(--color-on-contrast)] opacity-76">
-              {project.challenge}
-            </p>
-          </div>
-          <div className="border-t border-white/12 py-6 lg:border-t-0 lg:px-8">
-            <p className="text-[0.66rem] font-bold uppercase tracking-[0.14em] text-[var(--color-on-contrast)] opacity-48">
-              {data.work.solutionLabel}
-            </p>
-            <p className="mt-3 text-sm leading-6 text-[var(--color-on-contrast)] opacity-76">
-              {project.solution}
-            </p>
-          </div>
-          <div className="border-t border-white/12 py-6 lg:border-t-0 lg:pl-8">
-            <p className="text-[0.66rem] font-bold uppercase tracking-[0.14em] text-[var(--color-accent)]">
-              {data.work.outcomeLabel}
-            </p>
-            <p className="mt-3 text-sm font-semibold leading-6 text-[var(--color-on-contrast)] sm:text-base sm:leading-7">
-              {project.outcome}
-            </p>
-          </div>
         </div>
 
-        <div className="mt-8 grid gap-8 lg:grid-cols-[0.62fr_1.38fr] lg:gap-16">
-          <div>
-            <p className="text-[0.66rem] font-bold uppercase tracking-[0.14em] text-[var(--color-on-contrast)] opacity-48">
-              Built with
-            </p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {project.stack.map((technology) => (
-                <span
-                  key={technology}
-                  className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-semibold text-[var(--color-on-contrast)] opacity-80"
-                >
-                  {technology}
-                </span>
-              ))}
-            </div>
+        <footer className="mt-auto p-5 sm:p-7">
+          <div className="flex flex-wrap gap-2">
+            {visibleStack.map((technology) => (
+              <span key={technology} className="rounded-full bg-[var(--color-bg-soft)] px-3 py-1.5 text-[0.68rem] font-semibold text-[var(--color-text-muted)]">
+                {technology}
+              </span>
+            ))}
+            {remainingStackCount > 0 && (
+              <span className="rounded-full border border-[var(--color-card-border)] px-3 py-1.5 text-[0.68rem] font-semibold text-[var(--color-text-subtle)]">
+                +{remainingStackCount}
+              </span>
+            )}
           </div>
-          <div>
-            <p className="text-[0.66rem] font-bold uppercase tracking-[0.14em] text-[var(--color-on-contrast)] opacity-48">
-              {data.work.capabilitiesLabel}
-            </p>
-            <ul className="mt-3 grid gap-x-8 gap-y-3 sm:grid-cols-2">
-              {project.capabilities.map((capability) => (
-                <li key={capability} className="flex items-start gap-2.5 text-sm leading-5 text-[var(--color-on-contrast)] opacity-82">
-                  <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full bg-white/10 text-[var(--color-accent)]">
-                    <Check className="size-2.5" strokeWidth={2.8} aria-hidden="true" />
-                  </span>
-                  {capability}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
 
-        <p className="mt-7 flex items-start gap-2 text-xs leading-5 text-[var(--color-on-contrast)] opacity-48">
-          <Check className="mt-0.5 size-3.5 shrink-0 text-[var(--color-accent)]" aria-hidden="true" />
-          {project.verification}
-        </p>
+          <div className="mt-5 flex flex-col gap-2.5 sm:flex-row sm:items-center">
+            {previewLink && (
+              <WorkLinkButton link={previewLink} />
+            )}
+            <button
+              type="button"
+              aria-haspopup="dialog"
+              onClick={(event) => onOpenDetails(project.id, event.currentTarget)}
+              className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-5 py-3 text-sm font-bold text-[var(--color-on-accent)] transition duration-200 hover:-translate-y-0.5 hover:bg-[var(--color-accent-strong)]"
+            >
+              {data.work.detailsLabel}
+              <ArrowUpRight className="size-4" aria-hidden="true" />
+            </button>
+          </div>
+        </footer>
       </article>
-    </li>
+    </motion.li>
+  );
+}
+
+function WorkDetailDialog({
+  project,
+  data,
+  onClose,
+  returnFocusRef,
+}: Readonly<{
+  project: WorkItem | null;
+  data: SiteData;
+  onClose: () => void;
+  returnFocusRef: RefObject<HTMLButtonElement | null>;
+}>) {
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!project) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const focusFrame = window.requestAnimationFrame(() => closeButtonRef.current?.focus());
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.cancelAnimationFrame(focusFrame);
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+      returnFocusRef.current?.focus();
+    };
+  }, [onClose, project, returnFocusRef]);
+
+  if (!project) return null;
+
+  return (
+    <motion.div
+      key={project.id}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      onMouseDown={(event) => {
+        if (event.currentTarget === event.target) onClose();
+      }}
+      className="fixed inset-0 z-[90] flex items-end justify-center bg-black/55 p-2 backdrop-blur-md sm:items-center sm:p-6"
+    >
+      <motion.section
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={`work-detail-${project.id}-title`}
+        initial={{ opacity: 0, y: 28, scale: 0.985 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.28 }}
+        style={{ backgroundColor: "var(--color-bg-elevated)" }}
+        className="max-h-[calc(100dvh-1rem)] w-full max-w-5xl overflow-y-auto rounded-[1.5rem] border border-[var(--color-card-border)] shadow-[0_36px_120px_-32px_rgba(0,0,0,0.7)] sm:max-h-[calc(100dvh-3rem)] sm:rounded-[2rem]"
+      >
+            <header className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-[var(--color-divider)] bg-[var(--color-bg-elevated)]/95 p-5 backdrop-blur-xl sm:p-7">
+              <div>
+                <p className="text-[0.66rem] font-bold uppercase tracking-[0.14em] text-[var(--color-accent)]">
+                  {project.category}
+                </p>
+                <h3 id={`work-detail-${project.id}-title`} className="mt-2 font-display text-2xl font-semibold tracking-[-0.04em] text-[var(--color-text-main)] sm:text-4xl">
+                  {project.title}
+                </h3>
+              </div>
+              <button
+                ref={closeButtonRef}
+                type="button"
+                onClick={onClose}
+                aria-label={data.work.closeDetailsLabel}
+                className="flex size-11 shrink-0 items-center justify-center rounded-full border border-[var(--color-card-border)] bg-[var(--color-bg-base)] text-[var(--color-text-main)] transition hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+              >
+                <X className="size-5" aria-hidden="true" />
+              </button>
+            </header>
+
+            <div className="p-5 sm:p-8">
+              <p className="max-w-3xl text-base leading-7 text-[var(--color-text-muted)] sm:text-lg sm:leading-8">
+                {project.summary}
+              </p>
+
+              <dl className="mt-7 grid grid-cols-3 divide-x divide-[var(--color-divider)] border-y border-[var(--color-divider)] py-5">
+                {project.metrics.map((metric) => (
+                  <div key={metric.label} className="min-w-0 px-2 first:pl-0 last:pr-0 sm:px-6">
+                    <dt className="text-[0.58rem] font-bold uppercase leading-4 tracking-[0.08em] text-[var(--color-text-subtle)] sm:text-[0.66rem] sm:tracking-[0.12em]">{metric.label}</dt>
+                    <dd className="mt-2 break-words font-display text-xl font-semibold text-[var(--color-text-main)] sm:text-3xl">{metric.value}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              <div className="mt-8 grid gap-4 lg:grid-cols-3">
+                {[
+                  [data.work.challengeLabel, project.challenge],
+                  [data.work.solutionLabel, project.solution],
+                  [data.work.outcomeLabel, project.outcome],
+                ].map(([label, value], detailIndex) => (
+                  <div key={label} className="rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-bg-soft)] p-5">
+                    <p className={`text-[0.66rem] font-bold uppercase tracking-[0.14em] ${detailIndex === 2 ? "text-[var(--color-accent)]" : "text-[var(--color-text-subtle)]"}`}>{label}</p>
+                    <p className="mt-3 text-sm leading-6 text-[var(--color-text-main)]">{value}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8 grid gap-8 lg:grid-cols-[0.65fr_1.35fr]">
+                <div>
+                  <p className="text-[0.66rem] font-bold uppercase tracking-[0.14em] text-[var(--color-text-subtle)]">Built with</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {project.stack.map((technology) => (
+                      <span key={technology} className="rounded-full border border-[var(--color-card-border)] bg-[var(--color-bg-base)] px-3 py-1.5 text-xs font-semibold text-[var(--color-text-muted)]">{technology}</span>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <p className="text-[0.66rem] font-bold uppercase tracking-[0.14em] text-[var(--color-text-subtle)]">{data.work.capabilitiesLabel}</p>
+                  <ul className="mt-3 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+                    {project.capabilities.map((capability) => (
+                      <li key={capability} className="flex items-start gap-2.5 text-sm leading-5 text-[var(--color-text-main)]">
+                        <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full bg-[var(--color-accent-soft)] text-[var(--color-accent)]"><Check className="size-2.5" strokeWidth={2.8} aria-hidden="true" /></span>
+                        {capability}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div className="mt-8 flex flex-wrap items-center gap-2.5 border-t border-[var(--color-divider)] pt-6">
+                {project.links.map((link) => <WorkLinkButton key={link.href} link={link} />)}
+              </div>
+              <p className="mt-5 flex items-start gap-2 text-xs leading-5 text-[var(--color-text-subtle)]">
+                <Check className="mt-0.5 size-3.5 shrink-0 text-[var(--color-accent)]" aria-hidden="true" />
+                {project.verification}
+              </p>
+            </div>
+      </motion.section>
+    </motion.div>
   );
 }
 
 export default function Work({ data }: Readonly<{ data: SiteData }>) {
   const sectionRef = useRef<HTMLElement>(null);
+  const detailTriggerRef = useRef<HTMLButtonElement>(null);
+  const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
   const { motionEnabled, prefersReducedMotion } = useDesktopMotion();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -539,14 +623,22 @@ export default function Work({ data }: Readonly<{ data: SiteData }>) {
     [0, 1],
     motionEnabled ? ["8%", "-34%"] : ["0%", "0%"],
   );
+  const activeProject = data.work.items.find((project) => project.id === activeProjectId) ?? null;
+  const closeDetails = useCallback(() => setActiveProjectId(null), []);
+  const openDetails = useCallback((projectId: string, trigger: HTMLButtonElement) => {
+    detailTriggerRef.current = trigger;
+    setActiveProjectId(projectId);
+  }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      id="work"
-      aria-labelledby="work-title"
-      className="relative overflow-clip border-y border-[var(--color-card-border)] bg-[var(--color-contrast-bg)] py-20 sm:py-24 lg:py-32"
-    >
+    <>
+      <section
+        ref={sectionRef}
+        id="work"
+        aria-labelledby="work-title"
+        style={{ backgroundColor: "var(--color-bg-base)" }}
+        className="relative overflow-clip border-y border-[var(--color-card-border)] py-16 sm:py-20 lg:py-24"
+      >
       <div
         aria-hidden="true"
         className="absolute inset-x-0 top-0 h-[36rem] bg-[radial-gradient(circle_at_50%_0%,var(--color-glow),transparent_70%)] opacity-80"
@@ -554,7 +646,7 @@ export default function Work({ data }: Readonly<{ data: SiteData }>) {
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-14 overflow-hidden">
         <motion.p
           style={{ x: kineticX }}
-          className="whitespace-nowrap font-display text-[clamp(7rem,22vw,20rem)] font-semibold leading-none tracking-[-0.08em] text-[var(--color-on-contrast)] opacity-[0.04]"
+          className="whitespace-nowrap font-display text-[clamp(7rem,22vw,20rem)] font-semibold leading-none tracking-[-0.08em] text-[var(--color-text-main)] opacity-[0.035]"
         >
           BUILT / SHIPPED / USED
         </motion.p>
@@ -568,23 +660,23 @@ export default function Work({ data }: Readonly<{ data: SiteData }>) {
           className="grid gap-7 lg:grid-cols-[0.92fr_1.08fr] lg:items-end"
         >
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-on-contrast)] opacity-65">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-accent)]">
               {data.work.eyebrow}
             </p>
             <h2
               id="work-title"
-              className="mt-4 max-w-4xl font-display text-4xl font-semibold leading-[0.96] tracking-[-0.055em] text-[var(--color-on-contrast)] sm:text-6xl lg:text-[5.25rem]"
+              className="mt-4 max-w-4xl font-display text-4xl font-semibold leading-[0.98] tracking-[-0.05em] text-[var(--color-text-main)] sm:text-5xl lg:text-6xl"
             >
               {data.work.title}
             </h2>
           </div>
           <div className="lg:justify-self-end">
-            <p className="max-w-2xl text-base leading-7 text-[var(--color-on-contrast)] opacity-72 sm:text-lg sm:leading-8">
+            <p className="max-w-2xl text-base leading-7 text-[var(--color-text-muted)] sm:text-lg sm:leading-8">
               {data.work.subtitle}
             </p>
             <a
               href={data.actions.startProject.href}
-              className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full border border-white/20 px-5 py-3 text-sm font-bold text-[var(--color-on-contrast)] transition hover:-translate-y-0.5 hover:border-white/45 hover:bg-white/10"
+              className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full border border-[var(--color-card-border)] bg-[var(--color-bg-card)] px-5 py-3 text-sm font-bold text-[var(--color-text-main)] transition hover:-translate-y-0.5 hover:border-[var(--color-accent)] hover:bg-[var(--color-bg-hover)]"
             >
               {data.work.ctaLabel}
               <ArrowUpRight className="size-4" aria-hidden="true" />
@@ -592,26 +684,28 @@ export default function Work({ data }: Readonly<{ data: SiteData }>) {
           </div>
         </motion.div>
 
-        <div className="mt-12 grid divide-y divide-white/10 border-y border-white/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0 lg:mt-16">
+        <div className="mt-10 grid divide-y divide-[var(--color-divider)] border-y border-[var(--color-divider)] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
           {data.work.proofPoints.map((point) => (
             <div key={point.label} className="flex items-start gap-3 py-5 sm:px-5 sm:first:pl-0 sm:last:pr-0">
-              <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-[var(--color-accent)]">
+              <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg border border-[var(--color-card-border)] bg-[var(--color-accent-soft)] text-[var(--color-accent)]">
                 <Code2 className="size-4" aria-hidden="true" />
               </span>
               <div>
-                <p className="text-sm font-bold text-[var(--color-on-contrast)]">{point.label}</p>
-                <p className="mt-1 text-xs leading-5 text-[var(--color-on-contrast)] opacity-60">{point.detail}</p>
+                <p className="text-sm font-bold text-[var(--color-text-main)]">{point.label}</p>
+                <p className="mt-1 text-xs leading-5 text-[var(--color-text-muted)]">{point.detail}</p>
               </div>
             </div>
           ))}
         </div>
 
-        <ol className="mt-16 space-y-16 lg:mt-24 lg:space-y-20">
+        <ol className="mt-12 grid items-stretch gap-6 lg:grid-cols-2">
           {data.work.items.map((project, index) => (
-            <WorkStory key={project.id} project={project} index={index} data={data} />
+            <WorkStory key={project.id} project={project} index={index} data={data} onOpenDetails={openDetails} />
           ))}
         </ol>
       </div>
-    </section>
+      </section>
+      <WorkDetailDialog project={activeProject} data={data} onClose={closeDetails} returnFocusRef={detailTriggerRef} />
+    </>
   );
 }

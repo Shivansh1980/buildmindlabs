@@ -195,23 +195,9 @@
     opacity: 1;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-
-    *,
-    *::before,
-    *::after {
-      scroll-behavior: auto !important;
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
 }
 
-@media (min-width: 64rem) and (prefers-reduced-motion: no-preference) {
+@media (min-width: 64rem) {
     html.has-js .hero-motion-scene {
       min-height: 175svh;
       padding-top: 0;
@@ -313,7 +299,7 @@
     }
   }
 
-@media (min-width: 80rem) and (prefers-reduced-motion: no-preference) {
+@media (min-width: 80rem) {
     html.has-js .services-motion-layout {
       gap: 6rem;
     }
@@ -490,7 +476,7 @@
   filter: sepia(0.12) saturate(0.92);
 }
 
-@media (min-width: 64rem) and (max-height: 43.999rem) and (prefers-reduced-motion: no-preference) {
+@media (min-width: 64rem) and (max-height: 43.999rem) {
     html.has-js .ai-motion-scene,
     html.has-js .project-motion-story {
       height: auto;

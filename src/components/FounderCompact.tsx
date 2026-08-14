@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import {
   ArrowUpRight,
   CheckCircle2,
@@ -12,7 +12,7 @@ import type { SiteData } from "../types";
 export default function FounderCompact({ data }: { data: SiteData }) {
   const { founder } = data;
   const [activePersonId, setActivePersonId] = useState<string | null>(null);
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = false;
   const activePerson =
     founder.people.find((person) => person.id === activePersonId) ?? null;
 

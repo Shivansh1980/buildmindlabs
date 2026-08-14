@@ -155,6 +155,8 @@
     "title": "Products that show how we think, build, and finish.",
     "subtitle": "Two working products, not borrowed mockups: an open-source AI workflow toolkit used through npm and a full-stack notes workspace you can open in the browser.",
     "ctaLabel": "Build something this considered",
+    "detailsLabel": "View case study",
+    "closeDetailsLabel": "Close case study",
     "caseStudyLabel": "Case study",
     "galleryLabel": "Product view",
     "challengeLabel": "The product problem",

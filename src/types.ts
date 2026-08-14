@@ -132,6 +132,8 @@ export interface SiteData {
     title: string;
     subtitle: string;
     ctaLabel: string;
+    detailsLabel: string;
+    closeDetailsLabel: string;
     caseStudyLabel: string;
     galleryLabel: string;
     challengeLabel: string;
