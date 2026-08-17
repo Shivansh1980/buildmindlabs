@@ -18,8 +18,8 @@ export default function BrandLockup({
       aria-label={name}
     >
       <span
-        className={`brand-mark-shell relative flex shrink-0 overflow-hidden bg-[#020817] ${
-          isFooter ? "size-14 rounded-[1.15rem]" : "size-10 rounded-[0.85rem]"
+        className={`brand-mark-shell relative flex shrink-0 overflow-hidden ${
+          isFooter ? "size-14 rounded-[1.15rem]" : "size-12 rounded-[0.85rem]"
         }`}
         aria-hidden="true"
       >
