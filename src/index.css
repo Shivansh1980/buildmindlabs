@@ -306,9 +306,14 @@
 }
 
 .brand-mark-shell {
+  background: linear-gradient(
+    145deg,
+    var(--color-bg-elevated),
+    var(--color-bg-soft)
+  );
   box-shadow:
-    0 10px 28px -14px rgba(12, 96, 255, 0.7),
-    0 0 0 1px rgba(87, 142, 255, 0.25);
+    inset 0 0 0 1px color-mix(in srgb, var(--color-card-border) 78%, transparent),
+    0 10px 24px -16px color-mix(in srgb, var(--color-shadow) 72%, #0868f5 28%);
 }
 
 .brand-word-gradient {
