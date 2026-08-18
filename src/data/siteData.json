@@ -59,7 +59,6 @@
     "signalFlow": {
       "eyebrow": "A practical build, end to end",
       "title": "From social signal to shipped system",
-      "channels": ["X", "Threads", "LinkedIn"],
       "steps": [
         {
           "icon": "Crosshair",

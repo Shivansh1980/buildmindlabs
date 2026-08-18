@@ -64,7 +64,6 @@ export interface SiteData {
     signalFlow: {
       eyebrow: string;
       title: string;
-      channels: string[];
       steps: Array<{
         icon: string;
         label: string;
