@@ -81,6 +81,39 @@ The public Work section describes this tested flow directly. Features not exerci
 
 The authenticated workspace has no public screenshot asset in its repository. The site therefore renders a lightweight, responsive product view in `src/components/Work.tsx`, using the exact page title, text, heading, task, navigation, and controls exercised during the browser review. It is intentionally labeled "Verified editor view" and must not be represented as a client screenshot.
 
+## Job Assist Autofill
+
+### Public references
+
+- Source: <https://github.com/Shivansh1980/job_assist_extension>
+- Source commit reviewed: `e0e2c10`
+- Manifest version reviewed: `1.0.0` using Chrome Manifest V3
+- Review date: 21 August 2026
+
+### Product summary
+
+Job Assist Autofill is a local-first Chrome extension that detects likely job application forms, remembers reusable answers in extension storage, and offers contextual suggestions or full-page autofill on future applications. It combines deterministic field normalization with optional bundled MiniLM matching for unusual labels, without sending form values to an external service.
+
+### Source-backed capabilities reviewed
+
+- Confidence-gated page detection using URL, platform, page-copy, button, and field heuristics.
+- Normalized histories for common identity, contact, profile, employment, eligibility, salary, resume, and cover-letter fields, limited to the latest two text values per field.
+- Suggestions on focused fields plus full-page autofill with a bounded scan of same-page ATS frames.
+- Explicit confirmation before storing or reattaching files, with a manual-download fallback when browser policy blocks attachment.
+- Local saved-data management for editing, deleting, clearing, exporting, importing, and teaching custom field rules.
+- Optional quantized MiniLM matching through bundled ONNX Runtime Web; disabled by default, loaded lazily, and backed by the heuristic matcher when unavailable.
+- Skip boundaries for passwords, OTPs, payment data, hidden fields, security questions, terms acknowledgements, privacy acknowledgements, and marketing opt-ins.
+
+The repository is publicly inspectable and identified by its owner as open source. No standalone license file was visible during review, so public copy must not name a specific license until one is added. There is no verified Chrome Web Store listing or adoption metric; do not imply either.
+
+### Media provenance
+
+The three images in `public/work/` were captured locally from the reviewed source checkout. They contain representative, non-personal test data and are not usage metrics or screenshots of a real applicant account.
+
+- `job-assist-popup.png` places the real popup HTML/CSS controls and icon over a neutral representative application form using non-personal test state.
+- `job-assist-suggestions.png` places the exact namespaced suggestion classes and `suggestions.css` inside a neutral representative application form. It is not a screenshot of an employer or ATS website.
+- `job-assist-data-manager.png` renders the real options-page HTML/CSS structure, icon, controls, and representative rows at a fixed desktop viewport.
+
 ## Adding another project
 
 1. Verify ownership and whether the work can be shown publicly.
