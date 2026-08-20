@@ -36,6 +36,7 @@ type WorkLinkButtonProps = Readonly<{ link: WorkLink }> & Attributes;
 type WorkStoryProps = Readonly<{
   project: WorkItem;
   index: number;
+  featured: boolean;
   data: SiteData;
   onOpenDetails: (projectId: string, trigger: HTMLButtonElement) => void;
 }> & Attributes;
@@ -370,6 +371,7 @@ function WorkMedia({
 function WorkStory({
   project,
   index,
+  featured,
   data,
   onOpenDetails,
 }: WorkStoryProps) {
@@ -386,16 +388,16 @@ function WorkStory({
       whileHover={{ y: -6 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.5 }}
-      className="group h-full list-none"
+      className={`group h-full list-none ${featured ? "lg:col-span-2" : ""}`}
     >
       <article
         aria-labelledby={headingId}
         style={{ backgroundColor: "var(--color-bg-card)" }}
-        className="relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[var(--color-card-border)] shadow-[0_28px_80px_-52px_var(--color-shadow)] transition-[border-color,box-shadow] duration-300 group-hover:border-[var(--color-accent)] group-hover:shadow-[0_34px_90px_-48px_var(--color-shadow)] sm:rounded-[2rem]"
+        className={`relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[var(--color-card-border)] shadow-[0_28px_80px_-52px_var(--color-shadow)] transition-[border-color,box-shadow] duration-300 group-hover:border-[var(--color-accent)] group-hover:shadow-[0_34px_90px_-48px_var(--color-shadow)] sm:rounded-[2rem] ${featured ? "lg:grid lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:grid-rows-[auto_1fr]" : ""}`}
       >
         <span aria-hidden="true" className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent opacity-70" />
 
-        <header className="p-5 pb-4 sm:p-7 sm:pb-5">
+        <header className={`p-5 pb-4 sm:p-7 sm:pb-5 ${featured ? "lg:col-start-1 lg:row-start-1 lg:p-8 lg:pb-5" : ""}`}>
           <div className="flex flex-wrap items-center gap-2">
             <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-card-border)] bg-[var(--color-accent-soft)] px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-[var(--color-accent)]">
               <ProductIcon className="size-3.5 text-[var(--color-accent)]" aria-hidden="true" />
@@ -430,7 +432,7 @@ function WorkStory({
           </dl>
         </header>
 
-        <div className="min-w-0 px-3 sm:px-4">
+        <div className={`min-w-0 px-3 sm:px-4 ${featured ? "lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:grid lg:items-center lg:py-4 lg:pl-0 lg:pr-4" : ""}`}>
           <WorkMedia
             project={project}
             galleryLabel={data.work.galleryLabel}
@@ -438,7 +440,7 @@ function WorkStory({
           />
         </div>
 
-        <footer className="mt-auto p-5 sm:p-7">
+        <footer className={`mt-auto p-5 sm:p-7 ${featured ? "lg:col-start-1 lg:row-start-2 lg:p-8 lg:pt-3" : ""}`}>
           <div className="flex flex-wrap gap-2">
             {visibleStack.map((technology) => (
               <span key={technology} className="rounded-full bg-[var(--color-bg-soft)] px-3 py-1.5 text-[0.68rem] font-semibold text-[var(--color-text-muted)]">
@@ -700,7 +702,14 @@ export default function Work({ data }: Readonly<{ data: SiteData }>) {
 
         <ol className="mt-12 grid items-stretch gap-6 lg:grid-cols-2">
           {data.work.items.map((project, index) => (
-            <WorkStory key={project.id} project={project} index={index} data={data} onOpenDetails={openDetails} />
+            <WorkStory
+              key={project.id}
+              project={project}
+              index={index}
+              featured={data.work.items.length % 2 === 1 && index === 0}
+              data={data}
+              onOpenDetails={openDetails}
+            />
           ))}
         </ol>
       </div>

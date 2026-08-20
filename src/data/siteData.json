@@ -152,7 +152,7 @@
   "work": {
     "eyebrow": "Selected work · Public and inspectable",
     "title": "Products that show how we think, build, and finish.",
-    "subtitle": "Two working products, not borrowed mockups: an open-source AI workflow toolkit used through npm and a full-stack notes workspace you can open in the browser.",
+    "subtitle": "Three public, inspectable products: an AI workflow toolkit used through npm, a full-stack notes workspace, and a local-first browser extension for faster job applications.",
     "ctaLabel": "Build something this considered",
     "detailsLabel": "View case study",
     "closeDetailsLabel": "Close case study",
@@ -279,6 +279,58 @@
           "intro": "A focused workspace for launch planning, decisions, and client-ready notes.",
           "heading": "Launch checklist",
           "task": "Confirm launch scope and owners"
+        }
+      },
+      {
+        "id": "job-assist-autofill",
+        "kind": "product",
+        "category": "Open-source browser extension",
+        "status": "Public source",
+        "frameLabel": "github.com/Shivansh1980/job_assist_extension",
+        "title": "Job Assist Autofill",
+        "summary": "A privacy-first Chrome extension that recognizes job application forms, learns reusable answers locally, and brings suggestions, file handling, and optional on-device matching into the next application.",
+        "challenge": "Repeated job applications ask for the same information across inconsistent career portals, while conventional cloud autofill can create privacy concerns and still struggle with unusual labels, embedded ATS forms, and file uploads.",
+        "solution": "A Manifest V3 extension with confidence-gated page detection, normalized field histories, contextual suggestions, full-page autofill, explicit file consent, local data controls, custom rules, and optional bundled MiniLM matching that runs in the browser.",
+        "outcome": "A public-source workflow tool that reduces repetitive application entry without sending form values to a server, demonstrating browser-extension architecture, defensive data handling, and practical local AI integration.",
+        "verification": "Public repository at commit e0e2c10 and source-rendered product surfaces reviewed 21 August 2026; screenshot values are representative test data.",
+        "metrics": [
+          { "value": "MV3", "label": "Chrome platform" },
+          { "value": "Local", "label": "Data storage" },
+          { "value": "2", "label": "Values per field" }
+        ],
+        "capabilities": [
+          "Confidence-gated detection for career pages and ATS forms",
+          "Local suggestions and full-page autofill across same-page frames",
+          "Explicit file consent plus sensitive and opt-in field exclusions",
+          "Optional bundled MiniLM matching, custom rules, and JSON backups"
+        ],
+        "stack": ["Chrome MV3", "JavaScript", "Chrome Storage", "ONNX Runtime", "MiniLM"],
+        "links": [
+          {
+            "label": "View source",
+            "href": "https://github.com/Shivansh1980/job_assist_extension",
+            "kind": "source"
+          }
+        ],
+        "media": {
+          "kind": "gallery",
+          "images": [
+            {
+              "src": "/work/job-assist-popup.png",
+              "alt": "Job Assist popup rendered from the extension source with a detected application, eight locally saved test values, two files, and local MiniLM enabled.",
+              "label": "Extension popup"
+            },
+            {
+              "src": "/work/job-assist-suggestions.png",
+              "alt": "Representative job application email field showing the source-styled Job Assist suggestions dropdown and Autofill current page action.",
+              "label": "Field suggestions"
+            },
+            {
+              "src": "/work/job-assist-data-manager.png",
+              "alt": "Job Assist saved-data manager rendered from the extension source with representative local test values, file counts, and backup controls.",
+              "label": "Local data manager"
+            }
+          ]
         }
       }
     ]
