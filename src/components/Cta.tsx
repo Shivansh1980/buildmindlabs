@@ -59,10 +59,10 @@ export default function Cta({ data }: { data: SiteData }) {
     const website = valueFor("website");
     const projectType = data.cta.form.projectTypes.find(
       (option) => option.value === projectTypeValue,
-    )?.label;
+    )?.label ?? "";
     const budget = data.cta.form.budgetRanges.find(
       (option) => option.value === budgetValue,
-    )?.label;
+    )?.label ?? "";
 
     if (website) {
       form.reset();
@@ -73,7 +73,10 @@ export default function Cta({ data }: { data: SiteData }) {
       return;
     }
 
-    if (!projectType || !budget) {
+    if (
+      (projectTypeValue.length > 0 && !projectType) ||
+      (budgetValue.length > 0 && !budget)
+    ) {
       setFormStatus({
         kind: "error",
         message: data.cta.form.validationErrorText,
@@ -302,7 +305,6 @@ export default function Cta({ data }: { data: SiteData }) {
                 <select
                   id="contact-project-type"
                   name="projectType"
-                  required
                   defaultValue=""
                   className={`${fieldClassName} appearance-none`}
                 >
@@ -323,7 +325,6 @@ export default function Cta({ data }: { data: SiteData }) {
                 <select
                   id="contact-budget"
                   name="budget"
-                  required
                   defaultValue=""
                   className={`${fieldClassName} appearance-none`}
                 >

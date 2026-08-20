@@ -6,7 +6,7 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 
 export type Theme = "light" | "dark" | "midnight" | "sepia" | "clay";
 
@@ -54,7 +54,7 @@ export default function ThemeSwitcher({ copy }: ThemeSwitcherProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const itemRefs = useRef<Array<HTMLButtonElement | null>>([]);
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = false;
 
   const closeAndFocusTrigger = useCallback(() => {
     setIsOpen(false);

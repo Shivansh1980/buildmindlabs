@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { SiteData } from "../types";
@@ -10,7 +10,7 @@ const MOBILE_MENU_ID = "site-navigation-menu";
 export default function Navbar({ data }: { data: SiteData }) {
   const [isOpen, setIsOpen] = useState(false);
   const menuTriggerRef = useRef<HTMLButtonElement>(null);
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = false;
 
   const closeMenu = useCallback((restoreFocus = false) => {
     setIsOpen(false);

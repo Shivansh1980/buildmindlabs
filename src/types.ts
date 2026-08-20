@@ -64,7 +64,6 @@ export interface SiteData {
     signalFlow: {
       eyebrow: string;
       title: string;
-      channels: string[];
       steps: Array<{
         icon: string;
         label: string;
@@ -125,6 +124,68 @@ export interface SiteData {
       outcome: string;
       deliverables: string[];
       cta: string;
+    }>;
+  };
+  work: {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    ctaLabel: string;
+    detailsLabel: string;
+    closeDetailsLabel: string;
+    caseStudyLabel: string;
+    galleryLabel: string;
+    challengeLabel: string;
+    solutionLabel: string;
+    outcomeLabel: string;
+    capabilitiesLabel: string;
+    proofPoints: Array<{
+      label: string;
+      detail: string;
+    }>;
+    items: Array<{
+      id: string;
+      kind: "package" | "product";
+      category: string;
+      status: string;
+      frameLabel: string;
+      title: string;
+      summary: string;
+      challenge: string;
+      solution: string;
+      outcome: string;
+      verification: string;
+      metrics: Array<{
+        value: string;
+        label: string;
+      }>;
+      capabilities: string[];
+      stack: string[];
+      links: Array<LinkData & { kind: "live" | "npm" | "source" }>;
+      media:
+        | {
+            kind: "gallery";
+            images: Array<{
+              src: string;
+              alt: string;
+              label: string;
+            }>;
+          }
+        | {
+            kind: "notes";
+            label: string;
+            workspaceName: string;
+            workspaceType: string;
+            navigationLabel: string;
+            navigationItems: string[];
+            pagesLabel: string;
+            pageTitle: string;
+            editedLabel: string;
+            shareLabel: string;
+            intro: string;
+            heading: string;
+            task: string;
+          };
     }>;
   };
   projects: {

@@ -195,23 +195,9 @@
     opacity: 1;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-
-    *,
-    *::before,
-    *::after {
-      scroll-behavior: auto !important;
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
 }
 
-@media (min-width: 64rem) and (prefers-reduced-motion: no-preference) {
+@media (min-width: 64rem) {
     html.has-js .hero-motion-scene {
       min-height: 175svh;
       padding-top: 0;
@@ -313,16 +299,21 @@
     }
   }
 
-@media (min-width: 80rem) and (prefers-reduced-motion: no-preference) {
+@media (min-width: 80rem) {
     html.has-js .services-motion-layout {
       gap: 6rem;
     }
 }
 
 .brand-mark-shell {
+  background: linear-gradient(
+    145deg,
+    var(--color-bg-elevated),
+    var(--color-bg-soft)
+  );
   box-shadow:
-    0 10px 28px -14px rgba(12, 96, 255, 0.7),
-    0 0 0 1px rgba(87, 142, 255, 0.25);
+    inset 0 0 0 1px color-mix(in srgb, var(--color-card-border) 78%, transparent),
+    0 10px 24px -16px color-mix(in srgb, var(--color-shadow) 72%, #0868f5 28%);
 }
 
 .brand-word-gradient {
@@ -490,7 +481,7 @@
   filter: sepia(0.12) saturate(0.92);
 }
 
-@media (min-width: 64rem) and (max-height: 43.999rem) and (prefers-reduced-motion: no-preference) {
+@media (min-width: 64rem) and (max-height: 43.999rem) {
     html.has-js .ai-motion-scene,
     html.has-js .project-motion-story {
       height: auto;

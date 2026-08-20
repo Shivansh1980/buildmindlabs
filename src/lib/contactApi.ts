@@ -17,11 +17,11 @@ export type ContactSubmissionResult = {
 type ContactPayload = {
   name: string;
   email: string;
-  company: string;
-  project_type: string;
-  budget: string;
   message: string;
-  website: string;
+  company?: string;
+  project_type?: string;
+  budget?: string;
+  website?: string;
 };
 
 export type ContactRateLimitConfig = {
@@ -92,9 +92,7 @@ function validateValues(values: ContactFormValues): ContactFormValues {
     normalized.email.length > CONTACT_FIELD_LIMITS.email.max ||
     !emailLooksValid ||
     normalized.company.length > CONTACT_FIELD_LIMITS.company.max ||
-    normalized.projectType.length === 0 ||
     normalized.projectType.length > CONTACT_FIELD_LIMITS.projectType.max ||
-    normalized.budget.length === 0 ||
     normalized.budget.length > CONTACT_FIELD_LIMITS.budget.max ||
     normalized.message.length < CONTACT_FIELD_LIMITS.message.min ||
     normalized.message.length > CONTACT_FIELD_LIMITS.message.max ||
@@ -211,11 +209,13 @@ export async function submitContact(
   const payload: ContactPayload = {
     name: normalized.name,
     email: normalized.email,
-    company: normalized.company,
-    project_type: normalized.projectType,
-    budget: normalized.budget,
     message: normalized.message,
-    website: normalized.website,
+    ...(normalized.company ? { company: normalized.company } : {}),
+    ...(normalized.projectType
+      ? { project_type: normalized.projectType }
+      : {}),
+    ...(normalized.budget ? { budget: normalized.budget } : {}),
+    ...(normalized.website ? { website: normalized.website } : {}),
   };
   const controller = new AbortController();
   const timeoutId = window.setTimeout(

@@ -156,17 +156,6 @@ export default function Hero({ data }: { data: SiteData }) {
             </div>
 
             <div className="p-5 sm:p-6">
-              <div className="mb-5 flex flex-wrap gap-2">
-                {data.hero.signalFlow.channels.map((channel) => (
-                  <span
-                    key={channel}
-                    className="rounded-full border border-[var(--color-card-border)] bg-[var(--color-bg-card)] px-3 py-1.5 text-xs font-semibold text-[var(--color-text-muted)]"
-                  >
-                    {channel}
-                  </span>
-                ))}
-              </div>
-
               <ol className="relative space-y-3">
                 <span
                   aria-hidden="true"
